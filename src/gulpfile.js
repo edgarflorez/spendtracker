@@ -1,8 +1,6 @@
 var gulp 			= require('gulp');
 // Requires the gulp-sass plugin
 var sass 			= require('gulp-sass');
-// Require useref 
-var useref 			= require('gulp-useref');
 // Require gulpIf check que type of file
 var gulpIf 			= require('gulp-if');
 // Require uglify for JS
@@ -23,21 +21,21 @@ var runSequence 	= require('run-sequence');
 var concat 			= require('gulp-concat');
 
 gulp.task('default', function(callback) {
-  runSequence(['sass','browserSync','watch'])
+  runSequence(['sass','js','browserSync','watch'])
 });
 
 // Create a build
 gulp.task('build', function  (callback) {
 	runSequence('clean:dist',
-		['sass','images','fonts'],
+		['sass','js','images','fonts'],
 		callback
 	)
 })
 
 gulp.task('sass', function(){
-	return gulp.src('app/scss/style.scss') //Gets all files ending with .scss in app/scss and children dirs
+	return gulp.src('scss/style.scss') //Gets all files ending with .scss in scss and children dirs
 		.pipe(sass({outputStyle:'compressed'}).on('error', sass.logError)) // using gulp-sass
-		.pipe(gulp.dest('dist/css'))
+		.pipe(gulp.dest('../dist/css'))
 		.pipe(browserSync.reload({
 			stream:true
 		}))
@@ -47,48 +45,52 @@ gulp.task('sass', function(){
 gulp.task('browserSync', function(){
 	browserSync.init({
 		server:{
-			baseDir: 'app'
+			baseDir: '../dist'
 		}
 	})
 });
 
 // Gulp watch syntax
 gulp.task('watch', ['browserSync','sass'], function(){
-	gulp.watch('app/scss/**/*.scss', ['sass']);	
+	gulp.watch('scss/**/*.scss', ['sass']);	
+	gulp.watch('js/**/*.js', ['js']);
 	// Reloads the browser whenever HTML or JS  files change
-	gulp.watch('app/*.html', browserSync.reload)
-	gulp.watch('app/js/**/*.js', browserSync.reload)
+	gulp.watch('../dist/*.html', browserSync.reload)
+	gulp.watch('js/**/*.js', browserSync.reload)
 })
 
 // Gulp del 
 gulp.task('clean:dist', function  () {
-	return del.sync('dist');
+	return del.sync(['../dist/css/','../dist/js/'], {force:true});
 })
 
-// Gulp useref
-gulp.task('useref', function  () {
-	return gulp.src('app/*.html')
-		.pipe(useref())
-		// Minifies only if it's a Javascript file
-		.pipe(gulpIf('*.js',uglify()))
-		// Minifies only if it's a CSS file
-		.pipe(gulpIf('*.css',cssnano()))
-		.pipe(gulp.dest('dist'))
-})
+
 
 // Gulp imagemin
 gulp.task('images', function  () {
-	return gulp.src('app/images/**/*.+(png|jpg|gif|svg)')
+	return gulp.src('images/**/*.+(png|jpg|gif|svg)')
 		// caching images that ran throught imagemin
 		.pipe(cache(imagemin({
 			// Setting interlaced to true
 			interlaced: true
 		})))
-		.pipe(gulp.dest('dist/images'))
+		.pipe(gulp.dest('../dist/images'))
 })
 
 // Gulp copy fonts
 gulp.task('fonts', function  () {
-	return gulp.src('app/fonts/**/*')
-		.pipe(gulp.dest('dist/fonts'))
+	return gulp.src('fonts/**/*')
+		.pipe(gulp.dest('../dist/fonts'))
+})
+
+// Gulp js
+gulp.task('js', function  () {
+	return gulp.src([
+					'js/lib.js',
+					'js/script.js',
+					'js/vendor/vendor.js',
+					])
+		.pipe(concat('style.min.js'))
+		.pipe(uglify())
+		.pipe(gulp.dest('../dist/js/'))
 })
