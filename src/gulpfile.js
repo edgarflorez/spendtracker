@@ -37,7 +37,6 @@ gulp.task('build', function  (callback) {
 gulp.task('sass', function(){
 	return gulp.src('app/scss/style.scss') //Gets all files ending with .scss in app/scss and children dirs
 		.pipe(sass({outputStyle:'compressed'}).on('error', sass.logError)) // using gulp-sass
-		.pipe(gulp.dest('app/css'))
 		.pipe(gulp.dest('dist/css'))
 		.pipe(browserSync.reload({
 			stream:true
