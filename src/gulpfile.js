@@ -90,7 +90,7 @@ gulp.task('js', function  () {
 					'js/script.js',
 					'js/vendor/vendor.js',
 					])
-		.pipe(concat('style.min.js'))
+		.pipe(concat('scripts.min.js'))
 		.pipe(uglify())
 		.pipe(gulp.dest('../dist/js/'))
 })
