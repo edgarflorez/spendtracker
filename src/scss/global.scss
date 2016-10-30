@@ -1,4 +1,21 @@
 body{
 	background: $bg-color;
 }
+html,body{
+	height: 100%;
+}
 
+.day-detail,.calendar,.spend{
+	padding-top: 70px;
+	padding-bottom: 70px;
+}
+
+.action-nav{
+	padding: 10px 0;
+}
+
+.login,.spend{
+	display:flex;
+	align-items:center;
+	height:100%;
+}

@@ -86,10 +86,11 @@ gulp.task('fonts', function  () {
 // Gulp js
 gulp.task('js', function  () {
 	return gulp.src([
-					'js/lib.js',
-					'js/script.js',
-					'js/vendor/vendor.js',
-					])
+			'node_modules/bootstrap-sass/assets/javascripts/bootstrap/collapse.js', // bootstrap hamburguer menu
+			'js/lib.js',
+			'js/script.js',
+			'js/vendor/vendor.js',
+			])
 		.pipe(concat('scripts.min.js'))
 		.pipe(uglify())
 		.pipe(gulp.dest('../dist/js/'))
