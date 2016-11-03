@@ -10,8 +10,9 @@
 </head>
 <body>
 	<header class="main-header">
-		<h1 class="hidden">Day Detail</h1>
+		<h1 class="hidden">Calendar</h1>
 		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<h1 class="hidden">Main navigation</h1>
 			<div class="container-fluid">
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -30,11 +31,14 @@
 			</div><!-- /.container-fluid -->
 		</nav><!-- navbar -->
 	</div><!-- main-header -->
-	<section class="calendar">
+	<main class="calendar">
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12">
-					<section class="calendar-table">
+					<header>
+						<h2 class="hidden">Calendar grid</h2>
+					</header>
+					<div class="calendar-table">
 						<table class="table table-hover">
 							<thead>
 								<tr>
@@ -95,18 +99,19 @@
 								</tr>
 							</tbody>
 						</table>
-					</section><!-- calendar-table -->
+					</div><!-- calendar-table -->
 				</div><!-- col-xs-12 -->
 			</div><!-- row -->
 		</div><!-- container-fluid day -->	
-	</section><!-- calendar -->
+	</main><!-- calendar -->
 	<footer class="nav-footer">
 		<nav class="action-nav navbar navbar-default navbar-fixed-bottom">
-		  <div class="container-fluid">
-		  	<div class="btn-group btn-group-lg btn-group-justified">
-				<a class="btn btn-primary" href="#">NEW DAY  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> </a>
-		  	</div>
-		  </div><!-- container-fluid -->
+			<h2 class="hidden">Calendar Tools</h2>
+			<div class="container-fluid">
+				<div class="btn-group btn-group-lg btn-group-justified">
+					<a class="btn btn-primary" href="#">NEW DAY  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> </a>
+				</div>
+			</div><!-- container-fluid -->
 		</nav><!-- action-nav -->
 	</footer><!-- nav-footer -->
 </body>

@@ -12,6 +12,7 @@
 	<header class="main-header">
 		<h1 class="hidden">Day Detail</h1>
 		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<h1 class="hidden">Main navigation</h1>
 			<div class="container-fluid">
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -30,14 +31,14 @@
 			</div><!-- /.container-fluid -->
 		</nav><!-- navbar -->
 	</div><!-- main-header -->
-	<section class="day-detail">
+	<main class="day-detail">
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12">
 					<header class="current-day">
 						<h2><span class="label label-primary">Monday,</span> 26 October 2016</h2>
 					</header><!-- current-day -->
-					<section class="day-table">
+					<div class="day-table">
 						<table class="table table-hover">
 							<thead>
 								<tr>
@@ -155,19 +156,20 @@
 
 							</tbody>
 						</table>
-					</section><!-- day-table -->
+					</div><!-- day-table -->
 				</div><!-- col-xs-12 -->
 			</div><!-- row -->
 		</div><!-- container-fluid day -->	
-	</section><!-- day-detail -->
+	</main><!-- day-detail -->
 	<footer class="nav-footer">
 		<nav class="action-nav navbar navbar-default navbar-fixed-bottom">
-		  <div class="container-fluid">
-		  	<div class="btn-group btn-group-lg btn-group-justified">
-				<a class="btn btn-info" href="#" role="button"><span class="glyphicon glyphicon glyphicon-calendar pull-left"></span>Calendar</a>
-				<a class="btn btn-primary" href="#">Spend <span class="glyphicon glyphicon-plus pull-right" aria-hidden="true"></span> </a>
-		  	</div>
-		  </div><!-- container-fluid -->
+			<h2 class="hidden">Day Tools</h2>
+			<div class="container-fluid">
+				<div class="btn-group btn-group-lg btn-group-justified">
+					<a class="btn btn-info" href="#" role="button"><span class="glyphicon glyphicon glyphicon-calendar pull-left"></span>Calendar</a>
+					<a class="btn btn-primary" href="#">Spend <span class="glyphicon glyphicon-plus pull-right" aria-hidden="true"></span> </a>
+				</div>
+			</div><!-- container-fluid -->
 		</nav><!-- action-nav -->
 	</footer><!-- nav-footer -->
 </body>
