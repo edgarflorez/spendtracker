@@ -21,21 +21,21 @@ var runSequence 	= require('run-sequence');
 var concat 			= require('gulp-concat');
 
 gulp.task('default', function(callback) {
-  runSequence(['sass','js','browserSync','watch'])
+  runSequence(['sass','browserSync','watch'])
 });
 
 // Create a build
 gulp.task('build', function  (callback) {
 	runSequence('clean:dist',
-		['sass','js','images','fonts'],
+		['sass','images'],
 		callback
 	)
 })
 
 gulp.task('sass', function(){
-	return gulp.src('scss/style.scss') //Gets all files ending with .scss in scss and children dirs
+	return gulp.src('scss/style.scss') 	// Build the css according with the style.scss declaration 
 		.pipe(sass({outputStyle:'compressed'}).on('error', sass.logError)) // using gulp-sass
-		.pipe(gulp.dest('../dist/css'))
+		.pipe(gulp.dest('./css'))
 		.pipe(browserSync.reload({
 			stream:true
 		}))
@@ -45,7 +45,7 @@ gulp.task('sass', function(){
 gulp.task('browserSync', function(){
 	browserSync.init({
 		server:{
-			baseDir: '../dist'
+			baseDir: './'
 		}
 	})
 });
@@ -53,10 +53,10 @@ gulp.task('browserSync', function(){
 // Gulp watch syntax
 gulp.task('watch', ['browserSync','sass'], function(){
 	gulp.watch('scss/**/*.scss', ['sass']);	
-	gulp.watch('js/**/*.js', ['js']);
+	// gulp.watch('js/**/*.js', ['js']);
 	// Reloads the browser whenever HTML or JS  files change
-	gulp.watch('../dist/*.html', browserSync.reload)
-	gulp.watch('js/**/*.js', browserSync.reload)
+	// gulp.watch('./*.html', browserSync.reload)
+	// gulp.watch('js/**/*.js', browserSync.reload)
 })
 
 // Gulp del 
@@ -74,7 +74,7 @@ gulp.task('images', function  () {
 			// Setting interlaced to true
 			interlaced: true
 		})))
-		.pipe(gulp.dest('../dist/images'))
+		.pipe(gulp.dest('./images'))
 })
 
 // Gulp copy fonts

@@ -1,0 +1,119 @@
+<main class="calendar">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+				<header>
+					<h2 class="hidden">Calendar grid</h2>
+				</header>
+				<div class="calendar-table">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>Weekday</th>
+								<th>DAY</th>
+								<th>MONTH</th>
+								<th>YEAR</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let date of dates"> 
+								<td>{{ date.date | date:'EEEE' }} </td>
+								<td>{{ date.date | date:'dd'}} </td>
+								<td>{{ date.date | date:'MMMM'  }} </td>
+								<td>{{ date.date | date:'y' }} </td>
+							</tr>
+
+							<!-- <tr>
+								<td><a href="#">Monday</a></td>
+								<td><a href="#">24</a></td>
+								<td><a href="#">October</a></td>
+								<td><a href="#">2016</a></td>
+							</tr>
+							<tr>
+								<td><a href="#">Sunday</a></td>
+								<td><a href="#">23</a></td>
+								<td><a href="#">October</a></td>
+								<td><a href="#">2016</a></td>
+							</tr>
+							<tr>
+								<td><a href="#">Saturday</a></td>
+								<td><a href="#">22</a></td>
+								<td><a href="#">October</a></td>
+								<td><a href="#">2016</a></td>
+							</tr>
+							<tr>
+								<td><a href="#">Friday</a></td>
+								<td><a href="#">23</a></td>
+								<td><a href="#">October</a></td>
+								<td><a href="#">2016</a></td>
+							</tr>
+							<tr>
+								<td><a href="#">Thursday</a></td>
+								<td><a href="#">22</a></td>
+								<td><a href="#">October</a></td>
+								<td><a href="#">2016</a></td>
+							</tr>
+							<tr>
+								<td><a href="#">Wednesday</a></td>
+								<td><a href="#">21</a></td>
+								<td><a href="#">October</a></td>
+								<td><a href="#">2016</a></td>
+							</tr>
+							<tr>
+								<td><a href="#">Tuesday</a></td>
+								<td><a href="#">20</a></td>
+								<td><a href="#">October</a></td>
+								<td><a href="#">2016</a></td>
+							</tr>
+							<tr>
+								<td><a href="#">Monday</a></td>
+								<td><a href="#">19</a></td>
+								<td><a href="#">October</a></td>
+								<td><a href="#">2016</a></td>
+							</tr> -->
+						</tbody>
+					</table>
+				</div><!-- calendar-table -->
+			</div><!-- col-xs-12 -->
+		</div><!-- row -->
+	</div><!-- container-fluid day -->	
+	<div class="add-date" *ngIf="addDate">
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">Add New Date</a>
+				</div>
+			</div><!-- /.container-fluid -->
+		</nav><!-- navbar -->
+		<div class="date-picker-container">
+			<div class="row">
+
+				<input type="text" value="" [(ngModel)]="newDateFormatted" class="form-control input-lg input-date-picker">
+				
+				
+			</div>
+			<my-date-picker [options]="myDatePickerOptions"
+	               (dateChanged)="onDateChanged($event)"></my-date-picker>
+		</div>
+		<footer class="nav-footer">
+			<nav class="action-nav navbar navbar-default navbar-fixed-bottom">
+				<div class="container-fluid">
+					<div class="btn-group btn-group-lg btn-group-justified">
+						<a class="btn btn-default" href="#" role="button" (click)="onCancelAddNewDate($event)"><span class="glyphicon glyphicon glyphicon glyphicon-menu-left pull-left"></span>Cancel</a>
+						<a class="btn btn-primary" href="#" (click)="onSubmitAddNewDate($event)">Create <span class="glyphicon glyphicon glyphicon-ok pull-right" aria-hidden="true"></span> </a>
+					</div>
+				</div><!-- container-fluid -->
+			</nav><!-- action-nav -->
+		</footer>
+	</div>
+</main><!-- calendar -->
+<footer class="nav-footer">
+	<nav class="action-nav navbar navbar-default navbar-fixed-bottom">
+		<h2 class="hidden">Calendar Tools</h2>
+		<div class="container-fluid">
+			<div class="btn-group btn-group-lg btn-group-justified">
+				<a class="btn btn-primary" href="#" (click)="onAddNewDate($event)">NEW DAY  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> </a>
+			</div>
+		</div><!-- container-fluid -->
+	</nav><!-- action-nav -->
+</footer>
