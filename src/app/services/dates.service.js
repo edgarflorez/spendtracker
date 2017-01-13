@@ -16,6 +16,34 @@ var DatesService = (function () {
     DatesService.prototype.getDates = function () {
         return Promise.resolve(mock_dates_1.DATES);
     };
+    DatesService.prototype.addDate = function (newDate) {
+        var dateRepeated = false, dateA, dateB = new Date(newDate);
+        // Check if the date exists
+        for (var _i = 0, DATES_1 = mock_dates_1.DATES; _i < DATES_1.length; _i++) {
+            var date = DATES_1[_i];
+            dateA = new Date(date.date);
+            if (dateA.getTime() === dateB.getTime()) {
+                dateRepeated = true;
+            }
+        }
+        // prepare response
+        var response = {};
+        if (!dateRepeated) {
+            var newId = mock_dates_1.DATES.length + 1;
+            mock_dates_1.DATES.push({ id: newId, date: newDate });
+            this.dateSort(mock_dates_1.DATES);
+            response['type'] = 200;
+            response['data'] = mock_dates_1.DATES;
+        }
+        else {
+            response['type'] = 500;
+            response['data'] = "ERROR DATE DUPLICATED";
+        }
+        return Promise.resolve(response);
+    };
+    DatesService.prototype.dateSort = function (dates) {
+        dates.sort(function (a, b) { return a.date - b.date; });
+    };
     DatesService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [])

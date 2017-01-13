@@ -10,14 +10,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var dates_service_1 = require('./services/dates.service');
+var app_alert_1 = require('./utils/app.alert');
 var CalendarComponent = (function () {
     // constructor
-    function CalendarComponent(datesService) {
+    function CalendarComponent(datesService, appAlert) {
         this.datesService = datesService;
+        this.appAlert = appAlert;
         // vars
         this.addDate = false;
         this.newDateFormatted = '';
-        this.newDateTimeStamp = '';
+        this.newDateJSDate = '';
         this.myDatePickerOptions = {
             todayBtnTxt: 'Today',
             dateFormat: 'yyyy-mm-dd',
@@ -43,12 +45,12 @@ var CalendarComponent = (function () {
         // console.log('onDateChanged(): ', event.date, ' - jsdate: ', new Date(event.jsdate).toLocaleDateString(), ' - formatted: ', event.formatted, ' - epoc timestamp: ', event.epoc);
         console.dir(event);
         this.newDateFormatted = event.formatted;
-        this.newDateTimeStamp = event.jsdate;
+        this.newDateJSDate = event.jsdate;
     };
     CalendarComponent.prototype.onAddNewDate = function (event) {
         event.stopPropagation();
         this.newDateFormatted = '';
-        this.newDateTimeStamp = '';
+        this.newDateJSDate = '';
         this.addDate = true;
     };
     CalendarComponent.prototype.onCancelAddNewDate = function (event) {
@@ -56,9 +58,22 @@ var CalendarComponent = (function () {
         this.addDate = false;
     };
     CalendarComponent.prototype.onSubmitAddNewDate = function (event) {
+        var _this = this;
         event.stopPropagation();
-        this.addDate = false;
-        this.dates.push({ id: this.dates.length + 1, date: this.newDateTimeStamp });
+        this.datesService.addDate(this.newDateJSDate).then(function (response) {
+            switch (response.type) {
+                case 200:
+                    _this.addDate = false;
+                    _this.dates = response.data;
+                    break;
+                case 500:
+                    _this.addDate = false;
+                    _this.appAlert.alert("ERROR:: " + response.data);
+                    // console.log("ERROR :: ", response.data);
+                    break;
+            }
+        });
+        // this.dates.push({id:this.dates.length +1, date: this.newDateJSDate });
     };
     CalendarComponent = __decorate([
         core_1.Component({
@@ -66,7 +81,7 @@ var CalendarComponent = (function () {
             selector: 'calendar',
             templateUrl: 'calendar.component.html'
         }), 
-        __metadata('design:paramtypes', [dates_service_1.DatesService])
+        __metadata('design:paramtypes', [dates_service_1.DatesService, app_alert_1.AppAlert])
     ], CalendarComponent);
     return CalendarComponent;
 }());

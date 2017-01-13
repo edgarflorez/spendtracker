@@ -9,22 +9,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var dates_service_1 = require('./services/dates.service');
-var app_alert_1 = require('./utils/app.alert');
-var AppComponent = (function () {
-    function AppComponent() {
-        this.appName = 'Spend Tracker';
+var AppAlert = (function () {
+    function AppAlert() {
     }
-    AppComponent = __decorate([
-        core_1.Component({
-            moduleId: module.id,
-            selector: 'my-app',
-            templateUrl: 'app.component.html',
-            providers: [dates_service_1.DatesService, app_alert_1.AppAlert]
-        }), 
+    AppAlert.prototype.alert = function (message) {
+        var node = document.createElement("div"); // Create a <li> node
+        node.className = "test";
+        var textnode = document.createTextNode(message); // Create a text node
+        node.appendChild(textnode); // Append the text to <li>
+        document.getElementsByTagName('body')[0].appendChild(node);
+        console.log(document.getElementsByTagName('body')[0]);
+        // document.getElementById("myList").appendChild(node);     // Append <li> to <ul> with id="myList"
+        console.log(message);
+    };
+    AppAlert = __decorate([
+        core_1.Injectable(), 
         __metadata('design:paramtypes', [])
-    ], AppComponent);
-    return AppComponent;
+    ], AppAlert);
+    return AppAlert;
 }());
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+exports.AppAlert = AppAlert;
+//# sourceMappingURL=app.alert.js.map

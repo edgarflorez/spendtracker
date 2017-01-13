@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { SpendDate } from './types/spend-date';
 import { DatesService } from './services/dates.service';
+import { AppAlert }		from './utils/app.alert'
 
 @Component({
 	moduleId: module.id,
@@ -12,7 +13,7 @@ export class CalendarComponent implements OnInit {
 	// vars
 	addDate: boolean = false;
 	newDateFormatted: string = '';
-	newDateTimeStamp: number = '';
+	newDateJSDate: string = '';
 	dates: SpendDate[];
 	myDatePickerOptions = {
       todayBtnTxt: 'Today',
@@ -27,7 +28,7 @@ export class CalendarComponent implements OnInit {
   	};
 
   	// constructor
-	constructor( private datesService: DatesService ) {}
+	constructor( private datesService: DatesService, private appAlert: AppAlert ) {}
 
 	// methods
 	getDates(): void {
@@ -41,12 +42,12 @@ export class CalendarComponent implements OnInit {
 	  // console.log('onDateChanged(): ', event.date, ' - jsdate: ', new Date(event.jsdate).toLocaleDateString(), ' - formatted: ', event.formatted, ' - epoc timestamp: ', event.epoc);
 	  console.dir(event)
 	  this.newDateFormatted = event.formatted;
-	  this.newDateTimeStamp = event.jsdate;
+	  this.newDateJSDate = event.jsdate;
 	}
 	onAddNewDate(event:any){
 		event.stopPropagation();
 		this.newDateFormatted = '';
-		this.newDateTimeStamp = '';
+		this.newDateJSDate = '';
 		this.addDate = true;
 	}
 	onCancelAddNewDate(event:any){
@@ -55,8 +56,20 @@ export class CalendarComponent implements OnInit {
 	}
 	onSubmitAddNewDate(event:any){
 		event.stopPropagation();
-		this.addDate = false;
-		this.dates.push({id:this.dates.length +1, date: this.newDateTimeStamp });
+		this.datesService.addDate(this.newDateJSDate).then( response => {
+			switch(response.type){
+				case 200:
+					this.addDate = false;
+					this.dates = response.data;
+				break;
+				case 500:
+					this.addDate = false;
+					this.appAlert.alert("ERROR:: "+ response.data);
+					// console.log("ERROR :: ", response.data);
+				break;
+			}
+		});
+		// this.dates.push({id:this.dates.length +1, date: this.newDateJSDate });
 	}
 
 }
