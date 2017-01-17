@@ -16,8 +16,9 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr *ngFor="let date of dates"> 
-								<td>{{ date.date | date:'EEEE' }} </td>
+							<tr *ngFor="let date of dates" [routerLink]="['/day', date.id]" > 
+								<td>
+									{{ date.date | date:'EEEE' }} </td>
 								<td>{{ date.date | date:'dd'}} </td>
 								<td>{{ date.date | date:'MMMM'  }} </td>
 								<td>{{ date.date | date:'y' }} </td>
@@ -99,8 +100,8 @@
 			<nav class="action-nav navbar navbar-default navbar-fixed-bottom">
 				<div class="container-fluid">
 					<div class="btn-group btn-group-lg btn-group-justified">
-						<a class="btn btn-default" href="#" role="button" (click)="onCancelAddNewDate($event)"><span class="glyphicon glyphicon glyphicon glyphicon-menu-left pull-left"></span>Cancel</a>
-						<a class="btn btn-primary" href="#" (click)="onSubmitAddNewDate($event)">Create <span class="glyphicon glyphicon glyphicon-ok pull-right" aria-hidden="true"></span> </a>
+						<a class="btn btn-default" role="button" (click)="onCancelAddNewDate($event)"><span class="glyphicon glyphicon glyphicon glyphicon-menu-left pull-left"></span>Cancel</a>
+						<a class="btn btn-primary" (click)="onSubmitAddNewDate($event)">Create <span class="glyphicon glyphicon glyphicon-ok pull-right" aria-hidden="true"></span> </a>
 					</div>
 				</div><!-- container-fluid -->
 			</nav><!-- action-nav -->
@@ -112,7 +113,7 @@
 		<h2 class="hidden">Calendar Tools</h2>
 		<div class="container-fluid">
 			<div class="btn-group btn-group-lg btn-group-justified">
-				<a class="btn btn-primary" href="#" (click)="onAddNewDate($event)">NEW DAY  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> </a>
+				<a class="btn btn-primary" (click)="onAddNewDate($event)">NEW DAY  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> </a>
 			</div>
 		</div><!-- container-fluid -->
 	</nav><!-- action-nav -->

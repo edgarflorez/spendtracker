@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var forms_1 = require('@angular/forms');
+var router_1 = require('@angular/router');
 // If you are using systemjs package loader import the MyDateRangePickerModule from here:
 var my_date_picker_module_1 = require('mydatepicker/dist/my-date-picker.module');
 var app_component_1 = require('./app.component');
@@ -22,7 +23,30 @@ var AppModule = (function () {
     }
     AppModule = __decorate([
         core_1.NgModule({
-            imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, my_date_picker_module_1.MyDatePickerModule],
+            imports: [
+                platform_browser_1.BrowserModule,
+                forms_1.FormsModule,
+                my_date_picker_module_1.MyDatePickerModule,
+                router_1.RouterModule.forRoot([
+                    {
+                        path: '',
+                        redirectTo: '/calendar',
+                        pathMatch: 'full'
+                    },
+                    {
+                        path: 'calendar',
+                        component: calendar_component_1.CalendarComponent
+                    },
+                    {
+                        path: 'day/:id',
+                        component: day_component_1.DayComponent
+                    },
+                    {
+                        path: 'spend',
+                        component: spend_component_1.SpendComponent
+                    }
+                ])
+            ],
             declarations: [
                 app_component_1.AppComponent,
                 calendar_component_1.CalendarComponent,

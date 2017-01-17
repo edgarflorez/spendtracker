@@ -28,7 +28,10 @@ export class CalendarComponent implements OnInit {
   	};
 
   	// constructor
-	constructor( private datesService: DatesService, private appAlert: AppAlert ) {}
+	constructor( 
+		private datesService: DatesService, 
+		private appAlert: AppAlert
+	) {}
 
 	// methods
 	getDates(): void {
