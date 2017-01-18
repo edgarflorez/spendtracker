@@ -25,6 +25,10 @@ var DayComponent = (function () {
         this.location = location;
     }
     DayComponent.prototype.ngOnInit = function () {
+        // Online example 
+        // this.route.params
+        // 	.switchMap((params: Params) => this.heroService.getHero(+params['id']))
+        // 	.subscribe(hero => this.hero = hero);
         var _this = this;
         this.route.params
             .subscribe(function (params) { return _this.id = +params['id']; });

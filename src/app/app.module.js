@@ -11,13 +11,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var forms_1 = require('@angular/forms');
-var router_1 = require('@angular/router');
 // If you are using systemjs package loader import the MyDateRangePickerModule from here:
 var my_date_picker_module_1 = require('mydatepicker/dist/my-date-picker.module');
 var app_component_1 = require('./app.component');
 var calendar_component_1 = require('./calendar.component');
 var day_component_1 = require('./day.component');
 var spend_component_1 = require('./spend.component');
+var app_routing_module_1 = require('./app-routing.module');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -27,25 +27,7 @@ var AppModule = (function () {
                 platform_browser_1.BrowserModule,
                 forms_1.FormsModule,
                 my_date_picker_module_1.MyDatePickerModule,
-                router_1.RouterModule.forRoot([
-                    {
-                        path: '',
-                        redirectTo: '/calendar',
-                        pathMatch: 'full'
-                    },
-                    {
-                        path: 'calendar',
-                        component: calendar_component_1.CalendarComponent
-                    },
-                    {
-                        path: 'day/:id',
-                        component: day_component_1.DayComponent
-                    },
-                    {
-                        path: 'spend',
-                        component: spend_component_1.SpendComponent
-                    }
-                ])
+                app_routing_module_1.AppRoutingModule
             ],
             declarations: [
                 app_component_1.AppComponent,
@@ -53,6 +35,7 @@ var AppModule = (function () {
                 day_component_1.DayComponent,
                 spend_component_1.SpendComponent
             ],
+            providers: [],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])

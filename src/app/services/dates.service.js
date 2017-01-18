@@ -27,6 +27,7 @@ var DatesService = (function () {
             }
         }
         // prepare response
+        console.log("newDate", newDate);
         var response = {};
         if (!dateRepeated) {
             var newId = mock_dates_1.DATES.length + 1;
@@ -34,6 +35,10 @@ var DatesService = (function () {
             this.dateSort(mock_dates_1.DATES);
             response['type'] = 200;
             response['data'] = mock_dates_1.DATES;
+            if (newDate == "") {
+                response['type'] = 500;
+                response['data'] = "ERROR PLEASE SELECT A DATE";
+            }
         }
         else {
             response['type'] = 500;

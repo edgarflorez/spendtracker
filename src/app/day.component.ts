@@ -26,6 +26,11 @@ export class DayComponent implements OnInit {
 	) {}
 
 	ngOnInit() {
+		// Online example 
+		// this.route.params
+		// 	.switchMap((params: Params) => this.heroService.getHero(+params['id']))
+		// 	.subscribe(hero => this.hero = hero);
+
 		this.route.params
 			.subscribe((params: Params) => this.id =  +params['id'] );
 		

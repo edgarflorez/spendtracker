@@ -11,6 +11,8 @@ import { CalendarComponent }from './calendar.component';
 import { DayComponent } 	from './day.component';	
 import { SpendComponent } 	from './spend.component';
 
+import { AppRoutingModule }	from './app-routing.module';
+
 
 
 @NgModule({
@@ -18,25 +20,7 @@ import { SpendComponent } 	from './spend.component';
   	BrowserModule, 
   	FormsModule, 
   	MyDatePickerModule,
-  	RouterModule.forRoot([
-		{
-			path: 		'',
-			redirectTo: '/calendar',
-			pathMatch: 	'full'
-		},
-		{
-			path: 		'calendar',
-			component: 	CalendarComponent
-		},
-		{
-			path: 		'day/:id',
-			component: 	DayComponent
-		},
-		{
-			path: 		'spend',
-			component: 	SpendComponent
-		}
-	])
+  	AppRoutingModule
   ],
   declarations: [ 
   	AppComponent,
@@ -44,6 +28,7 @@ import { SpendComponent } 	from './spend.component';
   	DayComponent,
   	SpendComponent
   ],
+  providers: 	[],
   bootstrap:    [ AppComponent ]
 })
 export class AppModule { }

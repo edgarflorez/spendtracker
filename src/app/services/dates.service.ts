@@ -22,6 +22,7 @@ export class DatesService {
 			}
 		}
 		// prepare response
+		console.log("newDate", newDate);
 		let response: Object = {}
 		if(!dateRepeated){
 			let newId = DATES.length + 1;
@@ -29,6 +30,11 @@ export class DatesService {
 			this.dateSort(DATES);
 			response['type'] = 200;
 			response['data'] = DATES;
+			
+			if(newDate == ""){
+				response['type'] = 500;
+				response['data'] = "ERROR PLEASE SELECT A DATE"
+			}
 		}else{
 			response['type'] = 500;
 			response['data'] = "ERROR DATE DUPLICATED"
