@@ -17,7 +17,8 @@ import { DatesService } from './services/dates.service';
 	templateUrl: 	'day.component.html'
 })
 export class DayComponent implements OnInit {
-	id:string;
+	id:number;
+
 	constructor(
 		private datesService: DatesService,
 		private route: ActivatedRoute,
@@ -25,19 +26,9 @@ export class DayComponent implements OnInit {
 	) {}
 
 	ngOnInit() {
-		console.log("Day Init");
-		console.log(this.route.params._value.id);
-
-		this.id = this.route.params._value.id
 		this.route.params
-			.map(params => console.log(params['id']) )
-			// .switchMap((params: Params) => console.log(params['id']); )
-			// .switchMap((params: Params) => this.id = params['id'] );
-			// .switchMap((params: Params) => console.log("TEST"); );
-
-		// this.route.params
-		//     .switchMap((params: Params) => this.heroService.getHero(+params['id']))
-		//     .subscribe(hero => this.hero = hero);
+			.subscribe((params: Params) => this.id =  +params['id'] );
+		
 	}
 	goBack(): void {
 		this.location.back();

@@ -25,17 +25,9 @@ var DayComponent = (function () {
         this.location = location;
     }
     DayComponent.prototype.ngOnInit = function () {
-        console.log("Day Init");
-        console.log(this.route.params._value.id);
-        this.id = this.route.params._value.id;
+        var _this = this;
         this.route.params
-            .map(function (params) { return console.log(params['id']); });
-        // .switchMap((params: Params) => console.log(params['id']); )
-        // .switchMap((params: Params) => this.id = params['id'] );
-        // .switchMap((params: Params) => console.log("TEST"); );
-        // this.route.params
-        //     .switchMap((params: Params) => this.heroService.getHero(+params['id']))
-        //     .subscribe(hero => this.hero = hero);
+            .subscribe(function (params) { return _this.id = +params['id']; });
     };
     DayComponent.prototype.goBack = function () {
         this.location.back();
