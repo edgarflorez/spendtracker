@@ -25,15 +25,15 @@ export class DatesService {
 		console.log("newDate", newDate);
 		let response: Object = {}
 		if(!dateRepeated){
-			let newId = DATES.length + 1;
-			DATES.push({id:newId, date: newDate });
-			this.dateSort(DATES);
-			response['type'] = 200;
-			response['data'] = DATES;
-			
 			if(newDate == ""){
 				response['type'] = 500;
 				response['data'] = "ERROR PLEASE SELECT A DATE"
+			}else{
+				let newId = DATES.length + 1;
+				DATES.push({id:newId, date: newDate });
+				this.dateSort(DATES);
+				response['type'] = 200;
+				response['data'] = DATES;
 			}
 		}else{
 			response['type'] = 500;

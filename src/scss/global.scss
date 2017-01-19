@@ -21,8 +21,17 @@ html,body{
 }
 
 .app-alert{
-		position: absolute;
+	position: absolute;
 	top: 55px;
 	width: 80%;
 	margin-left: 10%;
+}
+.app-alert-close{
+	font-weight: bold;
+	padding: 5px;
+	position: absolute;
+	right: 0;
+	right: 10px;
+	top: 10px;
+	cursor: pointer;
 }

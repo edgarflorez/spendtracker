@@ -11,16 +11,46 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var AppAlert = (function () {
     function AppAlert() {
-        this.node = document.createElement("div"); // Create a <li> node
-        this.node.className = "app-alert alert alert-danger";
+        this.initUI();
     }
     AppAlert.prototype.alert = function (message) {
-        this.textnode = document.createTextNode(message); // Create a text node
-        this.node.appendChild(this.textnode); // Append the text to <li>
+        var _this = this;
+        this.textNode.textContent = message;
+        this.node.appendChild(this.textNode); // Append the text to <li>
         document.getElementsByTagName('body')[0].appendChild(this.node);
         // console.log(document.getElementsByTagName('body')[0]);
         // document.getElementById("myList").appendChild(node);     // Append <li> to <ul> with id="myList"
         console.log(message);
+        this.closeTimeout = setTimeout(function () {
+            document.getElementsByTagName('body')[0].removeChild(_this.node);
+            _this.node.removeChild(_this.textnode);
+        }, 10000);
+        this.initListeners();
+    };
+    AppAlert.prototype.initUI = function () {
+        this.textNode = document.createTextNode(''); // Create a text node
+        this.closeNode = document.createTextNode('X');
+        this.close = document.createElement('div');
+        this.close.className = 'app-alert-close';
+        this.close.appendChild(this.closeNode);
+        this.node = document.createElement('div'); // Create a <li> node
+        this.node.className = 'app-alert alert alert-danger';
+        this.node.appendChild(this.close);
+    };
+    AppAlert.prototype.initListeners = function () {
+        var _this = this;
+        this.close.addEventListener('click', function () {
+            clearTimeout(_this.closeTimeout);
+            document.getElementsByTagName('body')[0].removeChild(_this.node);
+            _this.node.removeChild(_this.textnode);
+        });
+        ;
+        document.getElementsByTagName('body')[0].addEventListener('click', function () {
+            clearTimeout(_this.closeTimeout);
+            document.getElementsByTagName('body')[0].removeChild(_this.node);
+            _this.node.removeChild(_this.textnode);
+        });
+        ;
     };
     AppAlert = __decorate([
         core_1.Injectable(), 
