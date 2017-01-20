@@ -18,9 +18,11 @@ var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var common_1 = require('@angular/common');
 var dates_service_1 = require('./services/dates.service');
+var spends_service_1 = require('./services/spends.service');
 var DayComponent = (function () {
-    function DayComponent(datesService, route, location) {
+    function DayComponent(datesService, spendsService, route, location) {
         this.datesService = datesService;
+        this.spendsService = spendsService;
         this.route = route;
         this.location = location;
     }
@@ -30,11 +32,21 @@ var DayComponent = (function () {
         // 	.switchMap((params: Params) => this.heroService.getHero(+params['id']))
         // 	.subscribe(hero => this.hero = hero);
         var _this = this;
+        // this.route.params
+        // 	.subscribe((params: Params) => this.id =  +params['id'] );
         this.route.params
-            .subscribe(function (params) { return _this.id = +params['id']; });
+            .switchMap(function (params) { return _this.datesService.getDateById(+params['id']); })
+            .subscribe(function (response) {
+            _this.date = response.date;
+            _this.getSpends(response.id);
+        });
     };
     DayComponent.prototype.goBack = function () {
         this.location.back();
+    };
+    DayComponent.prototype.getSpends = function (dateId) {
+        var _this = this;
+        this.spendsService.getSpendsByDate(dateId).then(function (spends) { return _this.spends = spends; });
     };
     DayComponent = __decorate([
         core_1.Component({
@@ -42,7 +54,7 @@ var DayComponent = (function () {
             selector: 'day',
             templateUrl: 'day.component.html'
         }), 
-        __metadata('design:paramtypes', [dates_service_1.DatesService, router_1.ActivatedRoute, common_1.Location])
+        __metadata('design:paramtypes', [dates_service_1.DatesService, spends_service_1.SpendsService, router_1.ActivatedRoute, common_1.Location])
     ], DayComponent);
     return DayComponent;
 }());

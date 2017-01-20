@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class AppAlert{
 	node: any;
-	textnode: any;
+	textNode: any;
 	closeNode:any;
 	close:any;
 	closeTimeout:any;
@@ -17,7 +17,7 @@ export class AppAlert{
 		console.log(message);
 		this.closeTimeout = setTimeout( () => {
 			document.getElementsByTagName('body')[0].removeChild(this.node);
-			this.node.removeChild(this.textnode);
+			this.node.removeChild(this.textNode);
 		}, 10000);
 		this.initListeners();
 	}
@@ -42,13 +42,13 @@ export class AppAlert{
 		this.close.addEventListener('click', () => {
 			clearTimeout(this.closeTimeout);
 			document.getElementsByTagName('body')[0].removeChild(this.node);
-			this.node.removeChild(this.textnode);
-		}) );
+			this.node.removeChild(this.textNode);
+		});
 		document.getElementsByTagName('body')[0].addEventListener('click', () => {
 			clearTimeout(this.closeTimeout);
 			document.getElementsByTagName('body')[0].removeChild(this.node);
-			this.node.removeChild(this.textnode);
-		}) );
+			this.node.removeChild(this.textNode);
+		});
 	}
 	
 }

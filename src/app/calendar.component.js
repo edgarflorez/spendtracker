@@ -65,6 +65,7 @@ var CalendarComponent = (function () {
                 case 200:
                     _this.addDate = false;
                     _this.dates = response.data;
+                    console.log(_this.dates);
                     break;
                 case 500:
                     _this.addDate = false;

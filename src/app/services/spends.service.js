@@ -9,23 +9,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var app_alert_1 = require('./utils/app.alert');
-var dates_service_1 = require('./services/dates.service');
-var spends_service_1 = require('./services/spends.service');
-var AppComponent = (function () {
-    function AppComponent() {
-        this.appName = 'Spend Tracker';
+var mock_spends_1 = require('../mock/mock.spends');
+var SpendsService = (function () {
+    function SpendsService() {
     }
-    AppComponent = __decorate([
-        core_1.Component({
-            moduleId: module.id,
-            selector: 'my-app',
-            templateUrl: 'app.component.html',
-            providers: [app_alert_1.AppAlert, dates_service_1.DatesService, spends_service_1.SpendsService]
-        }), 
+    SpendsService.prototype.getSpendsByDate = function (id) {
+        console.log("ID ::", id);
+        var filterSpends = [];
+        for (var i = 0; i < mock_spends_1.SPENDS.length; i++) {
+            if (mock_spends_1.SPENDS[i].date == id) {
+                filterSpends.push(mock_spends_1.SPENDS[i]);
+                console.log(mock_spends_1.SPENDS[i]);
+            }
+        }
+        ;
+        console.log("filterSpends :: ", filterSpends);
+        return Promise.resolve(filterSpends);
+    };
+    SpendsService = __decorate([
+        core_1.Injectable(), 
         __metadata('design:paramtypes', [])
-    ], AppComponent);
-    return AppComponent;
+    ], SpendsService);
+    return SpendsService;
 }());
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+exports.SpendsService = SpendsService;
+//# sourceMappingURL=spends.service.js.map

@@ -23,7 +23,7 @@ var AppAlert = (function () {
         console.log(message);
         this.closeTimeout = setTimeout(function () {
             document.getElementsByTagName('body')[0].removeChild(_this.node);
-            _this.node.removeChild(_this.textnode);
+            _this.node.removeChild(_this.textNode);
         }, 10000);
         this.initListeners();
     };
@@ -42,15 +42,13 @@ var AppAlert = (function () {
         this.close.addEventListener('click', function () {
             clearTimeout(_this.closeTimeout);
             document.getElementsByTagName('body')[0].removeChild(_this.node);
-            _this.node.removeChild(_this.textnode);
+            _this.node.removeChild(_this.textNode);
         });
-        ;
         document.getElementsByTagName('body')[0].addEventListener('click', function () {
             clearTimeout(_this.closeTimeout);
             document.getElementsByTagName('body')[0].removeChild(_this.node);
-            _this.node.removeChild(_this.textnode);
+            _this.node.removeChild(_this.textNode);
         });
-        ;
     };
     AppAlert = __decorate([
         core_1.Injectable(), 

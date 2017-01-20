@@ -64,6 +64,7 @@ export class CalendarComponent implements OnInit {
 				case 200:
 					this.addDate = false;
 					this.dates = response.data;
+					console.log(this.dates);
 				break;
 				case 500:
 					this.addDate = false;
