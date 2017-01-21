@@ -1,4 +1,4 @@
-import { SpendModel } from '../types/spend-model'
+import { SpendModel } from '../types/spend-model';
 
 export const SPENDS: SpendModel[] = [
 	{ id: 1, date: 1, ammount: 1000, description:'some spend 01', category:1 },

@@ -18,7 +18,8 @@
 							<tr *ngFor="let spend of spends">
 								<td>{{spend.ammount | currency:'USD':true:'1.0' }}</td>
 								<td>{{spend.description}}</td>
-								<td>{{spend.category}}</td>
+								<!-- <td>{{ getCategoryName(1) spend.category }}</td> -->
+								<td>{{ getCategoryName( spend.category ) }}</td>
 							</tr>
 							<!-- <tr>
 								<td><a href="#">4.000</a></td>

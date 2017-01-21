@@ -19,10 +19,12 @@ var router_1 = require('@angular/router');
 var common_1 = require('@angular/common');
 var dates_service_1 = require('./services/dates.service');
 var spends_service_1 = require('./services/spends.service');
+var categories_service_1 = require('./services/categories.service');
 var DayComponent = (function () {
-    function DayComponent(datesService, spendsService, route, location) {
+    function DayComponent(datesService, spendsService, categoriesService, route, location) {
         this.datesService = datesService;
         this.spendsService = spendsService;
+        this.categoriesService = categoriesService;
         this.route = route;
         this.location = location;
     }
@@ -48,13 +50,23 @@ var DayComponent = (function () {
         var _this = this;
         this.spendsService.getSpendsByDate(dateId).then(function (spends) { return _this.spends = spends; });
     };
+    // getCategoryName(categoryId: number): void{
+    // 	this.categoriesService.getCategoryById( categoryId ).then( category => { return category.categoryName } );
+    // }
+    DayComponent.prototype.getCategoryName = function (categoryId) {
+        // this.categoriesService.getCategoryById( categoryId ).then( category => cat =  returnData(category.categoryName) ); 
+        // function returnData (name): string {
+        // 	return name;
+        // }
+        return "CAT";
+    };
     DayComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
             selector: 'day',
             templateUrl: 'day.component.html'
         }), 
-        __metadata('design:paramtypes', [dates_service_1.DatesService, spends_service_1.SpendsService, router_1.ActivatedRoute, common_1.Location])
+        __metadata('design:paramtypes', [dates_service_1.DatesService, spends_service_1.SpendsService, categories_service_1.CategoriesServie, router_1.ActivatedRoute, common_1.Location])
     ], DayComponent);
     return DayComponent;
 }());

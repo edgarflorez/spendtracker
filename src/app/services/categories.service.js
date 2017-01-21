@@ -9,24 +9,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var app_alert_1 = require('./utils/app.alert');
-var dates_service_1 = require('./services/dates.service');
-var spends_service_1 = require('./services/spends.service');
-var categories_service_1 = require('./services/categories.service');
-var AppComponent = (function () {
-    function AppComponent() {
-        this.appName = 'Spend Tracker';
+var mock_categories_1 = require('../mock/mock.categories');
+var CategoriesServie = (function () {
+    function CategoriesServie() {
     }
-    AppComponent = __decorate([
-        core_1.Component({
-            moduleId: module.id,
-            selector: 'my-app',
-            templateUrl: 'app.component.html',
-            providers: [app_alert_1.AppAlert, dates_service_1.DatesService, spends_service_1.SpendsService, categories_service_1.CategoriesServie]
-        }), 
+    CategoriesServie.prototype.getCategoryById = function (id) {
+        var category;
+        for (var i = 0; i < mock_categories_1.CATEGORIES.length; i++) {
+            if (mock_categories_1.CATEGORIES[i].id == id) {
+                category = mock_categories_1.CATEGORIES[i];
+            }
+        }
+        ;
+        return Promise.resolve(category);
+    };
+    CategoriesServie = __decorate([
+        core_1.Injectable(), 
         __metadata('design:paramtypes', [])
-    ], AppComponent);
-    return AppComponent;
+    ], CategoriesServie);
+    return CategoriesServie;
 }());
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+exports.CategoriesServie = CategoriesServie;
+//# sourceMappingURL=categories.service.js.map
