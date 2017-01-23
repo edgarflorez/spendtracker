@@ -13,7 +13,7 @@ var mock_categories_1 = require('../mock/mock.categories');
 var CategoriesServie = (function () {
     function CategoriesServie() {
     }
-    CategoriesServie.prototype.getCategoryById = function (id) {
+    CategoriesServie.prototype.getCategoryById_ = function (id) {
         var category;
         for (var i = 0; i < mock_categories_1.CATEGORIES.length; i++) {
             if (mock_categories_1.CATEGORIES[i].id == id) {
@@ -22,6 +22,16 @@ var CategoriesServie = (function () {
         }
         ;
         return Promise.resolve(category);
+    };
+    CategoriesServie.prototype.getCategoryById = function (id) {
+        var category;
+        for (var i = 0; i < mock_categories_1.CATEGORIES.length; i++) {
+            if (mock_categories_1.CATEGORIES[i].id == id) {
+                category = mock_categories_1.CATEGORIES[i];
+            }
+        }
+        ;
+        return Promise.resolve(category.categoryName);
     };
     CategoriesServie = __decorate([
         core_1.Injectable(), 

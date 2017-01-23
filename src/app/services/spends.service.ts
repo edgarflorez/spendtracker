@@ -2,6 +2,7 @@ import { Injectable } 	from '@angular/core';
 
 import { SpendModel } 	from '../types/spend-model';
 import { SPENDS }		from '../mock/mock.spends';
+import { CategoriesServie }	from './categories.service';
 
 @Injectable()
 export class SpendsService {
@@ -11,12 +12,12 @@ export class SpendsService {
 		for (var i = 0; i < SPENDS.length; i++) {
 			if(SPENDS[i].date == id){
 				filterSpends.push(SPENDS[i]);
-				console.log(SPENDS[i]);
 			}
-			
 		};
 		console.log("filterSpends :: ", filterSpends);
 		return Promise.resolve( filterSpends );
 	}
-	constructor(){}
+	constructor(
+		private categoriesService: CategoriesServie,
+	){}
 }

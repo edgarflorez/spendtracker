@@ -4,4 +4,5 @@ export class SpendModel{
 	ammount: 		number;
 	description: 	string;
 	category: 		number;
+	categoryName: 	string;
 }

@@ -12,7 +12,6 @@ import { Location }               from '@angular/common';
 import { DatesService } 	from './services/dates.service';
 import { SpendsService }	from './services/spends.service';
 import { SpendModel } 		from './types/spend-model';
-import { CategoriesServie }	from './services/categories.service';
 import { SpendCategory } 	from './types/spend-category';
 
 @Component({
@@ -28,7 +27,6 @@ export class DayComponent implements OnInit {
 	constructor(
 		private datesService: DatesService,
 		private spendsService: SpendsService,
-		private categoriesService: CategoriesServie,
 		private route: ActivatedRoute,
 		private location: Location
 	) {}
@@ -58,11 +56,17 @@ export class DayComponent implements OnInit {
 	// getCategoryName(categoryId: number): void{
 	// 	this.categoriesService.getCategoryById( categoryId ).then( category => { return category.categoryName } );
 	// }
-	getCategoryName(categoryId: number): string {
+	getCategoryName(categoryId: number): void  {
+		// this.categoriesService.getCategoryById( categoryId ).then( category =>  {
+			// return category;
+		// });
+
+
+
 		// this.categoriesService.getCategoryById( categoryId ).then( category => cat =  returnData(category.categoryName) ); 
 		// function returnData (name): string {
 		// 	return name;
 		// }
-		return "CAT";
+		// return "CAT";
 	}
 }
