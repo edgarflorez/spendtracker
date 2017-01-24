@@ -20,7 +20,7 @@ const routes: Routes = [
 		component: 	DayComponent
 	},
 	{
-		path: 		'spend',
+		path: 		'spend/:id',
 		component: 	SpendComponent
 	}
 ]

@@ -37,6 +37,7 @@ var DayComponent = (function () {
         this.route.params
             .switchMap(function (params) { return _this.datesService.getDateById(+params['id']); })
             .subscribe(function (response) {
+            _this.id = response.id;
             _this.date = response.date;
             _this.getSpends(response.id);
         });

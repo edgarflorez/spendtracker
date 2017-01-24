@@ -8,10 +8,13 @@
 				<div class="panel panel-default">
 					<div class="panel-body">
 						<form action="" class="form-horizontal">
+							<h2 class="text-center">{{date | date:'d MMMM y'}}</h2>
+							<br>
+							{{formAmmount}}
 							<div class="form-group">
 								<label for="spendInputAmmount" class="col-xs-3">Ammount</label>
 								<div class="col-xs-9">
-									<input type="number" placeholder="Ammount" class="form-control" id="spendInputAmmount">
+									<input type="number" placeholder="Ammount" class="form-control" id="spendInputAmmount" [(ngModel)]="formAmmount" [ngModelOptions]="{standalone: true}">
 								</div>
 							</div>
 							<div class="form-group">
@@ -24,15 +27,13 @@
 								<label for="spendInputCategory" class="col-xs-3">Category</label>
 								<div class="col-xs-9">
 									<select name="spendInputCategory" id="spendInputCategory" class="form-control">
-										<option value="category A">category A</option>
-										<option value="category B">category B</option>
-										<option value="category C">category C</option>
-										<option value="category D">category D</option>
+										<option value="" disabled hidden>Please select a category</option>
+										<option *ngFor="let category of categories" value="{{ category.id }}">{{ category.categoryName }}</option>
 									</select>
 								</div>
 							</div>
 							<div class="btn-group btn-group-lg btn-group-justified">
-								<a class="btn btn-default" href="#" role="button">
+								<a class="btn btn-default" role="button" (click)="goBack()">
 									CANCEL</a>
 									<a class="btn btn-primary" href="#">SUBMIT </a>
 								</div>

@@ -22,7 +22,7 @@ var AppComponent = (function () {
             moduleId: module.id,
             selector: 'my-app',
             templateUrl: 'app.component.html',
-            providers: [app_alert_1.AppAlert, dates_service_1.DatesService, spends_service_1.SpendsService, categories_service_1.CategoriesServie]
+            providers: [app_alert_1.AppAlert, dates_service_1.DatesService, spends_service_1.SpendsService, categories_service_1.CategoriesService]
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);

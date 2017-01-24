@@ -8,12 +8,44 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+require('rxjs/add/operator/switchMap');
+require('rxjs/add/operator/map');
 var core_1 = require('@angular/core');
+var router_1 = require('@angular/router');
+var common_1 = require('@angular/common');
+var dates_service_1 = require('./services/dates.service');
+var categories_service_1 = require('./services/categories.service');
 var SpendComponent = (function () {
-    function SpendComponent() {
+    function SpendComponent(route, location, datesService, categoriesService) {
+        this.route = route;
+        this.location = location;
+        this.datesService = datesService;
+        this.categoriesService = categoriesService;
+        this.formAmmount = 1000;
+        this.formDescription = "This is the awesome description";
     }
     SpendComponent.prototype.ngOnInit = function () {
-        console.log("Spend Init");
+        var _this = this;
+        // this.route.params
+        // 	.switchMap((params: Params) => this.datesService.getDateById(+params['id']))
+        // 	.subscribe( response => {
+        // 		this.date = response.date;	
+        // 		this.getSpends(response.id)
+        // 	} );
+        this.route.params
+            .switchMap(function (params) { return _this.datesService.getDateById(+params['id']); })
+            .subscribe(function (response) {
+            _this.dateId = response.id;
+            _this.date = response.date;
+            _this.getCategories();
+        });
+    };
+    SpendComponent.prototype.goBack = function () {
+        this.location.back();
+    };
+    SpendComponent.prototype.getCategories = function () {
+        var _this = this;
+        this.categoriesService.getCategories().then(function (categories) { return _this.categories = categories; });
     };
     SpendComponent = __decorate([
         core_1.Component({
@@ -21,7 +53,7 @@ var SpendComponent = (function () {
             selector: 'spend',
             templateUrl: 'spend.component.html'
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [router_1.ActivatedRoute, common_1.Location, dates_service_1.DatesService, categories_service_1.CategoriesService])
     ], SpendComponent);
     return SpendComponent;
 }());

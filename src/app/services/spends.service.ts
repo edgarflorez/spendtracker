@@ -2,7 +2,6 @@ import { Injectable } 	from '@angular/core';
 
 import { SpendModel } 	from '../types/spend-model';
 import { SPENDS }		from '../mock/mock.spends';
-import { CategoriesServie }	from './categories.service';
 
 @Injectable()
 export class SpendsService {
@@ -18,6 +17,5 @@ export class SpendsService {
 		return Promise.resolve( filterSpends );
 	}
 	constructor(
-		private categoriesService: CategoriesServie,
 	){}
 }

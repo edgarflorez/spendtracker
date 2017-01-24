@@ -28,7 +28,7 @@ var routes = [
         component: day_component_1.DayComponent
     },
     {
-        path: 'spend',
+        path: 'spend/:id',
         component: spend_component_1.SpendComponent
     }
 ];

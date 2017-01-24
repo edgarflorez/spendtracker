@@ -10,10 +10,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var mock_spends_1 = require('../mock/mock.spends');
-var categories_service_1 = require('./categories.service');
 var SpendsService = (function () {
-    function SpendsService(categoriesService) {
-        this.categoriesService = categoriesService;
+    function SpendsService() {
     }
     SpendsService.prototype.getSpendsByDate = function (id) {
         console.log("ID ::", id);
@@ -29,7 +27,7 @@ var SpendsService = (function () {
     };
     SpendsService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [categories_service_1.CategoriesServie])
+        __metadata('design:paramtypes', [])
     ], SpendsService);
     return SpendsService;
 }());

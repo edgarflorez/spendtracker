@@ -43,6 +43,7 @@ export class DayComponent implements OnInit {
 		this.route.params
 			.switchMap((params: Params) => this.datesService.getDateById(+params['id']))
 			.subscribe( response => {
+				this.id = response.id;
 				this.date = response.date;	
 				this.getSpends(response.id)
 			} );

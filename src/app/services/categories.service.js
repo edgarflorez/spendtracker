@@ -10,20 +10,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var mock_categories_1 = require('../mock/mock.categories');
-var CategoriesServie = (function () {
-    function CategoriesServie() {
+var CategoriesService = (function () {
+    function CategoriesService() {
     }
-    CategoriesServie.prototype.getCategoryById_ = function (id) {
-        var category;
-        for (var i = 0; i < mock_categories_1.CATEGORIES.length; i++) {
-            if (mock_categories_1.CATEGORIES[i].id == id) {
-                category = mock_categories_1.CATEGORIES[i];
-            }
-        }
-        ;
-        return Promise.resolve(category);
-    };
-    CategoriesServie.prototype.getCategoryById = function (id) {
+    CategoriesService.prototype.getCategoryById = function (id) {
         var category;
         for (var i = 0; i < mock_categories_1.CATEGORIES.length; i++) {
             if (mock_categories_1.CATEGORIES[i].id == id) {
@@ -33,11 +23,14 @@ var CategoriesServie = (function () {
         ;
         return Promise.resolve(category.categoryName);
     };
-    CategoriesServie = __decorate([
+    CategoriesService.prototype.getCategories = function () {
+        return Promise.resolve(mock_categories_1.CATEGORIES);
+    };
+    CategoriesService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [])
-    ], CategoriesServie);
-    return CategoriesServie;
+    ], CategoriesService);
+    return CategoriesService;
 }());
-exports.CategoriesServie = CategoriesServie;
+exports.CategoriesService = CategoriesService;
 //# sourceMappingURL=categories.service.js.map
