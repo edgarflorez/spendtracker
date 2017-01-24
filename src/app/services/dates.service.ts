@@ -25,15 +25,15 @@ export class DatesService {
 		console.log("newDate", newDate);
 		let response: Object = {}
 		if(!dateRepeated){
-			let newId = DATES.length + 1;
-			DATES.push({id:newId, date: newDate });
-			this.dateSort(DATES);
-			response['type'] = 200;
-			response['data'] = DATES;
-			
 			if(newDate == ""){
 				response['type'] = 500;
 				response['data'] = "ERROR PLEASE SELECT A DATE"
+			}else{
+				let newId = DATES.length + 1;
+				DATES.push({id:newId, date: newDate });
+				this.dateSort(DATES);
+				response['type'] = 200;
+				response['data'] = DATES;
 			}
 		}else{
 			response['type'] = 500;
@@ -44,6 +44,21 @@ export class DatesService {
 
 	dateSort(dates: any): void{
 		dates.sort(function(a:any, b:any){ return a.date - b.date })
+	}
+
+	getDateById(id:number): Promise<SpendDate>{
+		var date:SpendDate;
+
+		for (var i = 0; i < DATES.length; i++) {
+			if(DATES[i].id == id ){
+				date = DATES[i]
+			}	
+		};
+
+		return Promise.resolve( date );
+
+
+
 	}
 
 	constructor() {}

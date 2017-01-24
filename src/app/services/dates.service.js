@@ -30,14 +30,16 @@ var DatesService = (function () {
         console.log("newDate", newDate);
         var response = {};
         if (!dateRepeated) {
-            var newId = mock_dates_1.DATES.length + 1;
-            mock_dates_1.DATES.push({ id: newId, date: newDate });
-            this.dateSort(mock_dates_1.DATES);
-            response['type'] = 200;
-            response['data'] = mock_dates_1.DATES;
             if (newDate == "") {
                 response['type'] = 500;
                 response['data'] = "ERROR PLEASE SELECT A DATE";
+            }
+            else {
+                var newId = mock_dates_1.DATES.length + 1;
+                mock_dates_1.DATES.push({ id: newId, date: newDate });
+                this.dateSort(mock_dates_1.DATES);
+                response['type'] = 200;
+                response['data'] = mock_dates_1.DATES;
             }
         }
         else {
@@ -48,6 +50,16 @@ var DatesService = (function () {
     };
     DatesService.prototype.dateSort = function (dates) {
         dates.sort(function (a, b) { return a.date - b.date; });
+    };
+    DatesService.prototype.getDateById = function (id) {
+        var date;
+        for (var i = 0; i < mock_dates_1.DATES.length; i++) {
+            if (mock_dates_1.DATES[i].id == id) {
+                date = mock_dates_1.DATES[i];
+            }
+        }
+        ;
+        return Promise.resolve(date);
     };
     DatesService = __decorate([
         core_1.Injectable(), 

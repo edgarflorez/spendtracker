@@ -9,8 +9,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var dates_service_1 = require('./services/dates.service');
 var app_alert_1 = require('./utils/app.alert');
+var dates_service_1 = require('./services/dates.service');
+var spends_service_1 = require('./services/spends.service');
+var categories_service_1 = require('./services/categories.service');
 var AppComponent = (function () {
     function AppComponent() {
         this.appName = 'Spend Tracker';
@@ -20,7 +22,7 @@ var AppComponent = (function () {
             moduleId: module.id,
             selector: 'my-app',
             templateUrl: 'app.component.html',
-            providers: [dates_service_1.DatesService, app_alert_1.AppAlert]
+            providers: [app_alert_1.AppAlert, dates_service_1.DatesService, spends_service_1.SpendsService, categories_service_1.CategoriesServie]
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
