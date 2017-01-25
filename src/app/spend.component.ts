@@ -6,7 +6,9 @@ import { Location }               	from '@angular/common';
 
 import { DatesService } 			from './services/dates.service';
 import { SpendCategory } 			from './types/spend-category';
-import { CategoriesService } 	from './services/categories.service';
+import { CategoriesService } 		from './services/categories.service';
+import { SpendsService } 			from './services/spends.service';
+import { SpendModel } 				from './types/spend-model';
 
 @Component({
 	moduleId: 		module.id,
@@ -18,17 +20,18 @@ export class SpendComponent implements OnInit {
 	date: string;
 	categories: SpendCategory[];
 
-	formAmmount:number 		= 1000;
-	formDescription:string 	= "This is the awesome description";
-	formCategoryId:number;
-	formCategoryName:string;
-
+	model = {
+		ammount: null,
+		description: null,
+		category: null
+	}
 
 	constructor(
 		private route: ActivatedRoute,
 		private location: Location,
 		private datesService: DatesService,
 		private categoriesService: CategoriesService,
+		private spendsService: SpendsService
 	) {}
 
 	ngOnInit() {
@@ -52,4 +55,39 @@ export class SpendComponent implements OnInit {
 	getCategories():void {
 		this.categoriesService.getCategories().then( categories => this.categories = categories )
 	}
+	reset(): void{
+		this.model = {
+			ammount: null,
+			description: null,
+			category: null
+		};
+	}
+	onSubmit():void{
+		console.log("SUBMIT");
+
+		let spend:SpendModel = {
+			id: 			0;
+			date: 			this.dateId;
+			ammount: 		this.model.ammount;
+			description: 	this.model.description;
+			category: 		this.model.category;
+			categoryName: 	"COSA";
+		}
+
+		this.spendsService.addSpend(spend).then( response => {
+			switch(response.type){
+				case 200:
+					this.location.back();
+				break;
+				case 500:
+					console.log(response.data);
+				break;
+			}
+
+		})
+
+	}
+
+	// TODO: Remove this when we're done
+  	get diagnostic() { return JSON.stringify(this.model); }
 }

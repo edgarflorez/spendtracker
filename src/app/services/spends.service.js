@@ -22,8 +22,17 @@ var SpendsService = (function () {
             }
         }
         ;
-        console.log("filterSpends :: ", filterSpends);
+        // console.log("filterSpends :: ", filterSpends);
         return Promise.resolve(filterSpends);
+    };
+    SpendsService.prototype.addSpend = function (spend) {
+        // assign ID
+        mock_spends_1.SPENDS.push(spend);
+        // return category string 
+        var response = {};
+        response['type'] = 200;
+        response['data'] = "Spend created sucessfully";
+        return Promise.resolve(response);
     };
     SpendsService = __decorate([
         core_1.Injectable(), 

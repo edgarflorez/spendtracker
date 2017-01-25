@@ -15,14 +15,19 @@ var router_1 = require('@angular/router');
 var common_1 = require('@angular/common');
 var dates_service_1 = require('./services/dates.service');
 var categories_service_1 = require('./services/categories.service');
+var spends_service_1 = require('./services/spends.service');
 var SpendComponent = (function () {
-    function SpendComponent(route, location, datesService, categoriesService) {
+    function SpendComponent(route, location, datesService, categoriesService, spendsService) {
         this.route = route;
         this.location = location;
         this.datesService = datesService;
         this.categoriesService = categoriesService;
-        this.formAmmount = 1000;
-        this.formDescription = "This is the awesome description";
+        this.spendsService = spendsService;
+        this.model = {
+            ammount: null,
+            description: null,
+            category: null
+        };
     }
     SpendComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -47,13 +52,48 @@ var SpendComponent = (function () {
         var _this = this;
         this.categoriesService.getCategories().then(function (categories) { return _this.categories = categories; });
     };
+    SpendComponent.prototype.reset = function () {
+        this.model = {
+            ammount: null,
+            description: null,
+            category: null
+        };
+    };
+    SpendComponent.prototype.onSubmit = function () {
+        var _this = this;
+        console.log("SUBMIT");
+        var spend = {
+            id: 0,
+            date: this.dateId,
+            ammount: this.model.ammount,
+            description: this.model.description,
+            category: this.model.category,
+            categoryName: "COSA"
+        };
+        this.spendsService.addSpend(spend).then(function (response) {
+            switch (response.type) {
+                case 200:
+                    _this.location.back();
+                    break;
+                case 500:
+                    console.log(response.data);
+                    break;
+            }
+        });
+    };
+    Object.defineProperty(SpendComponent.prototype, "diagnostic", {
+        // TODO: Remove this when we're done
+        get: function () { return JSON.stringify(this.model); },
+        enumerable: true,
+        configurable: true
+    });
     SpendComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
             selector: 'spend',
             templateUrl: 'spend.component.html'
         }), 
-        __metadata('design:paramtypes', [router_1.ActivatedRoute, common_1.Location, dates_service_1.DatesService, categories_service_1.CategoriesService])
+        __metadata('design:paramtypes', [router_1.ActivatedRoute, common_1.Location, dates_service_1.DatesService, categories_service_1.CategoriesService, spends_service_1.SpendsService])
     ], SpendComponent);
     return SpendComponent;
 }());
