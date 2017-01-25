@@ -1,0 +1,14 @@
+ROAD MAP
+
+
+- Create a spend
+	- Validate form
+	- ammount required 
+	- description required > 5 characters 
+	- Category valid
+	- Create the spend with the given data
+
+
+
+- Create a model for the form
+- [DONE] in the app module import the FormsModule 

@@ -35,3 +35,14 @@ html,body{
 	top: 10px;
 	cursor: pointer;
 }
+
+.spend{
+	.btn-group-justified{
+		a{
+			width: 50%
+		}
+		button{
+			width: 100%
+		}
+	}
+}

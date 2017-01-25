@@ -11,4 +11,5 @@ import { CategoriesService }	from './services/categories.service';
 	templateUrl: 'app.component.html',
 	providers: [ AppAlert, DatesService, SpendsService, CategoriesService ]
 })
-export class AppComponent  { appName = 'Spend Tracker'; }
+// export class AppComponent  { appName = 'Spend Tracker'; }
+export class AppComponent  { appName = 'ANGULAR LAB'; }

@@ -15,7 +15,7 @@ var spends_service_1 = require('./services/spends.service');
 var categories_service_1 = require('./services/categories.service');
 var AppComponent = (function () {
     function AppComponent() {
-        this.appName = 'Spend Tracker';
+        this.appName = 'ANGULAR LAB';
     }
     AppComponent = __decorate([
         core_1.Component({
