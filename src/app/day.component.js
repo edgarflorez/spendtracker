@@ -34,6 +34,7 @@ var DayComponent = (function () {
         var _this = this;
         // this.route.params
         // 	.subscribe((params: Params) => this.id =  +params['id'] );
+        this.editModeOn = false;
         this.route.params
             .switchMap(function (params) { return _this.datesService.getDateById(+params['id']); })
             .subscribe(function (response) {
@@ -61,6 +62,10 @@ var DayComponent = (function () {
         // 	return name;
         // }
         // return "CAT";
+    };
+    DayComponent.prototype.onChangeEditMode = function () {
+        console.log("MODE");
+        this.editModeOn = !this.editModeOn;
     };
     DayComponent = __decorate([
         core_1.Component({

@@ -35,19 +35,41 @@ export class SpendComponent implements OnInit {
 	) {}
 
 	ngOnInit() {
+
+		// Check if is a new spend or and edition
+
+		this.route.params.subscribe((params: Params) => {
+	        let userId = (params['idSpend']) ? params['idSpend'] : params['id'];
+	        let action = (params['idSpend']) ? 'edit' : 'new';
+	        console.log("A :" userId,action);
+	      });
+
+		this.route.params
+			.switchMap((params: Params) => {
+				var obj:any = {};
+				if(typeof params['idSpend'] != 'undefined'){
+					obj['action'] = 'edit';  
+					obj['id'] = params['idSpend'];
+				}else{
+					obj['action'] = 'new';  
+					obj['id'] = params['id'];
+				}
+				return Promise.resolve( obj );
+			})
+			.subscribe( response => {
+				console.log(response);
+				// this.dateId 	= response.id;
+				// this.date  		= response.date;
+				this.	getCategories();
+			});
+		// console.log(this.route);
 		// this.route.params
 		// 	.switchMap((params: Params) => this.datesService.getDateById(+params['id']))
 		// 	.subscribe( response => {
-		// 		this.date = response.date;	
-		// 		this.getSpends(response.id)
-		// 	} );
-		this.route.params
-			.switchMap((params: Params) => this.datesService.getDateById(+params['id']))
-			.subscribe( response => {
-				this.dateId 	= response.id;
-				this.date  		= response.date;
-				this.	getCategories();
-			});
+		// 		this.dateId 	= response.id;
+		// 		this.date  		= response.date;
+		// 		this.	getCategories();
+		// 	});
 	}
 	goBack(): void {
 		this.location.back();

@@ -23,6 +23,7 @@ export class DayComponent implements OnInit {
 	id:number;
 	date:string;
 	spends: SpendModel[];
+	editModeOn: boolean;
 
 	constructor(
 		private datesService: DatesService,
@@ -39,6 +40,8 @@ export class DayComponent implements OnInit {
 
 		// this.route.params
 		// 	.subscribe((params: Params) => this.id =  +params['id'] );
+
+		this.editModeOn = false;
 
 		this.route.params
 			.switchMap((params: Params) => this.datesService.getDateById(+params['id']))
@@ -69,5 +72,9 @@ export class DayComponent implements OnInit {
 		// 	return name;
 		// }
 		// return "CAT";
+	}
+	onChangeEditMode():void {
+		console.log("MODE");
+		this.editModeOn = !this.editModeOn;
 	}
 }

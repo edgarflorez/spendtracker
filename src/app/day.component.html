@@ -3,6 +3,7 @@
 		<div class="row">
 			<div class="col-xs-12">
 				<header class="current-day">
+					<a class="btn  pull-right" (click)="onChangeEditMode()" [ngClass]="{'btn-default': !editModeOn, 'btn-info': editModeOn }" ><span *ngIf="!editModeOn">Edit Spends</span> <span *ngIf="editModeOn">Cancel</span> <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
 					<h2><span class="label label-primary">{{ date | date:'EEEE' }},</span> {{date | date:'d MMMM y'}}</h2>
 				</header><!-- current-day -->
 				<div class="day-table">
@@ -12,115 +13,18 @@
 								<th>Ammount</th>
 								<th>Description</th>
 								<th>Category</th>
+								<th *ngIf="editModeOn" class="text-right">Edit</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr *ngFor="let spend of spends">
-								<td>{{ spend.ammount | currency:'USD':true:'1.0' }}</td>
+								<td>{{spend.id}} {{ spend.ammount | currency:'USD':true:'1.0' }}</td>
 								<td>{{ spend.description }}</td>
 								<td>{{ spend.categoryName }}</td>
+								<td *ngIf="editModeOn"  class="text-right">
+									<a class="btn btn-default btn-large" [routerLink]="['/spend/edit', spend.id]"><span class="glyphicon glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+								</td>
 							</tr>
-							<!-- <tr>
-								<td><a href="#">4.000</a></td>
-								<td><a href="#">Coffe</a></td>
-								<td><a href="#">Food</a></td>
-							</tr>
-							<tr>
-								<td><a href="#">4.000</a></td>
-								<td><a href="#">Coffe</a></td>
-								<td><a href="#">Food</a></td>
-							</tr>
-							<tr>
-								<td><a href="#">4.000</a></td>
-								<td><a href="#">Coffe</a></td>
-								<td><a href="#">Food</a></td>
-							</tr>
-							<tr>
-								<td><a href="#">4.000</a></td>
-								<td><a href="#">Coffe</a></td>
-								<td><a href="#">Food</a></td>
-							</tr>
-							<tr>
-								<td><a href="#">4.000</a></td>
-								<td><a href="#">Coffe</a></td>
-								<td><a href="#">Food</a></td>
-							</tr>
-							<tr>
-								<td><a href="#">4.000</a></td>
-								<td><a href="#">Coffe</a></td>
-								<td><a href="#">Food</a></td>
-							</tr>
-							<tr>
-								<td><a href="#">4.000</a></td>
-								<td><a href="#">Coffe</a></td>
-								<td><a href="#">Food</a></td>
-							</tr>
-							<tr>
-								<td><a href="#">4.000</a></td>
-								<td><a href="#">Coffe</a></td>
-								<td><a href="#">Food</a></td>
-							</tr>
-							<tr>
-								<td><a href="#">4.000</a></td>
-								<td><a href="#">Coffe</a></td>
-								<td><a href="#">Food</a></td>
-							</tr>
-							<tr>
-								<td><a href="#">4.000</a></td>
-								<td><a href="#">Coffe</a></td>
-								<td><a href="#">Food</a></td>
-							</tr>
-							<tr>
-								<td><a href="#">4.000</a></td>
-								<td><a href="#">Coffe</a></td>
-								<td><a href="#">Food</a></td>
-							</tr>
-							<tr>
-								<td><a href="#">4.000</a></td>
-								<td><a href="#">Coffe</a></td>
-								<td><a href="#">Food</a></td>
-							</tr>
-							<tr>
-								<td><a href="#">4.000</a></td>
-								<td><a href="#">Coffe</a></td>
-								<td><a href="#">Food</a></td>
-							</tr>
-							<tr>
-								<td><a href="#">4.000</a></td>
-								<td><a href="#">Coffe</a></td>
-								<td><a href="#">Food</a></td>
-							</tr>
-							<tr>
-								<td><a href="#">4.000</a></td>
-								<td><a href="#">Coffe</a></td>
-								<td><a href="#">Food</a></td>
-							</tr>
-							<tr>
-								<td><a href="#">4.000</a></td>
-								<td><a href="#">Coffe</a></td>
-								<td><a href="#">Food</a></td>
-							</tr>
-							<tr>
-								<td><a href="#">4.000</a></td>
-								<td><a href="#">Coffe</a></td>
-								<td><a href="#">Food</a></td>
-							</tr>
-							<tr>
-								<td><a href="#">4.000</a></td>
-								<td><a href="#">Coffe</a></td>
-								<td><a href="#">Food</a></td>
-							</tr>
-							<tr>
-								<td><a href="#">4.000</a></td>
-								<td><a href="#">Coffe</a></td>
-								<td><a href="#">Food</a></td>
-							</tr>
-							<tr>
-								<td><a href="#">1.000</a></td>
-								<td><a href="#">Coffe</a></td>
-								<td><a href="#">Food</a></td>
-							</tr> -->
-
 						</tbody>
 					</table>
 				</div><!-- day-table -->

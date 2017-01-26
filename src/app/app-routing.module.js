@@ -30,6 +30,10 @@ var routes = [
     {
         path: 'spend/:id',
         component: spend_component_1.SpendComponent
+    },
+    {
+        path: 'spend/edit/:idSpend',
+        component: spend_component_1.SpendComponent
     }
 ];
 var AppRoutingModule = (function () {

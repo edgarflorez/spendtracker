@@ -30,20 +30,40 @@ var SpendComponent = (function () {
         };
     }
     SpendComponent.prototype.ngOnInit = function () {
+        // Check if is a new spend or and edition
         var _this = this;
+        this.route.params.subscribe(function (params) {
+            var userId = (params['idSpend']) ? params['idSpend'] : params['id'];
+            var action = (params['idSpend']) ? 'edit' : 'new';
+            console.log("A :", userId, action);
+        });
+        this.route.params
+            .switchMap(function (params) {
+            var obj = {};
+            if (typeof params['idSpend'] != 'undefined') {
+                obj['action'] = 'edit';
+                obj['id'] = params['idSpend'];
+            }
+            else {
+                obj['action'] = 'new';
+                obj['id'] = params['id'];
+            }
+            return Promise.resolve(obj);
+        })
+            .subscribe(function (response) {
+            console.log(response);
+            // this.dateId 	= response.id;
+            // this.date  		= response.date;
+            _this.getCategories();
+        });
+        // console.log(this.route);
         // this.route.params
         // 	.switchMap((params: Params) => this.datesService.getDateById(+params['id']))
         // 	.subscribe( response => {
-        // 		this.date = response.date;	
-        // 		this.getSpends(response.id)
-        // 	} );
-        this.route.params
-            .switchMap(function (params) { return _this.datesService.getDateById(+params['id']); })
-            .subscribe(function (response) {
-            _this.dateId = response.id;
-            _this.date = response.date;
-            _this.getCategories();
-        });
+        // 		this.dateId 	= response.id;
+        // 		this.date  		= response.date;
+        // 		this.	getCategories();
+        // 	});
     };
     SpendComponent.prototype.goBack = function () {
         this.location.back();
