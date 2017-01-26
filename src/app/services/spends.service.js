@@ -10,8 +10,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var mock_spends_1 = require('../mock/mock.spends');
+var categories_service_1 = require('./categories.service');
 var SpendsService = (function () {
-    function SpendsService() {
+    function SpendsService(categoriesService) {
+        this.categoriesService = categoriesService;
     }
     SpendsService.prototype.getSpendsByDate = function (id) {
         console.log("ID ::", id);
@@ -26,17 +28,19 @@ var SpendsService = (function () {
         return Promise.resolve(filterSpends);
     };
     SpendsService.prototype.addSpend = function (spend) {
-        // assign ID
-        mock_spends_1.SPENDS.push(spend);
-        // return category string 
-        var response = {};
-        response['type'] = 200;
-        response['data'] = "Spend created sucessfully";
-        return Promise.resolve(response);
+        return this.categoriesService.getCategoryById(spend.category).then(function (categoryName) {
+            spend.id = mock_spends_1.SPENDS.length + 1;
+            spend.categoryName = categoryName;
+            mock_spends_1.SPENDS.push(spend);
+            var response = {};
+            response['type'] = 200;
+            response['data'] = "Spend created sucessfully";
+            return Promise.resolve(response);
+        });
     };
     SpendsService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [categories_service_1.CategoriesService])
     ], SpendsService);
     return SpendsService;
 }());

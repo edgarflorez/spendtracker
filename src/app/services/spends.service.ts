@@ -1,7 +1,8 @@
-import { Injectable } 	from '@angular/core';
+import { Injectable } 			from '@angular/core';
 
-import { SpendModel } 	from '../types/spend-model';
-import { SPENDS }		from '../mock/mock.spends';
+import { SpendModel } 			from '../types/spend-model';
+import { SPENDS }				from '../mock/mock.spends';
+import { CategoriesService } 	from './categories.service';
 
 @Injectable()
 export class SpendsService {
@@ -17,19 +18,21 @@ export class SpendsService {
 		return Promise.resolve( filterSpends );
 	}
 	addSpend(spend:SpendModel): Promise<any> {
-		// assign ID
 
-		SPENDS.push(spend);
+		return this.categoriesService.getCategoryById( spend.category ).then( categoryName => {
+			spend.id = SPENDS.length + 1;
+			spend.categoryName = categoryName;
+			SPENDS.push(spend);
+			
+			let response: Object = {}
+			response['type'] = 200;
+			response['data'] = "Spend created sucessfully";
 
-		// return category string 
-
-		let response: Object = {}
-		response['type'] = 200;
-		response['data'] = "Spend created sucessfully";
-
-		return Promise.resolve( response );	
+			return Promise.resolve( response );	
+		})
 	}
 
 	constructor(
+		private categoriesService: CategoriesService
 	){}
 }

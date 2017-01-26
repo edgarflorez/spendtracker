@@ -68,7 +68,7 @@ var SpendComponent = (function () {
             ammount: this.model.ammount,
             description: this.model.description,
             category: this.model.category,
-            categoryName: "COSA"
+            categoryName: ""
         };
         this.spendsService.addSpend(spend).then(function (response) {
             switch (response.type) {

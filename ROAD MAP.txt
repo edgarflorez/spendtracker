@@ -1,14 +1,13 @@
 ROAD MAP
 
 
-- Create a spend
-	- Validate form
-	- ammount required 
+- [DONE] Create a spend
+	- [DONE] Validate form
+	- [DONE] ammount required 
 	- description required > 5 characters 
+	- description max length 100 characters
 	- Category valid
 	- Create the spend with the given data
-
-
-
-- Create a model for the form
+- [DONE] Create a model for the form
 - [DONE] in the app module import the FormsModule 
+- Edit Spend 

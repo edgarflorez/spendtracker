@@ -21,9 +21,9 @@ export class SpendComponent implements OnInit {
 	categories: SpendCategory[];
 
 	model = {
-		ammount: null,
-		description: null,
-		category: null
+		ammount:<number> null,
+		description:<string> null,
+		category:<number> null
 	}
 
 	constructor(
@@ -66,12 +66,12 @@ export class SpendComponent implements OnInit {
 		console.log("SUBMIT");
 
 		let spend:SpendModel = {
-			id: 			0;
-			date: 			this.dateId;
-			ammount: 		this.model.ammount;
-			description: 	this.model.description;
-			category: 		this.model.category;
-			categoryName: 	"COSA";
+			id: 			0,
+			date: 			this.dateId,
+			ammount: 		this.model.ammount,
+			description: 	this.model.description,
+			category: 		this.model.category,
+			categoryName: 	""
 		}
 
 		this.spendsService.addSpend(spend).then( response => {
