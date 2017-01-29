@@ -16,14 +16,17 @@ import { SpendModel } 				from './types/spend-model';
 	templateUrl: 	'spend.component.html'
 })
 export class SpendComponent implements OnInit {
-	dateId: number;
-	date: string;
+	dateString: string;
 	categories: SpendCategory[];
+	action: string;
 
 	model = {
+		id:<number> null,
+		date:<number> null,
 		ammount:<number> null,
 		description:<string> null,
-		category:<number> null
+		category:<number> null,
+		categoryName:<string> null 
 	}
 
 	constructor(
@@ -39,35 +42,63 @@ export class SpendComponent implements OnInit {
 		// Check if is a new spend or and edition
 
 		this.route.params.subscribe((params: Params) => {
-	        let userId = (params['idSpend']) ? params['idSpend'] : params['id'];
-	        let action = (params['idSpend']) ? 'edit' : 'new';
-	        console.log("A :" userId,action);
-	      });
+			let userId = (params['idSpend']) ? params['idSpend'] : params['id'];
+			this.action = (params['idSpend']) ? 'edit' : 'new';
+			// console.log("A :", userId,this.action);
 
-		this.route.params
-			.switchMap((params: Params) => {
-				var obj:any = {};
-				if(typeof params['idSpend'] != 'undefined'){
-					obj['action'] = 'edit';  
-					obj['id'] = params['idSpend'];
-				}else{
-					obj['action'] = 'new';  
-					obj['id'] = params['id'];
-				}
-				return Promise.resolve( obj );
-			})
-			.subscribe( response => {
-				console.log(response);
-				// this.dateId 	= response.id;
-				// this.date  		= response.date;
-				this.	getCategories();
-			});
+			switch(this.action){
+				case 'new':
+					this.route.params
+						.switchMap((params: Params) => this.datesService.getDateById( userId ))
+						.subscribe( response => {
+							this.dateString = response.date;
+							this.model.id 	= 0;
+							this.model.categoryName = '';
+							this.model.date = response.id;
+							this.getCategories();
+						});
+				break;
+				case  'edit':
+					this.route.params
+						.switchMap((params: Params) => this.spendsService.getSpendById( userId ))
+						.subscribe( response => {
+							// console.log(response);
+							this.dateString = "SPEND DATE TODO";
+							this.model 		= response;
+							this.getCategories();
+						});
+				break;
+			}
+		});
+
+
+		// return;
+		// this.route.params
+		// 	.switchMap((params: Params) => {
+		// 		var obj:any = {};
+		// 		if(typeof params['idSpend'] != 'undefined'){
+		// 			obj['action'] = 'edit';  
+		// 			obj['id'] = params['idSpend'];
+		// 		}else{
+		// 			obj['action'] = 'new';  
+		// 			obj['id'] = params['id'];
+		// 		}
+		// 		return Promise.resolve( obj );
+		// 	})
+		// 	.subscribe( response => {
+		// 		console.log(response);
+		// 		this.model.date 	= response.id;
+		// 		this.dateString 	= response.date;
+		// 		this.	getCategories();
+		// 	});
+
+
 		// console.log(this.route);
 		// this.route.params
 		// 	.switchMap((params: Params) => this.datesService.getDateById(+params['id']))
 		// 	.subscribe( response => {
-		// 		this.dateId 	= response.id;
-		// 		this.date  		= response.date;
+		// 		this.model.date = response.id;
+		// 		this.dateString = response.date;
 		// 		this.	getCategories();
 		// 	});
 	}
@@ -79,35 +110,52 @@ export class SpendComponent implements OnInit {
 	}
 	reset(): void{
 		this.model = {
+			id: null,
+			date: null,
 			ammount: null,
 			description: null,
-			category: null
+			category: null,
+			categoryName: null
 		};
 	}
 	onSubmit():void{
-		console.log("SUBMIT");
 
 		let spend:SpendModel = {
-			id: 			0,
-			date: 			this.dateId,
+			id: 			this.model.id,
+			date: 			this.model.date,
 			ammount: 		this.model.ammount,
 			description: 	this.model.description,
 			category: 		this.model.category,
 			categoryName: 	""
 		}
 
-		this.spendsService.addSpend(spend).then( response => {
-			switch(response.type){
-				case 200:
-					this.location.back();
-				break;
-				case 500:
-					console.log(response.data);
-				break;
-			}
+		switch(this.action){
+			case 'new':
+				this.spendsService.addSpend(spend).then( response => {
+					switch(response.type){
+						case 200:
+							this.location.back();
+						break;
+						case 500:
+							console.log(response.data);
+						break;
+					}
 
-		})
-
+				})
+			break;
+			case  'edit':
+				this.spendsService.updateSpend(spend).then( response => {
+					switch(response.type){
+						case 200:
+							this.location.back();
+						break;
+						case 500:
+							console.log(response.data);
+						break;
+					}
+				})
+			break;
+		}
 	}
 
 	// TODO: Remove this when we're done

@@ -11,5 +11,9 @@ ROAD MAP
 - [DONE] Create a model for the form
 - [DONE] in the app module import the FormsModule 
 - Edit Spend 
-	- Create btn edit Show/hide
-	- View Edit 
+	- [DONE] Create btn edit Show/hide
+	- [DONE] View Edit 
+	- When you edit a spend then go back the element is edited It should let the same values
+		- try to copy the element avoid reference.
+- Delete a spend.
+	- confirm and captcha

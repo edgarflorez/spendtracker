@@ -18,7 +18,7 @@
 						</thead>
 						<tbody>
 							<tr *ngFor="let spend of spends">
-								<td>{{spend.id}} {{ spend.ammount | currency:'USD':true:'1.0' }}</td>
+								<td>{{ spend.ammount | currency:'USD':true:'1.0' }}</td>
 								<td>{{ spend.description }}</td>
 								<td>{{ spend.categoryName }}</td>
 								<td *ngIf="editModeOn"  class="text-right">

@@ -21,7 +21,7 @@
 							<div class="form-group">
 								<label for="spendInputDescription" class="col-xs-3">Description</label>
 								<div class="col-xs-9">
-									<input type="text" placeholder="Description" class="form-control" id="spendInputDescription"  name="description" [(ngModel)]="model.description" #description="ngModel" minlength="3" pattern="[A-Za-z ]+$" maxlength="100" required>
+									<input type="text" placeholder="Description" class="form-control" id="spendInputDescription"  name="description" [(ngModel)]="model.description" #description="ngModel" minlength="3" pattern="[A-Za-z0-9 ]+$" maxlength="100" required>
 									<div  [hidden]="description.valid || description.pristine" class="alert alert-danger btn-xs">
 										Please check the next caveats<br>
 										* The description should not be empty<br>

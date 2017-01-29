@@ -16,7 +16,6 @@ var SpendsService = (function () {
         this.categoriesService = categoriesService;
     }
     SpendsService.prototype.getSpendsByDate = function (id) {
-        console.log("ID ::", id);
         var filterSpends = [];
         for (var i = 0; i < mock_spends_1.SPENDS.length; i++) {
             if (mock_spends_1.SPENDS[i].date == id) {
@@ -24,14 +23,38 @@ var SpendsService = (function () {
             }
         }
         ;
-        // console.log("filterSpends :: ", filterSpends);
         return Promise.resolve(filterSpends);
+    };
+    SpendsService.prototype.getSpendById = function (id) {
+        var filterSpend;
+        for (var i = 0; i < mock_spends_1.SPENDS.length; i++) {
+            if (mock_spends_1.SPENDS[i].id == id) {
+                filterSpend = mock_spends_1.SPENDS[i];
+            }
+        }
+        ;
+        return Promise.resolve(filterSpend);
     };
     SpendsService.prototype.addSpend = function (spend) {
         return this.categoriesService.getCategoryById(spend.category).then(function (categoryName) {
             spend.id = mock_spends_1.SPENDS.length + 1;
             spend.categoryName = categoryName;
             mock_spends_1.SPENDS.push(spend);
+            var response = {};
+            response['type'] = 200;
+            response['data'] = "Spend created sucessfully";
+            return Promise.resolve(response);
+        });
+    };
+    SpendsService.prototype.updateSpend = function (spend) {
+        return this.categoriesService.getCategoryById(spend.category).then(function (categoryName) {
+            spend.categoryName = categoryName;
+            for (var i = 0; i < mock_spends_1.SPENDS.length; i++) {
+                if (spend.id == mock_spends_1.SPENDS[i].id) {
+                    mock_spends_1.SPENDS[i] = spend;
+                }
+            }
+            ;
             var response = {};
             response['type'] = 200;
             response['data'] = "Spend created sucessfully";

@@ -24,9 +24,12 @@ var SpendComponent = (function () {
         this.categoriesService = categoriesService;
         this.spendsService = spendsService;
         this.model = {
+            id: null,
+            date: null,
             ammount: null,
             description: null,
-            category: null
+            category: null,
+            categoryName: null
         };
     }
     SpendComponent.prototype.ngOnInit = function () {
@@ -34,34 +37,57 @@ var SpendComponent = (function () {
         var _this = this;
         this.route.params.subscribe(function (params) {
             var userId = (params['idSpend']) ? params['idSpend'] : params['id'];
-            var action = (params['idSpend']) ? 'edit' : 'new';
-            console.log("A :", userId, action);
-        });
-        this.route.params
-            .switchMap(function (params) {
-            var obj = {};
-            if (typeof params['idSpend'] != 'undefined') {
-                obj['action'] = 'edit';
-                obj['id'] = params['idSpend'];
+            _this.action = (params['idSpend']) ? 'edit' : 'new';
+            // console.log("A :", userId,this.action);
+            switch (_this.action) {
+                case 'new':
+                    _this.route.params
+                        .switchMap(function (params) { return _this.datesService.getDateById(userId); })
+                        .subscribe(function (response) {
+                        _this.dateString = response.date;
+                        _this.model.id = 0;
+                        _this.model.categoryName = '';
+                        _this.model.date = response.id;
+                        _this.getCategories();
+                    });
+                    break;
+                case 'edit':
+                    _this.route.params
+                        .switchMap(function (params) { return _this.spendsService.getSpendById(userId); })
+                        .subscribe(function (response) {
+                        // console.log(response);
+                        _this.dateString = "SPEND DATE TODO";
+                        _this.model = response;
+                        _this.getCategories();
+                    });
+                    break;
             }
-            else {
-                obj['action'] = 'new';
-                obj['id'] = params['id'];
-            }
-            return Promise.resolve(obj);
-        })
-            .subscribe(function (response) {
-            console.log(response);
-            // this.dateId 	= response.id;
-            // this.date  		= response.date;
-            _this.getCategories();
         });
+        // return;
+        // this.route.params
+        // 	.switchMap((params: Params) => {
+        // 		var obj:any = {};
+        // 		if(typeof params['idSpend'] != 'undefined'){
+        // 			obj['action'] = 'edit';  
+        // 			obj['id'] = params['idSpend'];
+        // 		}else{
+        // 			obj['action'] = 'new';  
+        // 			obj['id'] = params['id'];
+        // 		}
+        // 		return Promise.resolve( obj );
+        // 	})
+        // 	.subscribe( response => {
+        // 		console.log(response);
+        // 		this.model.date 	= response.id;
+        // 		this.dateString 	= response.date;
+        // 		this.	getCategories();
+        // 	});
         // console.log(this.route);
         // this.route.params
         // 	.switchMap((params: Params) => this.datesService.getDateById(+params['id']))
         // 	.subscribe( response => {
-        // 		this.dateId 	= response.id;
-        // 		this.date  		= response.date;
+        // 		this.model.date = response.id;
+        // 		this.dateString = response.date;
         // 		this.	getCategories();
         // 	});
     };
@@ -74,32 +100,50 @@ var SpendComponent = (function () {
     };
     SpendComponent.prototype.reset = function () {
         this.model = {
+            id: null,
+            date: null,
             ammount: null,
             description: null,
-            category: null
+            category: null,
+            categoryName: null
         };
     };
     SpendComponent.prototype.onSubmit = function () {
         var _this = this;
-        console.log("SUBMIT");
         var spend = {
-            id: 0,
-            date: this.dateId,
+            id: this.model.id,
+            date: this.model.date,
             ammount: this.model.ammount,
             description: this.model.description,
             category: this.model.category,
             categoryName: ""
         };
-        this.spendsService.addSpend(spend).then(function (response) {
-            switch (response.type) {
-                case 200:
-                    _this.location.back();
-                    break;
-                case 500:
-                    console.log(response.data);
-                    break;
-            }
-        });
+        switch (this.action) {
+            case 'new':
+                this.spendsService.addSpend(spend).then(function (response) {
+                    switch (response.type) {
+                        case 200:
+                            _this.location.back();
+                            break;
+                        case 500:
+                            console.log(response.data);
+                            break;
+                    }
+                });
+                break;
+            case 'edit':
+                this.spendsService.updateSpend(spend).then(function (response) {
+                    switch (response.type) {
+                        case 200:
+                            _this.location.back();
+                            break;
+                        case 500:
+                            console.log(response.data);
+                            break;
+                    }
+                });
+                break;
+        }
     };
     Object.defineProperty(SpendComponent.prototype, "diagnostic", {
         // TODO: Remove this when we're done
