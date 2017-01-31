@@ -29,7 +29,7 @@ var SpendsService = (function () {
         var filterSpend;
         for (var i = 0; i < mock_spends_1.SPENDS.length; i++) {
             if (mock_spends_1.SPENDS[i].id == id) {
-                filterSpend = mock_spends_1.SPENDS[i];
+                filterSpend = JSON.parse(JSON.stringify(mock_spends_1.SPENDS[i]));
             }
         }
         ;

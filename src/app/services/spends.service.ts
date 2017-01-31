@@ -19,7 +19,7 @@ export class SpendsService {
 		let filterSpend: SpendModel;
 		for (let i = 0; i < SPENDS.length; i++) {
 			if(SPENDS[i].id == id){
-				filterSpend = SPENDS[i];
+				filterSpend =  JSON.parse( JSON.stringify( SPENDS[i] ) );
 			}
 		};
 		return Promise.resolve( filterSpend );
