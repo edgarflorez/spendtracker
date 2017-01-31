@@ -19,6 +19,8 @@ export class SpendComponent implements OnInit {
 	dateString: string;
 	categories: SpendCategory[];
 	action: string;
+	editModeOn: boolean;
+	editModeOnConfirm: boolean;
 
 	model = {
 		id:<number> null,
@@ -51,6 +53,8 @@ export class SpendComponent implements OnInit {
 					this.route.params
 						.switchMap((params: Params) => this.datesService.getDateById( userId ))
 						.subscribe( response => {
+							this.editModeOn = false;
+							this.editModeOnConfirm = false;
 							this.dateString = response.date;
 							this.model.id 	= 0;
 							this.model.categoryName = '';
@@ -62,6 +66,8 @@ export class SpendComponent implements OnInit {
 					this.route.params
 						.switchMap((params: Params) => this.spendsService.getSpendById( userId ))
 						.subscribe( response => {
+							this.editModeOn = true;
+							this.editModeOnConfirm = false;
 							// console.log(response);
 							this.dateString = "SPEND DATE TODO";
 							this.model 		= response;
@@ -70,43 +76,31 @@ export class SpendComponent implements OnInit {
 				break;
 			}
 		});
-
-
-		// return;
-		// this.route.params
-		// 	.switchMap((params: Params) => {
-		// 		var obj:any = {};
-		// 		if(typeof params['idSpend'] != 'undefined'){
-		// 			obj['action'] = 'edit';  
-		// 			obj['id'] = params['idSpend'];
-		// 		}else{
-		// 			obj['action'] = 'new';  
-		// 			obj['id'] = params['id'];
-		// 		}
-		// 		return Promise.resolve( obj );
-		// 	})
-		// 	.subscribe( response => {
-		// 		console.log(response);
-		// 		this.model.date 	= response.id;
-		// 		this.dateString 	= response.date;
-		// 		this.	getCategories();
-		// 	});
-
-
-		// console.log(this.route);
-		// this.route.params
-		// 	.switchMap((params: Params) => this.datesService.getDateById(+params['id']))
-		// 	.subscribe( response => {
-		// 		this.model.date = response.id;
-		// 		this.dateString = response.date;
-		// 		this.	getCategories();
-		// 	});
 	}
 	goBack(): void {
 		this.location.back();
 	}
 	getCategories():void {
 		this.categoriesService.getCategories().then( categories => this.categories = categories )
+	}
+	onDeleteSpend(): void{
+		this.editModeOnConfirm = true;
+	}
+	onDeleteSpendCancel(): void{
+		this.editModeOnConfirm = false;
+	}
+	onDeleteSpendConfirm(): void{
+		this.spendsService.dropSpend(this.model.id).then( response => {
+			switch(response.type){
+				case 200:
+					this.location.back();
+				break;
+				case 500:
+					console.log(response.data);
+				break;
+			}
+
+		})
 	}
 	reset(): void{
 		this.model = {
@@ -140,7 +134,6 @@ export class SpendComponent implements OnInit {
 							console.log(response.data);
 						break;
 					}
-
 				})
 			break;
 			case  'edit':

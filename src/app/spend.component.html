@@ -50,6 +50,21 @@
 							<!-- {{ diagnostic }} -->
 						</div>
 					</div>
+					<div class="panel panel-default" *ngIf="editModeOn">
+						<div class="panel-body">
+							<div *ngIf="editModeOnConfirm">
+								<p class="text-center"><br>Are you sure to delete this spend?<br><br></p>
+								<div class="btn-group btn-group-lg btn-group-justified">
+									<a class="btn btn-default" role="button" (click)="onDeleteSpendCancel()">
+									NO</a>
+									<a class="btn btn-danger" role="button" (click)="onDeleteSpendConfirm()">YES</a>
+								</div>
+							</div>
+							<div class="btn-group btn-group-lg btn-group-justified" *ngIf="!editModeOnConfirm">
+								<a class="btn btn-danger" role="button" (click)="onDeleteSpend()">DELETE</a>
+							</div>
+						</div>
+					</div>
 				</div>
 				
 			</div><!-- row -->

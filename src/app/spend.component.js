@@ -44,6 +44,8 @@ var SpendComponent = (function () {
                     _this.route.params
                         .switchMap(function (params) { return _this.datesService.getDateById(userId); })
                         .subscribe(function (response) {
+                        _this.editModeOn = false;
+                        _this.editModeOnConfirm = false;
                         _this.dateString = response.date;
                         _this.model.id = 0;
                         _this.model.categoryName = '';
@@ -55,6 +57,8 @@ var SpendComponent = (function () {
                     _this.route.params
                         .switchMap(function (params) { return _this.spendsService.getSpendById(userId); })
                         .subscribe(function (response) {
+                        _this.editModeOn = true;
+                        _this.editModeOnConfirm = false;
                         // console.log(response);
                         _this.dateString = "SPEND DATE TODO";
                         _this.model = response;
@@ -63,33 +67,6 @@ var SpendComponent = (function () {
                     break;
             }
         });
-        // return;
-        // this.route.params
-        // 	.switchMap((params: Params) => {
-        // 		var obj:any = {};
-        // 		if(typeof params['idSpend'] != 'undefined'){
-        // 			obj['action'] = 'edit';  
-        // 			obj['id'] = params['idSpend'];
-        // 		}else{
-        // 			obj['action'] = 'new';  
-        // 			obj['id'] = params['id'];
-        // 		}
-        // 		return Promise.resolve( obj );
-        // 	})
-        // 	.subscribe( response => {
-        // 		console.log(response);
-        // 		this.model.date 	= response.id;
-        // 		this.dateString 	= response.date;
-        // 		this.	getCategories();
-        // 	});
-        // console.log(this.route);
-        // this.route.params
-        // 	.switchMap((params: Params) => this.datesService.getDateById(+params['id']))
-        // 	.subscribe( response => {
-        // 		this.model.date = response.id;
-        // 		this.dateString = response.date;
-        // 		this.	getCategories();
-        // 	});
     };
     SpendComponent.prototype.goBack = function () {
         this.location.back();
@@ -97,6 +74,25 @@ var SpendComponent = (function () {
     SpendComponent.prototype.getCategories = function () {
         var _this = this;
         this.categoriesService.getCategories().then(function (categories) { return _this.categories = categories; });
+    };
+    SpendComponent.prototype.onDeleteSpend = function () {
+        this.editModeOnConfirm = true;
+    };
+    SpendComponent.prototype.onDeleteSpendCancel = function () {
+        this.editModeOnConfirm = false;
+    };
+    SpendComponent.prototype.onDeleteSpendConfirm = function () {
+        var _this = this;
+        this.spendsService.dropSpend(this.model.id).then(function (response) {
+            switch (response.type) {
+                case 200:
+                    _this.location.back();
+                    break;
+                case 500:
+                    console.log(response.data);
+                    break;
+            }
+        });
     };
     SpendComponent.prototype.reset = function () {
         this.model = {

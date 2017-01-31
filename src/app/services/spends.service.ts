@@ -38,6 +38,24 @@ export class SpendsService {
 			return Promise.resolve( response );	
 		})
 	}
+	dropSpend(spendId: number): Promise<any> {
+		console.log("A", SPENDS);
+		for (let i = SPENDS.length - 1; i >= 0; i--) {
+			if(spendId == SPENDS[i].id){
+				SPENDS.splice(i,1);
+			}
+		};
+		console.log("B", SPENDS);
+
+
+			
+		let response: Object = {}
+		response['type'] = 200;
+		response['data'] = "Spend created sucessfully";
+
+		return Promise.resolve( response );	
+
+	}
 
 	updateSpend(spend:SpendModel): Promise<any> {
 		return this.categoriesService.getCategoryById( spend.category ).then( categoryName => {

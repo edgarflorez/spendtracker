@@ -13,7 +13,7 @@ ROAD MAP
 - Edit Spend 
 	- [DONE] Create btn edit Show/hide
 	- [DONE] View Edit 
-	- When you edit a spend then go back the element is edited It should let the same values
-		- try to copy the element avoid reference.
-- Delete a spend.
-	- confirm and captcha
+	- [DONE] When you edit a spend then go back the element is edited It should let the same values
+		- [DONE] try to copy the element avoid reference.
+- [DONE] Delete a spend.
+	- [DONE] confirm with buttons

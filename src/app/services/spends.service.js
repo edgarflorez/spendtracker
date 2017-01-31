@@ -46,6 +46,20 @@ var SpendsService = (function () {
             return Promise.resolve(response);
         });
     };
+    SpendsService.prototype.dropSpend = function (spendId) {
+        console.log("A", mock_spends_1.SPENDS);
+        for (var i = mock_spends_1.SPENDS.length - 1; i >= 0; i--) {
+            if (spendId == mock_spends_1.SPENDS[i].id) {
+                mock_spends_1.SPENDS.splice(i, 1);
+            }
+        }
+        ;
+        console.log("B", mock_spends_1.SPENDS);
+        var response = {};
+        response['type'] = 200;
+        response['data'] = "Spend created sucessfully";
+        return Promise.resolve(response);
+    };
     SpendsService.prototype.updateSpend = function (spend) {
         return this.categoriesService.getCategoryById(spend.category).then(function (categoryName) {
             spend.categoryName = categoryName;
