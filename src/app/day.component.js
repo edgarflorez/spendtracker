@@ -1,7 +1,3 @@
-// import { Component, OnInit } from '@angular/core';
-// import { ActivatedRoute, Params } from '@angular/router';
-// import { Location } from '@angular/common';
-// import 'rxjs/add/operator/switchMap';
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -19,19 +15,22 @@ var router_1 = require('@angular/router');
 var common_1 = require('@angular/common');
 var dates_service_1 = require('./services/dates.service');
 var spends_service_1 = require('./services/spends.service');
+var app_auth_service_1 = require('./services/app-auth.service');
 var DayComponent = (function () {
-    function DayComponent(datesService, spendsService, route, location) {
+    function DayComponent(datesService, spendsService, appAuthService, route, location) {
         this.datesService = datesService;
         this.spendsService = spendsService;
+        this.appAuthService = appAuthService;
         this.route = route;
         this.location = location;
     }
     DayComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.appAuthService.isUserAuthenticated();
         // Online example 
         // this.route.params
         // 	.switchMap((params: Params) => this.heroService.getHero(+params['id']))
         // 	.subscribe(hero => this.hero = hero);
-        var _this = this;
         // this.route.params
         // 	.subscribe((params: Params) => this.id =  +params['id'] );
         this.editModeOn = false;
@@ -73,7 +72,7 @@ var DayComponent = (function () {
             selector: 'day',
             templateUrl: 'day.component.html'
         }), 
-        __metadata('design:paramtypes', [dates_service_1.DatesService, spends_service_1.SpendsService, router_1.ActivatedRoute, common_1.Location])
+        __metadata('design:paramtypes', [dates_service_1.DatesService, spends_service_1.SpendsService, app_auth_service_1.AppAuthService, router_1.ActivatedRoute, common_1.Location])
     ], DayComponent);
     return DayComponent;
 }());

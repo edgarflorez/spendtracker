@@ -17,6 +17,7 @@ var app_component_1 = require('./app.component');
 var calendar_component_1 = require('./calendar.component');
 var day_component_1 = require('./day.component');
 var spend_component_1 = require('./spend.component');
+var auth_component_1 = require('./auth.component');
 var app_routing_module_1 = require('./app-routing.module');
 var AppModule = (function () {
     function AppModule() {
@@ -33,7 +34,8 @@ var AppModule = (function () {
                 app_component_1.AppComponent,
                 calendar_component_1.CalendarComponent,
                 day_component_1.DayComponent,
-                spend_component_1.SpendComponent
+                spend_component_1.SpendComponent,
+                auth_component_1.AuthComponent
             ],
             providers: [],
             bootstrap: [app_component_1.AppComponent]

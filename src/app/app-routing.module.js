@@ -13,6 +13,7 @@ var router_1 = require("@angular/router");
 var calendar_component_1 = require('./calendar.component');
 var day_component_1 = require('./day.component');
 var spend_component_1 = require('./spend.component');
+var auth_component_1 = require('./auth.component');
 var routes = [
     {
         path: '',
@@ -34,6 +35,10 @@ var routes = [
     {
         path: 'spend/edit/:idSpend',
         component: spend_component_1.SpendComponent
+    },
+    {
+        path: 'auth/:urlRedirect',
+        component: auth_component_1.AuthComponent
     }
 ];
 var AppRoutingModule = (function () {

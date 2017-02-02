@@ -10,11 +10,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var dates_service_1 = require('./services/dates.service');
+var app_auth_service_1 = require('./services/app-auth.service');
 var app_alert_1 = require('./utils/app.alert');
 var CalendarComponent = (function () {
     // constructor
-    function CalendarComponent(datesService, appAlert) {
+    function CalendarComponent(datesService, appAuthService, appAlert) {
         this.datesService = datesService;
+        this.appAuthService = appAuthService;
         this.appAlert = appAlert;
         // vars
         this.addDate = false;
@@ -38,6 +40,7 @@ var CalendarComponent = (function () {
         this.datesService.getDates().then(function (dates) { _this.dates = dates; console.log(_this.dates); });
     };
     CalendarComponent.prototype.ngOnInit = function () {
+        this.appAuthService.isUserAuthenticated();
         this.getDates();
         console.log("Calendar Init");
     };
@@ -82,7 +85,7 @@ var CalendarComponent = (function () {
             selector: 'calendar',
             templateUrl: 'calendar.component.html'
         }), 
-        __metadata('design:paramtypes', [dates_service_1.DatesService, app_alert_1.AppAlert])
+        __metadata('design:paramtypes', [dates_service_1.DatesService, app_auth_service_1.AppAuthService, app_alert_1.AppAlert])
     ], CalendarComponent);
     return CalendarComponent;
 }());

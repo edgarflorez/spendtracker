@@ -1,18 +1,14 @@
-// import { Component, OnInit } from '@angular/core';
-// import { ActivatedRoute, Params } from '@angular/router';
-// import { Location } from '@angular/common';
-// import 'rxjs/add/operator/switchMap';
-
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/map';
-import { Component, OnInit }      from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
-import { Location }               from '@angular/common';
+import { Component, OnInit }      	from '@angular/core';
+import { ActivatedRoute, Params } 	from '@angular/router';
+import { Location }               	from '@angular/common';
 
-import { DatesService } 	from './services/dates.service';
-import { SpendsService }	from './services/spends.service';
-import { SpendModel } 		from './types/spend-model';
-import { SpendCategory } 	from './types/spend-category';
+import { DatesService } 			from './services/dates.service';
+import { SpendsService }			from './services/spends.service';
+import { AppAuthService } 			from './services/app-auth.service';
+import { SpendModel } 				from './types/spend-model';
+import { SpendCategory } 			from './types/spend-category';
 
 @Component({
 	moduleId: module.id,
@@ -28,11 +24,14 @@ export class DayComponent implements OnInit {
 	constructor(
 		private datesService: DatesService,
 		private spendsService: SpendsService,
+		private appAuthService: AppAuthService,
 		private route: ActivatedRoute,
 		private location: Location
 	) {}
 
 	ngOnInit() {
+		this.appAuthService.isUserAuthenticated();
+		
 		// Online example 
 		// this.route.params
 		// 	.switchMap((params: Params) => this.heroService.getHero(+params['id']))

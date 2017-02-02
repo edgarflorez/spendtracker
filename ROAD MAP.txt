@@ -17,3 +17,16 @@ ROAD MAP
 		- [DONE] try to copy the element avoid reference.
 - [DONE] Delete a spend.
 	- [DONE] confirm with buttons
+
+- [DONE] Remove main nav, just let the app navigation.
+- LOGIN
+	- Implement on all pages de login entry point
+	- Fix the View to take all the screen
+	- 
+- Create a login point entry
+	- 1 DB and two users
+	- Security session
+	- ask for auth at any step
+	- keep session open for a user [Checkbox]
+- Create app log
+	- Log all events like create date, edit, delete ETC

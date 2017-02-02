@@ -9,7 +9,8 @@ import { MyDatePickerModule } from 'mydatepicker/dist/my-date-picker.module';
 import { AppComponent }  	from './app.component';
 import { CalendarComponent }from './calendar.component';
 import { DayComponent } 	from './day.component';	
-import { SpendComponent } 	from './spend.component';
+import { SpendComponent }   from './spend.component';
+import { AuthComponent } 	from './auth.component';
 
 import { AppRoutingModule }	from './app-routing.module';
 
@@ -26,7 +27,8 @@ import { AppRoutingModule }	from './app-routing.module';
   	AppComponent,
   	CalendarComponent,
   	DayComponent,
-  	SpendComponent
+  	SpendComponent,
+    AuthComponent 
   ],
   providers: 	[],
   bootstrap:    [ AppComponent ]

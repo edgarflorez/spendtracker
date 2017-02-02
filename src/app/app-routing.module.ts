@@ -4,6 +4,7 @@ import { RouterModule, Routes } 	from "@angular/router";
 import { CalendarComponent }from './calendar.component';
 import { DayComponent } 	from './day.component';	
 import { SpendComponent } 	from './spend.component';
+import { AuthComponent } 	from './auth.component';
 
 const routes: Routes = [
 	{
@@ -26,6 +27,10 @@ const routes: Routes = [
 	{
 		path: 		'spend/edit/:idSpend',
 		component: 	SpendComponent
+	},
+	{
+		path: 		'auth/:urlRedirect',
+		component: 	AuthComponent
 	}
 ]
 

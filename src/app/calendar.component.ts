@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit }	from '@angular/core';
 
-import { SpendDate } from './types/spend-date';
-import { DatesService } from './services/dates.service';
-import { AppAlert }		from './utils/app.alert'
+import { SpendDate } 			from './types/spend-date';
+import { DatesService } 		from './services/dates.service';
+import { AppAuthService } 		from './services/app-auth.service';
+import { AppAlert }				from './utils/app.alert'
 
 @Component({
 	moduleId: module.id,
@@ -29,7 +30,8 @@ export class CalendarComponent implements OnInit {
 
   	// constructor
 	constructor( 
-		private datesService: DatesService, 
+		private datesService: DatesService,
+		private appAuthService: AppAuthService,
 		private appAlert: AppAlert
 	) {}
 
@@ -38,6 +40,7 @@ export class CalendarComponent implements OnInit {
 		this.datesService.getDates().then( dates => {this.dates = dates; console.log(this.dates);})
 	}
 	ngOnInit() {
+		this.appAuthService.isUserAuthenticated();
 		this.getDates();
 		console.log("Calendar Init");
 	}

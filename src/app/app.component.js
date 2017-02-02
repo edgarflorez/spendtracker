@@ -13,6 +13,7 @@ var app_alert_1 = require('./utils/app.alert');
 var dates_service_1 = require('./services/dates.service');
 var spends_service_1 = require('./services/spends.service');
 var categories_service_1 = require('./services/categories.service');
+var app_auth_service_1 = require('./services/app-auth.service');
 var AppComponent = (function () {
     function AppComponent() {
         this.appName = 'ANGULAR LAB';
@@ -22,7 +23,13 @@ var AppComponent = (function () {
             moduleId: module.id,
             selector: 'my-app',
             templateUrl: 'app.component.html',
-            providers: [app_alert_1.AppAlert, dates_service_1.DatesService, spends_service_1.SpendsService, categories_service_1.CategoriesService]
+            providers: [
+                app_alert_1.AppAlert,
+                dates_service_1.DatesService,
+                spends_service_1.SpendsService,
+                categories_service_1.CategoriesService,
+                app_auth_service_1.AppAuthService
+            ]
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
