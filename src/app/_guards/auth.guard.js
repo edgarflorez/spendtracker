@@ -10,28 +10,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
-var AppAuthService = (function () {
-    function AppAuthService(router) {
+var AuthGuard = (function () {
+    function AuthGuard(router) {
         this.router = router;
-        this.authenticated = false;
     }
-    AppAuthService.prototype.isUserAuthenticated = function () {
-        console.log("THE USER IS :: ", this.authenticated);
-        if (!this.authenticated) {
-            this.getAuthDialog();
+    AuthGuard.prototype.canActivate = function (route, state) {
+        if (localStorage.getItem('currentUser')) {
+            // Logged in so return true
+            return true;
         }
-        return this.authenticated;
+        // not logged in so redirect to login page with the return url
+        this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
+        return false;
     };
-    AppAuthService.prototype.getAuthDialog = function () {
-        console.log("HEY YOU SHOULD BE LOGGED GO BACK");
-        console.log(this.router.url);
-        this.router.navigate(['/auth', this.router.url]);
-    };
-    AppAuthService = __decorate([
+    AuthGuard = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [router_1.Router])
-    ], AppAuthService);
-    return AppAuthService;
+    ], AuthGuard);
+    return AuthGuard;
 }());
-exports.AppAuthService = AppAuthService;
-//# sourceMappingURL=app-auth.service.js.map
+exports.AuthGuard = AuthGuard;
+//# sourceMappingURL=auth.guard.js.map

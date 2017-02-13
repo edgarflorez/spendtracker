@@ -1,4 +1,4 @@
-import { SpendCategory } from '../types/spend-category';
+import { SpendCategory } from '../_models/spend-category';
 
 export const CATEGORIES: SpendCategory[] = [
 	{ id: 1, categoryName: 'Alimentacion'},

@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable } 	from '@angular/core';
 
-import { SpendDate } from '../types/spend-date'
-import { DATES } from '../mock/mock.dates';
+import { SpendDate } 	from '../_models/spend-date'
+import { DATES } 		from '../mock/mock.dates';
 
 @Injectable()
 export class DatesService {

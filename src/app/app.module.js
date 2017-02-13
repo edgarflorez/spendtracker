@@ -11,6 +11,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var forms_1 = require('@angular/forms');
+var http_1 = require('@angular/http');
+// used to create fake backend
+// import { fakeBackendProvider } from './_helpers/index';
+// import { MockBackend, MockConnection } from '@angular/http/testing';
+// import { BaseRequestOptions } from '@angular/http';
 // If you are using systemjs package loader import the MyDateRangePickerModule from here:
 var my_date_picker_module_1 = require('mydatepicker/dist/my-date-picker.module');
 var app_component_1 = require('./app.component');
@@ -19,6 +24,7 @@ var day_component_1 = require('./day.component');
 var spend_component_1 = require('./spend.component');
 var auth_component_1 = require('./auth.component');
 var app_routing_module_1 = require('./app-routing.module');
+var index_1 = require('./_guards/index');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -27,6 +33,7 @@ var AppModule = (function () {
             imports: [
                 platform_browser_1.BrowserModule,
                 forms_1.FormsModule,
+                http_1.HttpModule,
                 my_date_picker_module_1.MyDatePickerModule,
                 app_routing_module_1.AppRoutingModule
             ],
@@ -37,7 +44,9 @@ var AppModule = (function () {
                 spend_component_1.SpendComponent,
                 auth_component_1.AuthComponent
             ],
-            providers: [],
+            providers: [
+                index_1.AuthGuard,
+            ],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])

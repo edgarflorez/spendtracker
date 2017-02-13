@@ -4,11 +4,11 @@ import { Component, OnInit } 		from '@angular/core';
 import { ActivatedRoute, Params } 	from '@angular/router';
 import { Location }               	from '@angular/common';
 
-import { DatesService } 			from './services/dates.service';
-import { SpendCategory } 			from './types/spend-category';
-import { CategoriesService } 		from './services/categories.service';
-import { SpendsService } 			from './services/spends.service';
-import { SpendModel } 				from './types/spend-model';
+import { DatesService } 			from './_services/dates.service';
+import { SpendCategory } 			from './_models/spend-category';
+import { CategoriesService } 		from './_services/categories.service';
+import { SpendsService } 			from './_services/spends.service';
+import { SpendModel } 				from './_models/spend-model';
 
 @Component({
 	moduleId: 		module.id,
@@ -40,7 +40,6 @@ export class SpendComponent implements OnInit {
 	) {}
 
 	ngOnInit() {
-
 		// Check if is a new spend or and edition
 
 		this.route.params.subscribe((params: Params) => {

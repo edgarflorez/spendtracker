@@ -1,4 +1,4 @@
-ROAD MAP
+3ROAD MAP
 
 
 - [DONE] Create a spend
@@ -19,14 +19,32 @@ ROAD MAP
 	- [DONE] confirm with buttons
 
 - [DONE] Remove main nav, just let the app navigation.
+
 - LOGIN
-	- Implement on all pages de login entry point
-	- Fix the View to take all the screen
-	- 
+	- [DONE] Implement on all pages de login entry point
+	- [DONE] Fix the View to take all the screen
+	
 - Create a login point entry
-	- 1 DB and two users
+	- Users mock
+	- login or reject login.
+*********************************************************************************************************************
+	- create  a session for query dates, spends and create  new dates and spends + edit
+		- https://auth0.com/docs/quickstart/spa/angular2/03-session-handling
+		- https://auth0.com/blog/creating-your-first-real-world-angular-2-app-from-authentication-to-calling-an-api-and-everything-in-between/
+		- http://jasonwatmore.com/post/2016/09/29/angular-2-user-registration-and-login-example-tutorial
+		- https://medium.com/@blacksonic86/authentication-in-angular-2-958052c64492#.knegfliu1
+		- http://stackoverflow.com/questions/36364365/angular2-central-session-service
+	- [DONE] 1 DB and two users
 	- Security session
 	- ask for auth at any step
 	- keep session open for a user [Checkbox]
+	- Logout
 - Create app log
 	- Log all events like create date, edit, delete ETC
+
+
+
+***** Angular 2 Login Component
+http://jasonwatmore.com/post/2016/09/29/angular-2-user-registration-and-login-example-tutorial
+
+****** problemas al integrar los modulos app component :: fakeBackendService

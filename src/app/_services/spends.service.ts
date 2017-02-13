@@ -1,8 +1,8 @@
 import { Injectable } 			from '@angular/core';
 
-import { SpendModel } 			from '../types/spend-model';
+import { SpendModel } 			from '../_models/spend-model';
 import { SPENDS }				from '../mock/mock.spends';
-import { CategoriesService } 	from './categories.service';
+import { CategoriesService } 	from './categories.service'; 
 
 @Injectable()
 export class SpendsService {

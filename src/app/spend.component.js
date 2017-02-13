@@ -13,9 +13,9 @@ require('rxjs/add/operator/map');
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var common_1 = require('@angular/common');
-var dates_service_1 = require('./services/dates.service');
-var categories_service_1 = require('./services/categories.service');
-var spends_service_1 = require('./services/spends.service');
+var dates_service_1 = require('./_services/dates.service');
+var categories_service_1 = require('./_services/categories.service');
+var spends_service_1 = require('./_services/spends.service');
 var SpendComponent = (function () {
     function SpendComponent(route, location, datesService, categoriesService, spendsService) {
         this.route = route;

@@ -10,10 +10,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var app_alert_1 = require('./utils/app.alert');
-var dates_service_1 = require('./services/dates.service');
-var spends_service_1 = require('./services/spends.service');
-var categories_service_1 = require('./services/categories.service');
-var app_auth_service_1 = require('./services/app-auth.service');
+var dates_service_1 = require('./_services/dates.service');
+var spends_service_1 = require('./_services/spends.service');
+var categories_service_1 = require('./_services/categories.service');
+var app_auth_service_1 = require('./_services/app-auth.service');
 var AppComponent = (function () {
     function AppComponent() {
         this.appName = 'ANGULAR LAB';
@@ -28,7 +28,7 @@ var AppComponent = (function () {
                 dates_service_1.DatesService,
                 spends_service_1.SpendsService,
                 categories_service_1.CategoriesService,
-                app_auth_service_1.AppAuthService
+                app_auth_service_1.AppAuthService,
             ]
         }), 
         __metadata('design:paramtypes', [])

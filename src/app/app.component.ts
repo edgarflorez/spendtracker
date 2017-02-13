@@ -1,10 +1,14 @@
 import { Component } 			from '@angular/core';
 
 import { AppAlert }				from './utils/app.alert'
-import { DatesService } 		from './services/dates.service';
-import { SpendsService }		from './services/spends.service'
-import { CategoriesService }	from './services/categories.service';
-import { AppAuthService }	from './services/app-auth.service';
+import { DatesService } 		from './_services/dates.service';
+import { SpendsService }		from './_services/spends.service'
+import { CategoriesService }	from './_services/categories.service';
+import { AppAuthService }		from './_services/app-auth.service';
+
+import { fakeBackendProvider } from './_helpers/index';
+import { MockBackend, MockConnection } from '@angular/http/testing';
+import { BaseRequestOptions } from '@angular/http';
 
 @Component({
 	moduleId: module.id,
@@ -15,7 +19,11 @@ import { AppAuthService }	from './services/app-auth.service';
 		DatesService,
 		SpendsService,
 		CategoriesService,
-		AppAuthService
+		AppAuthService,
+
+		// fakeBackendProvider
+		// MockBackend,
+    	// BaseRequestOptions
 	]
 })
 // export class AppComponent  { appName = 'Spend Tracker'; }

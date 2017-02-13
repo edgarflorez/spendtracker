@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { SpendCategory } from '../types/spend-category';
+import { SpendCategory } from '../_models/spend-category';
 import { CATEGORIES } from '../mock/mock.categories';
 
 @Injectable()

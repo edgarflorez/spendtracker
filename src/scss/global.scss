@@ -13,7 +13,11 @@ html,body{
 .action-nav{
 	padding: 10px 0;
 }
-
+.login{
+	position:relative;
+	z-index: 9999;
+	background: $bg-color;
+}
 .login,.spend{
 	display:flex;
 	align-items:center;
@@ -25,6 +29,7 @@ html,body{
 	top: 55px;
 	width: 80%;
 	margin-left: 10%;
+	z-index: 99999;
 }
 .app-alert-close{
 	font-weight: bold;
@@ -64,4 +69,8 @@ html,body{
 .column-edit{
 	width: 5%;
 	text-align: center;
+}
+
+.component-group{
+	height: 100%;
 }

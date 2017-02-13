@@ -5,6 +5,7 @@ import { CalendarComponent }from './calendar.component';
 import { DayComponent } 	from './day.component';	
 import { SpendComponent } 	from './spend.component';
 import { AuthComponent } 	from './auth.component';
+import { AuthGuard } 		from './_guards/index'; 
 
 const routes: Routes = [
 	{
@@ -14,22 +15,26 @@ const routes: Routes = [
 	},
 	{
 		path: 		'calendar',
-		component: 	CalendarComponent
+		component: 	CalendarComponent,
+		canActivate: [AuthGuard]
 	},
 	{
 		path: 		'day/:id',
-		component: 	DayComponent
+		component: 	DayComponent,
+		canActivate: [AuthGuard]
 	},
 	{
 		path: 		'spend/:id',
-		component: 	SpendComponent
+		component: 	SpendComponent,
+		canActivate: [AuthGuard]
 	},
 	{
 		path: 		'spend/edit/:idSpend',
-		component: 	SpendComponent
+		component: 	SpendComponent,
+		canActivate: [AuthGuard]
 	},
 	{
-		path: 		'auth/:urlRedirect',
+		path: 		'login',
 		component: 	AuthComponent
 	}
 ]

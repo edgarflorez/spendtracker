@@ -1,4 +1,4 @@
-import { SpendDate } from '../types/spend-date';
+import { SpendDate } from '../_models/spend-date';
 
 export const DATES: SpendDate[]  = [
 	{ id: 1, date: 'Jan 06 2017 21:07:08 GMT-0500 (COT)'},

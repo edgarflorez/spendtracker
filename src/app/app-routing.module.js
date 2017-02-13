@@ -14,6 +14,7 @@ var calendar_component_1 = require('./calendar.component');
 var day_component_1 = require('./day.component');
 var spend_component_1 = require('./spend.component');
 var auth_component_1 = require('./auth.component');
+var index_1 = require('./_guards/index');
 var routes = [
     {
         path: '',
@@ -22,22 +23,26 @@ var routes = [
     },
     {
         path: 'calendar',
-        component: calendar_component_1.CalendarComponent
+        component: calendar_component_1.CalendarComponent,
+        canActivate: [index_1.AuthGuard]
     },
     {
         path: 'day/:id',
-        component: day_component_1.DayComponent
+        component: day_component_1.DayComponent,
+        canActivate: [index_1.AuthGuard]
     },
     {
         path: 'spend/:id',
-        component: spend_component_1.SpendComponent
+        component: spend_component_1.SpendComponent,
+        canActivate: [index_1.AuthGuard]
     },
     {
         path: 'spend/edit/:idSpend',
-        component: spend_component_1.SpendComponent
+        component: spend_component_1.SpendComponent,
+        canActivate: [index_1.AuthGuard]
     },
     {
-        path: 'auth/:urlRedirect',
+        path: 'login',
         component: auth_component_1.AuthComponent
     }
 ];
