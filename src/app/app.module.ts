@@ -10,7 +10,7 @@ import { HttpModule } from '@angular/http';
 // import { BaseRequestOptions } from '@angular/http';
 
 // If you are using systemjs package loader import the MyDateRangePickerModule from here:
-import { MyDatePickerModule } from 'mydatepicker/dist/my-date-picker.module';
+// import { MyDatePickerModule } from 'mydatepicker/dist/my-date-picker.module';
 
 import { AppComponent }   from './app.component';
 import { CalendarComponent }from './calendar.component';
@@ -26,7 +26,7 @@ import { AuthGuard }      from './_guards/index';
   	BrowserModule, 
   	FormsModule,
     HttpModule,
-  	MyDatePickerModule,
+  	// MyDatePickerModule,
   	AppRoutingModule
   ],
   declarations: [ 

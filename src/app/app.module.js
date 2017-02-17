@@ -17,7 +17,7 @@ var http_1 = require('@angular/http');
 // import { MockBackend, MockConnection } from '@angular/http/testing';
 // import { BaseRequestOptions } from '@angular/http';
 // If you are using systemjs package loader import the MyDateRangePickerModule from here:
-var my_date_picker_module_1 = require('mydatepicker/dist/my-date-picker.module');
+// import { MyDatePickerModule } from 'mydatepicker/dist/my-date-picker.module';
 var app_component_1 = require('./app.component');
 var calendar_component_1 = require('./calendar.component');
 var day_component_1 = require('./day.component');
@@ -34,7 +34,7 @@ var AppModule = (function () {
                 platform_browser_1.BrowserModule,
                 forms_1.FormsModule,
                 http_1.HttpModule,
-                my_date_picker_module_1.MyDatePickerModule,
+                // MyDatePickerModule,
                 app_routing_module_1.AppRoutingModule
             ],
             declarations: [

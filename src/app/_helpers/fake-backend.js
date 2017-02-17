@@ -1,6 +1,6 @@
 "use strict";
-var http_1 = require('@angular/http');
-var testing_1 = require('@angular/http/testing');
+var http_1 = require("@angular/http");
+var testing_1 = require("@angular/http/testing");
 exports.fakeBackendProvider = {
     // Use fake backend provider in place of http service for backend-less development
     provide: http_1.Http,
