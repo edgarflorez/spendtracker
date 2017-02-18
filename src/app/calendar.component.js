@@ -8,9 +8,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var dates_service_1 = require('./_services/dates.service');
-var app_alert_1 = require('./utils/app.alert');
+var core_1 = require("@angular/core");
+var dates_service_1 = require("./_services/dates.service");
+var app_alert_1 = require("./utils/app.alert");
 var CalendarComponent = (function () {
     // constructor
     function CalendarComponent(datesService, appAlert) {
@@ -76,15 +76,16 @@ var CalendarComponent = (function () {
         });
         // this.dates.push({id:this.dates.length +1, date: this.newDateJSDate });
     };
-    CalendarComponent = __decorate([
-        core_1.Component({
-            moduleId: module.id,
-            selector: 'calendar',
-            templateUrl: 'calendar.component.html'
-        }), 
-        __metadata('design:paramtypes', [dates_service_1.DatesService, app_alert_1.AppAlert])
-    ], CalendarComponent);
     return CalendarComponent;
 }());
+CalendarComponent = __decorate([
+    core_1.Component({
+        moduleId: module.id,
+        selector: 'calendar',
+        templateUrl: 'calendar.component.html'
+    }),
+    __metadata("design:paramtypes", [dates_service_1.DatesService,
+        app_alert_1.AppAlert])
+], CalendarComponent);
 exports.CalendarComponent = CalendarComponent;
 //# sourceMappingURL=calendar.component.js.map

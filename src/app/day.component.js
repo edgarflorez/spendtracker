@@ -8,13 +8,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-require('rxjs/add/operator/switchMap');
-require('rxjs/add/operator/map');
-var core_1 = require('@angular/core');
-var router_1 = require('@angular/router');
-var common_1 = require('@angular/common');
-var dates_service_1 = require('./_services/dates.service');
-var spends_service_1 = require('./_services/spends.service');
+require("rxjs/add/operator/switchMap");
+require("rxjs/add/operator/map");
+var core_1 = require("@angular/core");
+var router_1 = require("@angular/router");
+var common_1 = require("@angular/common");
+var dates_service_1 = require("./_services/dates.service");
+var spends_service_1 = require("./_services/spends.service");
 var DayComponent = (function () {
     function DayComponent(datesService, spendsService, route, location) {
         this.datesService = datesService;
@@ -63,15 +63,18 @@ var DayComponent = (function () {
         console.log("MODE");
         this.editModeOn = !this.editModeOn;
     };
-    DayComponent = __decorate([
-        core_1.Component({
-            moduleId: module.id,
-            selector: 'day',
-            templateUrl: 'day.component.html'
-        }), 
-        __metadata('design:paramtypes', [dates_service_1.DatesService, spends_service_1.SpendsService, router_1.ActivatedRoute, common_1.Location])
-    ], DayComponent);
     return DayComponent;
 }());
+DayComponent = __decorate([
+    core_1.Component({
+        moduleId: module.id,
+        selector: 'day',
+        templateUrl: 'day.component.html'
+    }),
+    __metadata("design:paramtypes", [dates_service_1.DatesService,
+        spends_service_1.SpendsService,
+        router_1.ActivatedRoute,
+        common_1.Location])
+], DayComponent);
 exports.DayComponent = DayComponent;
 //# sourceMappingURL=day.component.js.map

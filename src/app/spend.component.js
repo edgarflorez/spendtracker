@@ -8,14 +8,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-require('rxjs/add/operator/switchMap');
-require('rxjs/add/operator/map');
-var core_1 = require('@angular/core');
-var router_1 = require('@angular/router');
-var common_1 = require('@angular/common');
-var dates_service_1 = require('./_services/dates.service');
-var categories_service_1 = require('./_services/categories.service');
-var spends_service_1 = require('./_services/spends.service');
+require("rxjs/add/operator/switchMap");
+require("rxjs/add/operator/map");
+var core_1 = require("@angular/core");
+var router_1 = require("@angular/router");
+var common_1 = require("@angular/common");
+var dates_service_1 = require("./_services/dates.service");
+var categories_service_1 = require("./_services/categories.service");
+var spends_service_1 = require("./_services/spends.service");
 var SpendComponent = (function () {
     function SpendComponent(route, location, datesService, categoriesService, spendsService) {
         this.route = route;
@@ -147,15 +147,19 @@ var SpendComponent = (function () {
         enumerable: true,
         configurable: true
     });
-    SpendComponent = __decorate([
-        core_1.Component({
-            moduleId: module.id,
-            selector: 'spend',
-            templateUrl: 'spend.component.html'
-        }), 
-        __metadata('design:paramtypes', [router_1.ActivatedRoute, common_1.Location, dates_service_1.DatesService, categories_service_1.CategoriesService, spends_service_1.SpendsService])
-    ], SpendComponent);
     return SpendComponent;
 }());
+SpendComponent = __decorate([
+    core_1.Component({
+        moduleId: module.id,
+        selector: 'spend',
+        templateUrl: 'spend.component.html'
+    }),
+    __metadata("design:paramtypes", [router_1.ActivatedRoute,
+        common_1.Location,
+        dates_service_1.DatesService,
+        categories_service_1.CategoriesService,
+        spends_service_1.SpendsService])
+], SpendComponent);
 exports.SpendComponent = SpendComponent;
 //# sourceMappingURL=spend.component.js.map

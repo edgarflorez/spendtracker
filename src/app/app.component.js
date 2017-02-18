@@ -5,35 +5,37 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var core_1 = require('@angular/core');
-var app_alert_1 = require('./utils/app.alert');
-var dates_service_1 = require('./_services/dates.service');
-var spends_service_1 = require('./_services/spends.service');
-var categories_service_1 = require('./_services/categories.service');
-var app_auth_service_1 = require('./_services/app-auth.service');
+var core_1 = require("@angular/core");
+var app_alert_1 = require("./utils/app.alert");
+var dates_service_1 = require("./_services/dates.service");
+var spends_service_1 = require("./_services/spends.service");
+var categories_service_1 = require("./_services/categories.service");
+var app_auth_service_1 = require("./_services/app-auth.service");
+var index_1 = require("./_helpers/index");
+var testing_1 = require("@angular/http/testing");
+var http_1 = require("@angular/http");
 var AppComponent = (function () {
     function AppComponent() {
         this.appName = 'ANGULAR LAB';
     }
-    AppComponent = __decorate([
-        core_1.Component({
-            moduleId: module.id,
-            selector: 'my-app',
-            templateUrl: 'app.component.html',
-            providers: [
-                app_alert_1.AppAlert,
-                dates_service_1.DatesService,
-                spends_service_1.SpendsService,
-                categories_service_1.CategoriesService,
-                app_auth_service_1.AppAuthService,
-            ]
-        }), 
-        __metadata('design:paramtypes', [])
-    ], AppComponent);
     return AppComponent;
 }());
+AppComponent = __decorate([
+    core_1.Component({
+        moduleId: module.id,
+        selector: 'my-app',
+        templateUrl: 'app.component.html',
+        providers: [
+            app_alert_1.AppAlert,
+            dates_service_1.DatesService,
+            spends_service_1.SpendsService,
+            categories_service_1.CategoriesService,
+            app_auth_service_1.AppAuthService,
+            index_1.fakeBackendProvider,
+            testing_1.MockBackend,
+            http_1.BaseRequestOptions,
+        ]
+    })
+], AppComponent);
 exports.AppComponent = AppComponent;
 //# sourceMappingURL=app.component.js.map

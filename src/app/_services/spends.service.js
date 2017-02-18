@@ -8,9 +8,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var mock_spends_1 = require('../mock/mock.spends');
-var categories_service_1 = require('./categories.service');
+var core_1 = require("@angular/core");
+var mock_spends_1 = require("../mock/mock.spends");
+var categories_service_1 = require("./categories.service");
 var SpendsService = (function () {
     function SpendsService(categoriesService) {
         this.categoriesService = categoriesService;
@@ -75,11 +75,11 @@ var SpendsService = (function () {
             return Promise.resolve(response);
         });
     };
-    SpendsService = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [categories_service_1.CategoriesService])
-    ], SpendsService);
     return SpendsService;
 }());
+SpendsService = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [categories_service_1.CategoriesService])
+], SpendsService);
 exports.SpendsService = SpendsService;
 //# sourceMappingURL=spends.service.js.map

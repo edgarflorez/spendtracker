@@ -12,10 +12,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var router_1 = require('@angular/router');
-var app_auth_service_1 = require('./_services/app-auth.service');
-var app_alert_1 = require('./utils/app.alert');
+var core_1 = require("@angular/core");
+var router_1 = require("@angular/router");
+var app_auth_service_1 = require("./_services/app-auth.service");
+var app_alert_1 = require("./utils/app.alert");
 var AuthComponent = (function () {
     // model = {
     // 	redirect:<string> '',
@@ -52,15 +52,18 @@ var AuthComponent = (function () {
             _this.loading = false;
         });
     };
-    AuthComponent = __decorate([
-        core_1.Component({
-            moduleId: module.id,
-            selector: 'auth',
-            templateUrl: 'auth.component.html'
-        }), 
-        __metadata('design:paramtypes', [router_1.ActivatedRoute, router_1.Router, app_auth_service_1.AppAuthService, app_alert_1.AppAlert])
-    ], AuthComponent);
     return AuthComponent;
 }());
+AuthComponent = __decorate([
+    core_1.Component({
+        moduleId: module.id,
+        selector: 'auth',
+        templateUrl: 'auth.component.html'
+    }),
+    __metadata("design:paramtypes", [router_1.ActivatedRoute,
+        router_1.Router,
+        app_auth_service_1.AppAuthService,
+        app_alert_1.AppAlert])
+], AuthComponent);
 exports.AuthComponent = AuthComponent;
 //# sourceMappingURL=auth.component.js.map

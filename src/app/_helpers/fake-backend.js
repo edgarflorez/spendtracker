@@ -2,61 +2,62 @@
 var http_1 = require("@angular/http");
 var testing_1 = require("@angular/http/testing");
 exports.fakeBackendProvider = {
-    // Use fake backend provider in place of http service for backend-less development
+    // use fake backend in place of Http service for backend-less development
     provide: http_1.Http,
-    userFactory: function (backend, options) {
-        // array in local storage fo registered users
+    useFactory: function (backend, options, realBackend) {
+        // If the user localStorage is not defined initialize the values
+        if (!localStorage.getItem('users')) {
+            localStorage.setItem('users', '[{   "firstName": "edgarf",  "lastName": "florez",   "username": "edgarf",   "password": "12345",    "id": 1}, { "firstName": "cindy",   "lastName": "cordero",  "username": "cindyc",   "password": "12345",    "id": 2}]');
+        }
+        // array in local storage for registered users
         var users = JSON.parse(localStorage.getItem('users')) || [];
         // configure fake backend
         backend.connections.subscribe(function (connection) {
-            // Wrap in timeout to simulate service api call
+            // wrap in timeout to simulate server api call
             setTimeout(function () {
                 // authenticate
                 if (connection.request.url.endsWith('/api/authenticate') && connection.request.method === http_1.RequestMethod.Post) {
-                    // get parameters from the post request
+                    // get parameters from post request
                     var params_1 = JSON.parse(connection.request.getBody());
                     // find if any user matches login credentials
                     var filteredUsers = users.filter(function (user) {
                         return user.username === params_1.username && user.password === params_1.password;
                     });
                     if (filteredUsers.length) {
-                        // if login details are valid return 200 OK with user details and jwt token
+                        // if login details are valid return 200 OK with user details and fake jwt token
                         var user = filteredUsers[0];
                         connection.mockRespond(new http_1.Response(new http_1.ResponseOptions({
                             status: 200,
                             body: {
                                 id: user.id,
                                 username: user.username,
-                                firstname: user.firstname,
-                                lastname: user.lastname,
+                                firstName: user.firstName,
+                                lastName: user.lastName,
                                 token: 'fake-jwt-token'
                             }
                         })));
                     }
                     else {
                         // else return 400 bad request
-                        connection.mockError(new Error('username or password is incorrect'));
+                        connection.mockError(new Error('Username or password is incorrect'));
                     }
+                    return;
                 }
                 // get users
                 if (connection.request.url.endsWith('/api/users') && connection.request.method === http_1.RequestMethod.Get) {
-                    // check for fake auth token in header and return users if valid, this security is implemented server side in real app
+                    // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
                     if (connection.request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
-                        connection.mockRespond(new http_1.Response(new http_1.ResponseOptions({
-                            status: 200,
-                            body: users
-                        })));
+                        connection.mockRespond(new http_1.Response(new http_1.ResponseOptions({ status: 200, body: users })));
                     }
                     else {
-                        // return 401 not authorized if token is null or invalid
-                        connection.mockRespond(new http_1.Response(new http_1.ResponseOptions({
-                            status: 401
-                        })));
+                        // return 401 not authorised if token is null or invalid
+                        connection.mockRespond(new http_1.Response(new http_1.ResponseOptions({ status: 401 })));
                     }
+                    return;
                 }
-                // get users by id
+                // get user by id
                 if (connection.request.url.match(/\/api\/users\/\d+$/) && connection.request.method === http_1.RequestMethod.Get) {
-                    // check for fake auth in header and return user if valid, this security is implemented server side in real app
+                    // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
                     if (connection.request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                         // find user by id in users array
                         var urlParts = connection.request.url.split('/');
@@ -64,17 +65,13 @@ exports.fakeBackendProvider = {
                         var matchedUsers = users.filter(function (user) { return user.id === id_1; });
                         var user = matchedUsers.length ? matchedUsers[0] : null;
                         // respond 200 OK with user
-                        connection.mockRespond(new http_1.Response(new http_1.ResponseOptions({
-                            status: 200,
-                            body: user
-                        })));
+                        connection.mockRespond(new http_1.Response(new http_1.ResponseOptions({ status: 200, body: user })));
                     }
                     else {
-                        // return 401 not authorized if token is null or invalid
-                        connection.mockRespond(new http_1.Response(new http_1.ResponseOptions({
-                            status: 401
-                        })));
+                        // return 401 not authorised if token is null or invalid
+                        connection.mockRespond(new http_1.Response(new http_1.ResponseOptions({ status: 401 })));
                     }
+                    return;
                 }
                 // create user
                 if (connection.request.url.endsWith('/api/users') && connection.request.method === http_1.RequestMethod.Post) {
@@ -83,23 +80,21 @@ exports.fakeBackendProvider = {
                     // validation
                     var duplicateUser = users.filter(function (user) { return user.username === newUser_1.username; }).length;
                     if (duplicateUser) {
-                        return connection.mockError(new Error('username "' + newUser_1.username + '" is already taken'));
+                        return connection.mockError(new Error('Username "' + newUser_1.username + '" is already taken'));
                     }
-                    ;
                     // save new user
                     newUser_1.id = users.length + 1;
                     users.push(newUser_1);
                     localStorage.setItem('users', JSON.stringify(users));
                     // respond 200 OK
-                    connection.mockRespond(new http_1.Response(new http_1.ResponseOptions({
-                        status: 200
-                    })));
+                    connection.mockRespond(new http_1.Response(new http_1.ResponseOptions({ status: 200 })));
+                    return;
                 }
                 // delete user
                 if (connection.request.url.match(/\/api\/users\/\d+$/) && connection.request.method === http_1.RequestMethod.Delete) {
-                    // check for fake auth token in header and return user if valid, this security is implemented server side in real app
+                    // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
                     if (connection.request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
-                        // find user id in users array
+                        // find user by id in users array
                         var urlParts = connection.request.url.split('/');
                         var id = parseInt(urlParts[urlParts.length - 1]);
                         for (var i = 0; i < users.length; i++) {
@@ -111,23 +106,35 @@ exports.fakeBackendProvider = {
                                 break;
                             }
                         }
-                        ;
                         // respond 200 OK
-                        connection.mockRespond(new http_1.Response(new http_1.ResponseOptions({
-                            status: 200
-                        })));
+                        connection.mockRespond(new http_1.Response(new http_1.ResponseOptions({ status: 200 })));
                     }
                     else {
-                        // return 401 not authorized if token is null or invalid
-                        connection.mockRespond(new http_1.Response(new http_1.ResponseOptions({
-                            status: 401
-                        })));
+                        // return 401 not authorised if token is null or invalid
+                        connection.mockRespond(new http_1.Response(new http_1.ResponseOptions({ status: 401 })));
                     }
+                    return;
                 }
+                // pass through any requests not handled above
+                var realHttp = new http_1.Http(realBackend, options);
+                var requestOptions = new http_1.RequestOptions({
+                    method: connection.request.method,
+                    headers: connection.request.headers,
+                    body: connection.request.getBody(),
+                    url: connection.request.url,
+                    withCredentials: connection.request.withCredentials,
+                    responseType: connection.request.responseType
+                });
+                realHttp.request(connection.request.url, requestOptions)
+                    .subscribe(function (response) {
+                    connection.mockRespond(response);
+                }, function (error) {
+                    connection.mockError(error);
+                });
             }, 500);
         });
         return new http_1.Http(backend, options);
     },
-    deps: [testing_1.MockBackend, http_1.BaseRequestOptions]
+    deps: [testing_1.MockBackend, http_1.BaseRequestOptions, http_1.XHRBackend]
 };
 //# sourceMappingURL=fake-backend.js.map

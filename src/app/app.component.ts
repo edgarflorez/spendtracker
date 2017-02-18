@@ -10,6 +10,7 @@ import { fakeBackendProvider } from './_helpers/index';
 import { MockBackend, MockConnection } from '@angular/http/testing';
 import { BaseRequestOptions } from '@angular/http';
 
+
 @Component({
 	moduleId: module.id,
 	selector: 'my-app',
@@ -21,9 +22,9 @@ import { BaseRequestOptions } from '@angular/http';
 		CategoriesService,
 		AppAuthService,
 
-		// fakeBackendProvider
-		// MockBackend,
-    	// BaseRequestOptions
+		fakeBackendProvider,
+		MockBackend,
+    	BaseRequestOptions,
 	]
 })
 // export class AppComponent  { appName = 'Spend Tracker'; }

@@ -1,13 +1,15 @@
 import { NgModule }      	from '@angular/core';
 import { BrowserModule } 	from '@angular/platform-browser';
 import { FormsModule }    	from '@angular/forms';
-import { RouterModule }		from '@angular/router'
+import { RouterModule }		from '@angular/router';
 import { HttpModule } from '@angular/http';
 
 // used to create fake backend
 // import { fakeBackendProvider } from './_helpers/index';
 // import { MockBackend, MockConnection } from '@angular/http/testing';
 // import { BaseRequestOptions } from '@angular/http';
+
+
 
 // If you are using systemjs package loader import the MyDateRangePickerModule from here:
 // import { MyDatePickerModule } from 'mydatepicker/dist/my-date-picker.module';
@@ -39,9 +41,6 @@ import { AuthGuard }      from './_guards/index';
   providers: 	[
     AuthGuard,
     // fakeBackendProvider
-
-    // AuthGuard,
-
     // MockBackend,
     // BaseRequestOptions
   ],
