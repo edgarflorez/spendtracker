@@ -10,12 +10,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var dates_service_1 = require("./_services/dates.service");
+var user_service_1 = require("./_services/user.service");
 var app_alert_1 = require("./utils/app.alert");
 var CalendarComponent = (function () {
     // constructor
-    function CalendarComponent(datesService, appAlert) {
+    function CalendarComponent(datesService, appAlert, userService) {
         this.datesService = datesService;
         this.appAlert = appAlert;
+        this.userService = userService;
         // vars
         this.addDate = false;
         this.newDateFormatted = '';
@@ -34,8 +36,13 @@ var CalendarComponent = (function () {
     }
     // methods
     CalendarComponent.prototype.getDates = function () {
-        var _this = this;
-        this.datesService.getDates().then(function (dates) { _this.dates = dates; console.log(_this.dates); });
+        // this.datesService.getDates().then( dates => {this.dates = dates; console.log(this.dates);})
+        this.datesService.getDates(this.userService.getCurrentUserId())
+            .subscribe(function (data) {
+            console.log("Calendar Component :: getDates ", data);
+        }, function (error) {
+            console.log(error.message);
+        });
     };
     CalendarComponent.prototype.ngOnInit = function () {
         this.getDates();
@@ -85,7 +92,8 @@ CalendarComponent = __decorate([
         templateUrl: 'calendar.component.html'
     }),
     __metadata("design:paramtypes", [dates_service_1.DatesService,
-        app_alert_1.AppAlert])
+        app_alert_1.AppAlert,
+        user_service_1.UserService])
 ], CalendarComponent);
 exports.CalendarComponent = CalendarComponent;
 //# sourceMappingURL=calendar.component.js.map

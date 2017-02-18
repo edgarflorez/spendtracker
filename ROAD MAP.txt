@@ -27,18 +27,20 @@
 - Create a login point entry
 	- Users mock
 	- login or reject login.
+	- [DONE] 1 DB and two users
+	- Security session
+	- ask for auth at any step
+	- Logout
 *********************************************************************************************************************
+	- Create days for each user independently
+	- Use the userService to return user data
 	- create  a session for query dates, spends and create  new dates and spends + edit
 		- https://auth0.com/docs/quickstart/spa/angular2/03-session-handling
 		- https://auth0.com/blog/creating-your-first-real-world-angular-2-app-from-authentication-to-calling-an-api-and-everything-in-between/
 		- http://jasonwatmore.com/post/2016/09/29/angular-2-user-registration-and-login-example-tutorial
 		- https://medium.com/@blacksonic86/authentication-in-angular-2-958052c64492#.knegfliu1
 		- http://stackoverflow.com/questions/36364365/angular2-central-session-service
-	- [DONE] 1 DB and two users
-	- Security session
-	- ask for auth at any step
 	- keep session open for a user [Checkbox]
-	- Logout
 - Implement the calendar lose functionality
 - Alert Close from any place of the page, next click. THE ALERT SHOULD BE IMPROVED, IT DUPLICATES THE ELEMENTS, further memory leaks
 - Create app log

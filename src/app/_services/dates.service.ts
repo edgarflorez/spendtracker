@@ -1,13 +1,25 @@
 import { Injectable } 	from '@angular/core';
+import { Http, Headers, RequestOptions, Response } from '@angular/http';
 
 import { SpendDate } 	from '../_models/spend-date'
 import { DATES } 		from '../mock/mock.dates';
 
 @Injectable()
 export class DatesService {
+	
+	constructor(
+		private http:Http
+	) {}
 
-	getDates(): Promise<SpendDate[]>{
-		return Promise.resolve( DATES );
+	// getDates(): Promise<SpendDate[]>{
+	// 	return Promise.resolve( DATES );
+	// }
+	getDates(userId: number){
+		return this.http.get('/api/dates/getDates/' + userId, this.jwt())
+			.map( (response: Response) => {
+				console.log("dates.service :: getDates ", response);
+				return response;
+			});
 	}
 	addDate(newDate: string): Promise<any>{
 		let dateRepeated: boolean = false,
@@ -61,5 +73,14 @@ export class DatesService {
 
 	}
 
-	constructor() {}
+
+	// private helper methods
+	private jwt(){
+		// create authorization header with jwt token
+		let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+		if(currentUser && currentUser.token){
+			let headers = new Headers({'Authorization': 'Bearer '+ currentUser.token});
+			return new RequestOptions({ headers: headers});
+		}
+	}
 }

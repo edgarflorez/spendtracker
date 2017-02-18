@@ -18,6 +18,14 @@ export  class UserService {
 	getById(id: number){
 		return this.http.get('/api/users/'+ id, this.jwt()).map((response: Response) => response.json());
 	}
+	getCurrentUserId(){
+		if(localStorage.getItem('currentUser')){
+			let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+			return currentUser.id;
+		}
+
+		return NaN;
+	}
 
 	createUser(user:UserModel){
 		return this.http.post('/api/users', user, this.jwt()).map((response: Response) => response.json());

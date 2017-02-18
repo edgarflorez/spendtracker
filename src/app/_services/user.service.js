@@ -21,6 +21,13 @@ var UserService = (function () {
     UserService.prototype.getById = function (id) {
         return this.http.get('/api/users/' + id, this.jwt()).map(function (response) { return response.json(); });
     };
+    UserService.prototype.getCurrentUserId = function () {
+        if (localStorage.getItem('currentUser')) {
+            var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            return currentUser.id;
+        }
+        return NaN;
+    };
     UserService.prototype.createUser = function (user) {
         return this.http.post('/api/users', user, this.jwt()).map(function (response) { return response.json(); });
     };

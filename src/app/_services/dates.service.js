@@ -9,12 +9,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
+var http_1 = require("@angular/http");
 var mock_dates_1 = require("../mock/mock.dates");
 var DatesService = (function () {
-    function DatesService() {
+    function DatesService(http) {
+        this.http = http;
     }
-    DatesService.prototype.getDates = function () {
-        return Promise.resolve(mock_dates_1.DATES);
+    // getDates(): Promise<SpendDate[]>{
+    // 	return Promise.resolve( DATES );
+    // }
+    DatesService.prototype.getDates = function (userId) {
+        return this.http.get('/api/dates/getDates/' + userId, this.jwt())
+            .map(function (response) {
+            console.log("dates.service :: getDates ", response);
+            return response;
+        });
     };
     DatesService.prototype.addDate = function (newDate) {
         var dateRepeated = false, dateA, dateB = new Date(newDate);
@@ -61,11 +70,20 @@ var DatesService = (function () {
         ;
         return Promise.resolve(date);
     };
+    // private helper methods
+    DatesService.prototype.jwt = function () {
+        // create authorization header with jwt token
+        var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        if (currentUser && currentUser.token) {
+            var headers = new http_1.Headers({ 'Authorization': 'Bearer ' + currentUser.token });
+            return new http_1.RequestOptions({ headers: headers });
+        }
+    };
     return DatesService;
 }());
 DatesService = __decorate([
     core_1.Injectable(),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [http_1.Http])
 ], DatesService);
 exports.DatesService = DatesService;
 //# sourceMappingURL=dates.service.js.map

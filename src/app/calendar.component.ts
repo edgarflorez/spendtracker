@@ -2,7 +2,8 @@ import { Component, OnInit }	from '@angular/core';
 
 import { SpendDate } 			from './_models/spend-date';
 import { DatesService } 		from './_services/dates.service';
-import { AppAlert }				from './utils/app.alert'
+import { UserService }			from './_services/user.service';
+import { AppAlert }				from './utils/app.alert';
 
 @Component({
 	moduleId: module.id,
@@ -30,12 +31,22 @@ export class CalendarComponent implements OnInit {
   	// constructor
 	constructor( 
 		private datesService: DatesService,
-		private appAlert: AppAlert
+		private appAlert: AppAlert,
+		private userService: UserService
 	) {}
 
 	// methods
 	getDates(): void {
-		this.datesService.getDates().then( dates => {this.dates = dates; console.log(this.dates);})
+		// this.datesService.getDates().then( dates => {this.dates = dates; console.log(this.dates);})
+		this.datesService.getDates(this.userService.getCurrentUserId())
+			.subscribe(
+				data => {
+					console.log("Calendar Component :: getDates ", data);
+				},
+				error => {
+					console.log( error.message );
+				}
+			)
 	}
 	ngOnInit() {
 		this.getDates();
