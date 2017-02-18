@@ -6,10 +6,9 @@ import { SpendsService }		from './_services/spends.service'
 import { CategoriesService }	from './_services/categories.service';
 import { AppAuthService }		from './_services/app-auth.service';
 
-import { fakeBackendProvider } from './_helpers/index';
+import { fakeBackendProvider } 	from './_helpers/index';
 import { MockBackend, MockConnection } from '@angular/http/testing';
-import { BaseRequestOptions } from '@angular/http';
-
+import { BaseRequestOptions } 	from '@angular/http';
 
 @Component({
 	moduleId: module.id,

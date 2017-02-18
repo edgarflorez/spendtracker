@@ -53,8 +53,7 @@ export class AuthComponent implements OnInit {
 					this.router.navigate([this.returnUrl]);
 				},
 				error => {
-					// this.appAlert( 'ERROR : '+ error  );
-					// this.appAlert( 'ERROR : todo service message' );
+					this.appAlert.alert( error.message );
 					this.loading = false;
 				}
 			)

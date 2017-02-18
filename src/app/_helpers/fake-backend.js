@@ -7,7 +7,7 @@ exports.fakeBackendProvider = {
     useFactory: function (backend, options, realBackend) {
         // If the user localStorage is not defined initialize the values
         if (!localStorage.getItem('users')) {
-            localStorage.setItem('users', '[{   "firstName": "edgarf",  "lastName": "florez",   "username": "edgarf",   "password": "12345",    "id": 1}, { "firstName": "cindy",   "lastName": "cordero",  "username": "cindyc",   "password": "12345",    "id": 2}]');
+            localStorage.setItem('users', '[{ "firstName": "edgarf",  "lastName": "florez",   "username": "edgarf",   "password": "12345",    "id": 1}, { "firstName": "cindy",   "lastName": "cordero",  "username": "cindyc",   "password": "12345",    "id": 2}, { "firstName": "John",   "lastName": "Doe",  "username": "a",   "password": "a",    "id": 3}]');
         }
         // array in local storage for registered users
         var users = JSON.parse(localStorage.getItem('users')) || [];

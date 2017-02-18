@@ -41,13 +41,8 @@ export class AppAlert{
 	initListeners(){
 		this.close.addEventListener('click', () => {
 			clearTimeout(this.closeTimeout);
-			document.getElementsByTagName('body')[0].removeChild(this.node);
 			this.node.removeChild(this.textNode);
-		});
-		document.getElementsByTagName('body')[0].addEventListener('click', () => {
-			clearTimeout(this.closeTimeout);
 			document.getElementsByTagName('body')[0].removeChild(this.node);
-			this.node.removeChild(this.textNode);
 		});
 	}
 	

@@ -9,10 +9,6 @@ var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
 var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/http");
-// used to create fake backend
-// import { fakeBackendProvider } from './_helpers/index';
-// import { MockBackend, MockConnection } from '@angular/http/testing';
-// import { BaseRequestOptions } from '@angular/http';
 // If you are using systemjs package loader import the MyDateRangePickerModule from here:
 // import { MyDatePickerModule } from 'mydatepicker/dist/my-date-picker.module';
 var app_component_1 = require("./app.component");
@@ -44,7 +40,7 @@ AppModule = __decorate([
             auth_component_1.AuthComponent
         ],
         providers: [
-            index_1.AuthGuard,
+            index_1.AuthGuard
         ],
         bootstrap: [app_component_1.AppComponent]
     })

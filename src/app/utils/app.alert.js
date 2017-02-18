@@ -41,13 +41,8 @@ var AppAlert = (function () {
         var _this = this;
         this.close.addEventListener('click', function () {
             clearTimeout(_this.closeTimeout);
-            document.getElementsByTagName('body')[0].removeChild(_this.node);
             _this.node.removeChild(_this.textNode);
-        });
-        document.getElementsByTagName('body')[0].addEventListener('click', function () {
-            clearTimeout(_this.closeTimeout);
             document.getElementsByTagName('body')[0].removeChild(_this.node);
-            _this.node.removeChild(_this.textNode);
         });
     };
     return AppAlert;

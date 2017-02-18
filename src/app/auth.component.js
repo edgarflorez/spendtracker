@@ -47,8 +47,7 @@ var AuthComponent = (function () {
             .subscribe(function (data) {
             _this.router.navigate([_this.returnUrl]);
         }, function (error) {
-            // this.appAlert( 'ERROR : '+ error  );
-            // this.appAlert( 'ERROR : todo service message' );
+            _this.appAlert.alert(error.message);
             _this.loading = false;
         });
     };

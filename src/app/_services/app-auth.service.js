@@ -16,13 +16,13 @@ var AppAuthService = (function () {
         this.http = http;
     }
     AppAuthService.prototype.login = function (username, password) {
-        return this.http.post('/api/athenticate', JSON.stringify({ username: username, password: password }))
+        return this.http.post('/api/authenticate', JSON.stringify({ username: username, password: password }))
             .map(function (response) {
             // login sussessful if there's a jwt token in response
             var user = response.json();
             if (user && user.token) {
                 // store user details and jwt token in local storage to keep the user logged in between page refreshes
-                localStorage.setItem('currenUser', JSON.stringify(user));
+                localStorage.setItem('currentUser', JSON.stringify(user));
             }
         });
     };
