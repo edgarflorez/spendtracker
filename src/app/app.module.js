@@ -10,7 +10,7 @@ var platform_browser_1 = require("@angular/platform-browser");
 var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/http");
 // If you are using systemjs package loader import the MyDateRangePickerModule from here:
-// import { MyDatePickerModule } from 'mydatepicker/dist/my-date-picker.module';
+var mydatepicker_1 = require("mydatepicker");
 var app_component_1 = require("./app.component");
 var calendar_component_1 = require("./calendar.component");
 var day_component_1 = require("./day.component");
@@ -29,7 +29,7 @@ AppModule = __decorate([
             platform_browser_1.BrowserModule,
             forms_1.FormsModule,
             http_1.HttpModule,
-            // MyDatePickerModule,
+            mydatepicker_1.MyDatePickerModule,
             app_routing_module_1.AppRoutingModule
         ],
         declarations: [
