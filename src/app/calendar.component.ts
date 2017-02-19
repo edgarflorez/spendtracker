@@ -42,6 +42,7 @@ export class CalendarComponent implements OnInit {
 			.subscribe(
 				data => {
 					console.log("Calendar Component :: getDates ", data);
+					this.dates = data;
 				},
 				error => {
 					console.log( error.message );
@@ -70,21 +71,35 @@ export class CalendarComponent implements OnInit {
 	}
 	onSubmitAddNewDate(event:any){
 		event.stopPropagation();
-		this.datesService.addDate(this.newDateJSDate).then( response => {
-			switch(response.type){
-				case 200:
+		this.datesService.addDate({'id':0, 'userId':this.userService.getCurrentUserId(), 'date': this.newDateJSDate } )
+			.subscribe(
+				data => {
+					console.log("Calendar Component :: onSubmitAddNewDate ", data);
 					this.addDate = false;
-					this.dates = response.data;
-					console.log(this.dates);
-				break;
-				case 500:
+					this.getDates();
+				},
+				error => {
+					console.log( error );
 					this.addDate = false;
-					this.appAlert.alert("ERROR:: "+ response.data);
+					this.appAlert.alert("ERROR:: "+ error);
 					// console.log("ERROR :: ", response.data);
-				break;
-			}
-		});
-		// this.dates.push({id:this.dates.length +1, date: this.newDateJSDate });
+				}
+
+			)
+		// this.datesService.addDate(this.newDateJSDate).then( response => {
+		// 	switch(response.type){
+		// 		case 200:
+		// 			this.addDate = false;
+		// 			this.dates = response.data;
+		// 			console.log(this.dates);
+		// 		break;
+		// 		case 500:
+		// 			this.addDate = false;
+		// 			this.appAlert.alert("ERROR:: "+ response.data);
+		// 			// console.log("ERROR :: ", response.data);
+		// 		break;
+		// 	}
+		// });
 	}
 
 }

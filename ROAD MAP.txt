@@ -32,6 +32,7 @@
 	- ask for auth at any step
 	- Logout
 *********************************************************************************************************************
+	- Create a date with the userId
 	- Create days for each user independently
 	- Use the userService to return user data
 	- create  a session for query dates, spends and create  new dates and spends + edit

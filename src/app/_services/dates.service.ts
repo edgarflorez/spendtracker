@@ -17,11 +17,11 @@ export class DatesService {
 	getDates(userId: number){
 		return this.http.get('/api/dates/getDates/' + userId, this.jwt())
 			.map( (response: Response) => {
-				console.log("dates.service :: getDates ", response);
-				return response;
+				return response['_body'];
 			});
 	}
-	addDate(newDate: string): Promise<any>{
+	/*
+	addDate_old(newDate: string): Promise<any>{
 		let dateRepeated: boolean = false,
 			dateA: Date,
 			dateB: Date = new Date(newDate)
@@ -52,6 +52,14 @@ export class DatesService {
 			response['data'] = "ERROR DATE DUPLICATED"
 		}
 		return Promise.resolve( response );
+	}
+	*/
+	addDate(newDate:SpendDate){
+		return this.http.post('/api/dates', newDate, this.jwt())
+			.map( (response: Response) => {
+				console.log("dates.service :: addDate ", response);
+				return response;
+			});
 	}
 
 	dateSort(dates: any): void{

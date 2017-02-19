@@ -21,41 +21,49 @@ var DatesService = (function () {
     DatesService.prototype.getDates = function (userId) {
         return this.http.get('/api/dates/getDates/' + userId, this.jwt())
             .map(function (response) {
-            console.log("dates.service :: getDates ", response);
-            return response;
+            return response['_body'];
         });
     };
-    DatesService.prototype.addDate = function (newDate) {
-        var dateRepeated = false, dateA, dateB = new Date(newDate);
+    /*
+    addDate_old(newDate: string): Promise<any>{
+        let dateRepeated: boolean = false,
+            dateA: Date,
+            dateB: Date = new Date(newDate)
+            ;
         // Check if the date exists
-        for (var _i = 0, DATES_1 = mock_dates_1.DATES; _i < DATES_1.length; _i++) {
-            var date = DATES_1[_i];
+        for(let date of DATES){
             dateA = new Date(date.date);
-            if (dateA.getTime() === dateB.getTime()) {
+            if(dateA.getTime() === dateB.getTime()){
                 dateRepeated = true;
             }
         }
         // prepare response
         console.log("newDate", newDate);
-        var response = {};
-        if (!dateRepeated) {
-            if (newDate == "") {
+        let response: Object = {}
+        if(!dateRepeated){
+            if(newDate == ""){
                 response['type'] = 500;
-                response['data'] = "ERROR PLEASE SELECT A DATE";
-            }
-            else {
-                var newId = mock_dates_1.DATES.length + 1;
-                mock_dates_1.DATES.push({ id: newId, date: newDate });
-                this.dateSort(mock_dates_1.DATES);
+                response['data'] = "ERROR PLEASE SELECT A DATE"
+            }else{
+                let newId = DATES.length + 1;
+                DATES.push({id:newId, date: newDate });
+                this.dateSort(DATES);
                 response['type'] = 200;
-                response['data'] = mock_dates_1.DATES;
+                response['data'] = DATES;
             }
-        }
-        else {
+        }else{
             response['type'] = 500;
-            response['data'] = "ERROR DATE DUPLICATED";
+            response['data'] = "ERROR DATE DUPLICATED"
         }
-        return Promise.resolve(response);
+        return Promise.resolve( response );
+    }
+    */
+    DatesService.prototype.addDate = function (newDate) {
+        return this.http.post('/api/dates', newDate, this.jwt())
+            .map(function (response) {
+            console.log("dates.service :: addDate ", response);
+            return response;
+        });
     };
     DatesService.prototype.dateSort = function (dates) {
         dates.sort(function (a, b) { return a.date - b.date; });

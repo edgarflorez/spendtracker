@@ -36,10 +36,12 @@ var CalendarComponent = (function () {
     }
     // methods
     CalendarComponent.prototype.getDates = function () {
+        var _this = this;
         // this.datesService.getDates().then( dates => {this.dates = dates; console.log(this.dates);})
         this.datesService.getDates(this.userService.getCurrentUserId())
             .subscribe(function (data) {
             console.log("Calendar Component :: getDates ", data);
+            _this.dates = data;
         }, function (error) {
             console.log(error.message);
         });
@@ -67,21 +69,31 @@ var CalendarComponent = (function () {
     CalendarComponent.prototype.onSubmitAddNewDate = function (event) {
         var _this = this;
         event.stopPropagation();
-        this.datesService.addDate(this.newDateJSDate).then(function (response) {
-            switch (response.type) {
-                case 200:
-                    _this.addDate = false;
-                    _this.dates = response.data;
-                    console.log(_this.dates);
-                    break;
-                case 500:
-                    _this.addDate = false;
-                    _this.appAlert.alert("ERROR:: " + response.data);
-                    // console.log("ERROR :: ", response.data);
-                    break;
-            }
+        this.datesService.addDate({ 'id': 0, 'userId': this.userService.getCurrentUserId(), 'date': this.newDateJSDate })
+            .subscribe(function (data) {
+            console.log("Calendar Component :: onSubmitAddNewDate ", data);
+            _this.addDate = false;
+            _this.getDates();
+        }, function (error) {
+            console.log(error);
+            _this.addDate = false;
+            _this.appAlert.alert("ERROR:: " + error);
+            // console.log("ERROR :: ", response.data);
         });
-        // this.dates.push({id:this.dates.length +1, date: this.newDateJSDate });
+        // this.datesService.addDate(this.newDateJSDate).then( response => {
+        // 	switch(response.type){
+        // 		case 200:
+        // 			this.addDate = false;
+        // 			this.dates = response.data;
+        // 			console.log(this.dates);
+        // 		break;
+        // 		case 500:
+        // 			this.addDate = false;
+        // 			this.appAlert.alert("ERROR:: "+ response.data);
+        // 			// console.log("ERROR :: ", response.data);
+        // 		break;
+        // 	}
+        // });
     };
     return CalendarComponent;
 }());

@@ -12,6 +12,7 @@ export let fakeBackendProvider = {
 
         // array in local storage for registered users
         let users: any[] = JSON.parse(localStorage.getItem('users')) || [];
+        let dates: any[] = JSON.parse(localStorage.getItem('dates')) || [];
 
         // configure fake backend
         backend.connections.subscribe((connection: MockConnection) => {
@@ -143,12 +144,36 @@ export let fakeBackendProvider = {
 
                         console.log('fake-backend :: service api/dates/'+id);
 
+                        let bodyResponse = JSON.parse(localStorage.getItem('dates'))
+
                         // respond 200 OK with user
-                        connection.mockRespond(new Response(new ResponseOptions({ status: 200, body: 'dates response body' })));
+                        connection.mockRespond(new Response(new ResponseOptions({ status: 200, body: bodyResponse })));
                     } else {
                         // return 401 not authorised if token is null or invalid
                         connection.mockRespond(new Response(new ResponseOptions({ status: 401 })));
                     }
+
+                    return;
+                }
+
+                // dates addDate
+                if (connection.request.url.endsWith('/api/dates') && connection.request.method === RequestMethod.Post) {
+                    // get new user object from post body
+                    let newDate = JSON.parse(connection.request.getBody());
+
+                    // validation TODO
+                    // let duplicateUser = users.filter(user => { return user.username === newUser.username; }).length;
+                    // if (duplicateUser) {
+                    //     return connection.mockError(new Error('Username "' + newUser.username + '" is already taken'));
+                    // }
+
+                    // save new user
+                    newDate.id = dates.length + 1;
+                    dates.push(newDate);
+                    localStorage.setItem('dates', JSON.stringify(dates));
+
+                    // respond 200 OK
+                    connection.mockRespond(new Response(new ResponseOptions({ status: 200 })));
 
                     return;
                 }

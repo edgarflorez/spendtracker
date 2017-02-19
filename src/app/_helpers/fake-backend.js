@@ -11,6 +11,7 @@ exports.fakeBackendProvider = {
         }
         // array in local storage for registered users
         var users = JSON.parse(localStorage.getItem('users')) || [];
+        var dates = JSON.parse(localStorage.getItem('dates')) || [];
         // configure fake backend
         backend.connections.subscribe(function (connection) {
             // wrap in timeout to simulate server api call
@@ -125,13 +126,31 @@ exports.fakeBackendProvider = {
                         // let matchedUsers = users.filter(user => { return user.id === id; });
                         // let user = matchedUsers.length ? matchedUsers[0] : null;
                         console.log('fake-backend :: service api/dates/' + id);
+                        var bodyResponse = JSON.parse(localStorage.getItem('dates'));
                         // respond 200 OK with user
-                        connection.mockRespond(new http_1.Response(new http_1.ResponseOptions({ status: 200, body: 'dates response body' })));
+                        connection.mockRespond(new http_1.Response(new http_1.ResponseOptions({ status: 200, body: bodyResponse })));
                     }
                     else {
                         // return 401 not authorised if token is null or invalid
                         connection.mockRespond(new http_1.Response(new http_1.ResponseOptions({ status: 401 })));
                     }
+                    return;
+                }
+                // dates addDate
+                if (connection.request.url.endsWith('/api/dates') && connection.request.method === http_1.RequestMethod.Post) {
+                    // get new user object from post body
+                    var newDate = JSON.parse(connection.request.getBody());
+                    // validation TODO
+                    // let duplicateUser = users.filter(user => { return user.username === newUser.username; }).length;
+                    // if (duplicateUser) {
+                    //     return connection.mockError(new Error('Username "' + newUser.username + '" is already taken'));
+                    // }
+                    // save new user
+                    newDate.id = dates.length + 1;
+                    dates.push(newDate);
+                    localStorage.setItem('dates', JSON.stringify(dates));
+                    // respond 200 OK
+                    connection.mockRespond(new http_1.Response(new http_1.ResponseOptions({ status: 200 })));
                     return;
                 }
                 // pass through any requests not handled above
