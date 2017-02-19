@@ -77,7 +77,7 @@ var CalendarComponent = (function () {
         }, function (error) {
             console.log(error);
             _this.addDate = false;
-            _this.appAlert.alert("ERROR:: " + error);
+            _this.appAlert.alert(error);
             // console.log("ERROR :: ", response.data);
         });
         // this.datesService.addDate(this.newDateJSDate).then( response => {

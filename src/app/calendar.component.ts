@@ -81,7 +81,7 @@ export class CalendarComponent implements OnInit {
 				error => {
 					console.log( error );
 					this.addDate = false;
-					this.appAlert.alert("ERROR:: "+ error);
+					this.appAlert.alert(error);
 					// console.log("ERROR :: ", response.data);
 				}
 

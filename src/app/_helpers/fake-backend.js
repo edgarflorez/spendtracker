@@ -120,15 +120,13 @@ exports.fakeBackendProvider = {
                 if (connection.request.url.match(/\/api\/dates\/getDates\/\d+$/) && connection.request.method === http_1.RequestMethod.Get) {
                     // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
                     if (connection.request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
-                        // find user by id in users array
+                        // find dates by userid in dates array
                         var urlParts = connection.request.url.split('/');
-                        var id = parseInt(urlParts[urlParts.length - 1]);
-                        // let matchedUsers = users.filter(user => { return user.id === id; });
-                        // let user = matchedUsers.length ? matchedUsers[0] : null;
-                        console.log('fake-backend :: service api/dates/' + id);
-                        var bodyResponse = JSON.parse(localStorage.getItem('dates'));
+                        var id_2 = parseInt(urlParts[urlParts.length - 1]);
+                        var matchedDates = dates.filter(function (date) { return date.userId === id_2; });
+                        console.log('fake-backend :: service api/dates/' + id_2);
                         // respond 200 OK with user
-                        connection.mockRespond(new http_1.Response(new http_1.ResponseOptions({ status: 200, body: bodyResponse })));
+                        connection.mockRespond(new http_1.Response(new http_1.ResponseOptions({ status: 200, body: matchedDates })));
                     }
                     else {
                         // return 401 not authorised if token is null or invalid
@@ -139,15 +137,19 @@ exports.fakeBackendProvider = {
                 // dates addDate
                 if (connection.request.url.endsWith('/api/dates') && connection.request.method === http_1.RequestMethod.Post) {
                     // get new user object from post body
-                    var newDate = JSON.parse(connection.request.getBody());
-                    // validation TODO
-                    // let duplicateUser = users.filter(user => { return user.username === newUser.username; }).length;
-                    // if (duplicateUser) {
-                    //     return connection.mockError(new Error('Username "' + newUser.username + '" is already taken'));
-                    // }
+                    var newDate_1 = JSON.parse(connection.request.getBody());
+                    if (newDate_1.date === '') {
+                        return connection.mockError(new Error('ERROR :: Please select a date'));
+                    }
+                    // Validate duplicated dates for the user
+                    var duplicateDate = dates.filter(function (date) { return date.userId === newDate_1.userId && date.date === newDate_1.date; });
+                    console.log("duplicateDate ::: ", duplicateDate);
+                    if (duplicateDate.length > 0) {
+                        return connection.mockError(new Error('ERROR :: Date duplicated "' + newDate_1.date + '" is already taken'));
+                    }
                     // save new user
-                    newDate.id = dates.length + 1;
-                    dates.push(newDate);
+                    newDate_1.id = dates.length + 1;
+                    dates.push(newDate_1);
                     localStorage.setItem('dates', JSON.stringify(dates));
                     // respond 200 OK
                     connection.mockRespond(new http_1.Response(new http_1.ResponseOptions({ status: 200 })));
