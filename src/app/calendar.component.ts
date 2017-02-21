@@ -41,7 +41,6 @@ export class CalendarComponent implements OnInit {
 		this.datesService.getDates(this.userService.getCurrentUserId())
 			.subscribe(
 				data => {
-					console.log("Calendar Component :: getDates ", data);
 					this.dates = data;
 				},
 				error => {

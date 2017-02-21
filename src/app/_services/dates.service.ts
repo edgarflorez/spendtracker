@@ -66,20 +66,24 @@ export class DatesService {
 		dates.sort(function(a:any, b:any){ return a.date - b.date })
 	}
 
-	getDateById(id:number): Promise<SpendDate>{
-		var date:SpendDate;
+	// getDateById_old(id:number): Promise<SpendDate>{
+	// 	console.log('DATE ID :: ', id);
+	// 	var date:SpendDate;
 
-		for (var i = 0; i < DATES.length; i++) {
-			if(DATES[i].id == id ){
-				date = DATES[i]
-			}	
-		};
-
-		return Promise.resolve( date );
-
-
-
+	// 	for (var i = 0; i < DATES.length; i++) {
+	// 		if(DATES[i].id == id ){
+	// 			date = DATES[i]
+	// 		}	
+	// 	};
+	// 	return Promise.resolve( date );
+	// }
+	getDateById(id:number){
+		return this.http.get('/api/dates/getDateById/'+ id, this.jwt())
+			.map( (response: Response) =>{
+				return  response['_body'];
+			});
 	}
+
 
 
 	// private helper methods

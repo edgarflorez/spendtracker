@@ -12,6 +12,7 @@ exports.fakeBackendProvider = {
         // array in local storage for registered users
         var users = JSON.parse(localStorage.getItem('users')) || [];
         var dates = JSON.parse(localStorage.getItem('dates')) || [];
+        var spends = JSON.parse(localStorage.getItem('spends')) || [];
         // configure fake backend
         backend.connections.subscribe(function (connection) {
             // wrap in timeout to simulate server api call
@@ -153,6 +154,42 @@ exports.fakeBackendProvider = {
                     localStorage.setItem('dates', JSON.stringify(dates));
                     // respond 200 OK
                     connection.mockRespond(new http_1.Response(new http_1.ResponseOptions({ status: 200 })));
+                    return;
+                }
+                // dates getDateById
+                if (connection.request.url.match(/\/api\/dates\/getDateById\/\d+$/) && connection.request.method === http_1.RequestMethod.Get) {
+                    // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
+                    if (connection.request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                        // find the date info with the dateid
+                        var urlParts = connection.request.url.split('/');
+                        var id_3 = parseInt(urlParts[urlParts.length - 1]);
+                        var matchedDates = dates.filter(function (date) { return date.id === id_3; });
+                        console.log('fake-backend :: service api/getDateById/' + id_3);
+                        // respond 200 OK with user
+                        connection.mockRespond(new http_1.Response(new http_1.ResponseOptions({ status: 200, body: matchedDates[0] })));
+                    }
+                    else {
+                        // return 401 not authorised if token is null or invalid
+                        connection.mockRespond(new http_1.Response(new http_1.ResponseOptions({ status: 401 })));
+                    }
+                    return;
+                }
+                // spends getSpendsByDate
+                if (connection.request.url.match(/\/api\/spends\/getSpendsByDate\/\d+$/) && connection.request.method === http_1.RequestMethod.Get) {
+                    // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
+                    if (connection.request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                        // find spends by dateId in spends array
+                        var urlParts = connection.request.url.split('/');
+                        var dateId_1 = parseInt(urlParts[urlParts.length - 1]);
+                        var matchedSpends = spends.filter(function (spend) { return spend.date === dateId_1; });
+                        console.log('fake-backend :: service api/getSpendsByDate/' + dateId_1);
+                        // respond 200 OK with user
+                        connection.mockRespond(new http_1.Response(new http_1.ResponseOptions({ status: 200, body: matchedSpends })));
+                    }
+                    else {
+                        // return 401 not authorised if token is null or invalid
+                        connection.mockRespond(new http_1.Response(new http_1.ResponseOptions({ status: 401 })));
+                    }
                     return;
                 }
                 // pass through any requests not handled above

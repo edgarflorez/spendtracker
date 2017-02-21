@@ -40,18 +40,32 @@ export class DayComponent implements OnInit {
 		this.editModeOn = false;
 
 		this.route.params
-			.switchMap((params: Params) => this.datesService.getDateById(+params['id']))
-			.subscribe( response => {
-				this.id = response.id;
-				this.date = response.date;	
-				this.getSpends(response.id)
-			} );
+			.switchMap( (params: Params) => this.datesService.getDateById(+params['id']) )
+			.subscribe(
+				data => {
+					this.id = data.id;
+					this.date = data.date;
+					this.getSpends(data.id)
+				},
+				error => {
+					console.log( error.message );
+				}
+			);
 	}
 	goBack(): void {
 		this.location.back();
 	}
 	getSpends(dateId: number): void{
-		this.spendsService.getSpendsByDate( dateId ).then( spends => this.spends = spends ); 
+		// this.spendsService.getSpendsByDate( dateId ).then( spends => this.spends = spends ); 
+		this.spendsService.getSpendsByDate( dateId )
+			.subscribe( 
+				data => {
+					this.spends = data
+				},
+				error => {
+					console.log( error.message );
+				}
+			); 
 	}
 	// getCategoryName(categoryId: number): void{
 	// 	this.categoriesService.getCategoryById( categoryId ).then( category => { return category.categoryName } );

@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
-var mock_dates_1 = require("../mock/mock.dates");
 var DatesService = (function () {
     function DatesService(http) {
         this.http = http;
@@ -68,15 +67,21 @@ var DatesService = (function () {
     DatesService.prototype.dateSort = function (dates) {
         dates.sort(function (a, b) { return a.date - b.date; });
     };
+    // getDateById_old(id:number): Promise<SpendDate>{
+    // 	console.log('DATE ID :: ', id);
+    // 	var date:SpendDate;
+    // 	for (var i = 0; i < DATES.length; i++) {
+    // 		if(DATES[i].id == id ){
+    // 			date = DATES[i]
+    // 		}	
+    // 	};
+    // 	return Promise.resolve( date );
+    // }
     DatesService.prototype.getDateById = function (id) {
-        var date;
-        for (var i = 0; i < mock_dates_1.DATES.length; i++) {
-            if (mock_dates_1.DATES[i].id == id) {
-                date = mock_dates_1.DATES[i];
-            }
-        }
-        ;
-        return Promise.resolve(date);
+        return this.http.get('/api/dates/getDateById/' + id, this.jwt())
+            .map(function (response) {
+            return response['_body'];
+        });
     };
     // private helper methods
     DatesService.prototype.jwt = function () {

@@ -33,10 +33,12 @@ var DayComponent = (function () {
         this.editModeOn = false;
         this.route.params
             .switchMap(function (params) { return _this.datesService.getDateById(+params['id']); })
-            .subscribe(function (response) {
-            _this.id = response.id;
-            _this.date = response.date;
-            _this.getSpends(response.id);
+            .subscribe(function (data) {
+            _this.id = data.id;
+            _this.date = data.date;
+            _this.getSpends(data.id);
+        }, function (error) {
+            console.log(error.message);
         });
     };
     DayComponent.prototype.goBack = function () {
@@ -44,7 +46,13 @@ var DayComponent = (function () {
     };
     DayComponent.prototype.getSpends = function (dateId) {
         var _this = this;
-        this.spendsService.getSpendsByDate(dateId).then(function (spends) { return _this.spends = spends; });
+        // this.spendsService.getSpendsByDate( dateId ).then( spends => this.spends = spends ); 
+        this.spendsService.getSpendsByDate(dateId)
+            .subscribe(function (data) {
+            _this.spends = data;
+        }, function (error) {
+            console.log(error.message);
+        });
     };
     // getCategoryName(categoryId: number): void{
     // 	this.categoriesService.getCategoryById( categoryId ).then( category => { return category.categoryName } );
