@@ -27,8 +27,9 @@ var SpendsService = (function () {
     // 	return Promise.resolve( filterSpends );
     // }
     SpendsService.prototype.getSpendsByDate = function (id) {
-        return this.http.get('/api/spends/getSpendsByDate/' + id, this.jwt());
-        map(function (response) {
+        return this.http.get('/api/spends/getSpendsByDate/' + id, this.jwt())
+            .map(function (response) {
+            console.log('spends.service :: getSpendsByDate ', response['_body']);
             return response['_body'];
         });
     };
@@ -42,15 +43,22 @@ var SpendsService = (function () {
         ;
         return Promise.resolve(filterSpend);
     };
+    // addSpend_old(spend:SpendModel): Promise<any> {
+    // 	return this.categoriesService.getCategoryById( spend.category ).then( categoryName => {
+    // 		spend.id = SPENDS.length + 1;
+    // 		spend.categoryName = categoryName;
+    // 		SPENDS.push(spend);
+    // 		let response: Object = {}
+    // 		response['type'] = 200;
+    // 		response['data'] = "Spend created sucessfully";
+    // 		return Promise.resolve( response );	
+    // 	})
+    // }
     SpendsService.prototype.addSpend = function (spend) {
-        return this.categoriesService.getCategoryById(spend.category).then(function (categoryName) {
-            spend.id = mock_spends_1.SPENDS.length + 1;
-            spend.categoryName = categoryName;
-            mock_spends_1.SPENDS.push(spend);
-            var response = {};
-            response['type'] = 200;
-            response['data'] = "Spend created sucessfully";
-            return Promise.resolve(response);
+        return this.http.post('/api/spends', spend, this.jwt())
+            .map(function (response) {
+            console.log('spends.service :: addSpend ', response['_body']);
+            return response;
         });
     };
     SpendsService.prototype.dropSpend = function (spendId) {
@@ -67,19 +75,25 @@ var SpendsService = (function () {
         response['data'] = "Spend created sucessfully";
         return Promise.resolve(response);
     };
+    // updateSpend_old(spend:SpendModel): Promise<any> {
+    // 	return this.categoriesService.getCategoryById( spend.category ).then( categoryName => {
+    // 		spend.categoryName = categoryName;
+    // 		for (let i = 0; i < SPENDS.length; i++) {
+    // 			if( spend.id ==  SPENDS[i].id){
+    // 				SPENDS[i] = spend
+    // 			}
+    // 		};
+    // 		let response: Object = {}
+    // 		response['type'] = 200;
+    // 		response['data'] = "Spend created sucessfully";
+    // 		return Promise.resolve( response );	
+    // 	})
+    // }
     SpendsService.prototype.updateSpend = function (spend) {
-        return this.categoriesService.getCategoryById(spend.category).then(function (categoryName) {
-            spend.categoryName = categoryName;
-            for (var i = 0; i < mock_spends_1.SPENDS.length; i++) {
-                if (spend.id == mock_spends_1.SPENDS[i].id) {
-                    mock_spends_1.SPENDS[i] = spend;
-                }
-            }
-            ;
-            var response = {};
-            response['type'] = 200;
-            response['data'] = "Spend created sucessfully";
-            return Promise.resolve(response);
+        return this.http.post('/api/spends/update', spend, this.jwt())
+            .map(function (response) {
+            console.log('spends.service :: updateSpend ', response['_body']);
+            return response;
         });
     };
     // private helper methods

@@ -9,11 +9,16 @@ export let fakeBackendProvider = {
         if(!localStorage.getItem('users')){
             localStorage.setItem('users', '[{ "firstName": "edgarf",  "lastName": "florez",   "username": "edgarf",   "password": "12345",    "id": 1}, { "firstName": "cindy",   "lastName": "cordero",  "username": "cindyc",   "password": "12345",    "id": 2}, { "firstName": "John",   "lastName": "Doe",  "username": "a",   "password": "a",    "id": 3}]')
         }
+        if(!localStorage.getItem('categories')){
+            localStorage.setItem('categories', '[{ "id": "1", "categoryName": "Alimentacion"},{ "id": "2", "categoryName": "Creditos"},{ "id": "3", "categoryName": "Otros Gastos"},{ "id": "4", "categoryName": "Seguro Vida"},{ "id": "5", "categoryName": "Servicios"},{ "id": "6", "categoryName": "Trasporte"},{ "id": "7", "categoryName": "Vivienda"}]')
+        }
+
 
         // array in local storage for registered users
         let users: any[] = JSON.parse(localStorage.getItem('users')) || [];
         let dates: any[] = JSON.parse(localStorage.getItem('dates')) || [];
         let spends: any[] = JSON.parse(localStorage.getItem('spends')) || [];
+        let categories: any[] = JSON.parse(localStorage.getItem('categories')) || [];
 
         // configure fake backend
         backend.connections.subscribe((connection: MockConnection) => {
@@ -196,6 +201,49 @@ export let fakeBackendProvider = {
                         // return 401 not authorised if token is null or invalid
                         connection.mockRespond(new Response(new ResponseOptions({ status: 401 })));
                     }
+
+                    return;
+                }
+
+                // spends addSpend
+                if (connection.request.url.endsWith('/api/spends') && connection.request.method === RequestMethod.Post) {
+                    // get new user object from post body
+                    let newSpend = JSON.parse(connection.request.getBody());
+
+                    // return category name within the service
+                    let categoryName = categories.filter( category => { return newSpend.category === category.id } ); 
+                    newSpend.categoryName = categoryName[0]['categoryName']; 
+
+                    // save new spend
+                    newSpend.id = spends.length + 1;
+                    spends.push(newSpend);
+                    localStorage.setItem('spends', JSON.stringify(spends));
+
+                    // respond 200 OK
+                    connection.mockRespond(new Response(new ResponseOptions({ status: 200 })));
+
+                    return;
+                }
+
+                 // spends updateSpend
+                if (connection.request.url.endsWith('/api/spends/update') && connection.request.method === RequestMethod.Post) {
+                    // get new user object from post body
+                    let newSpend = JSON.parse(connection.request.getBody());
+
+                    // return category name within the service
+                    let categoryName = categories.filter( category => { return newSpend.category === category.id } ); 
+                    newSpend.categoryName = categoryName[0]['categoryName']; 
+
+                    // update new spend
+                    for (var i = spends.length - 1; i >= 0; i--) {
+                        if(spends[i][id] == newSpend.id){
+                            spends[i] = newSpend;
+                        }
+                    };
+                    localStorage.setItem('spends', JSON.stringify(spends));
+
+                    // respond 200 OK
+                    connection.mockRespond(new Response(new ResponseOptions({ status: 200 })));
 
                     return;
                 }

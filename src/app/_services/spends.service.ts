@@ -23,7 +23,8 @@ export class SpendsService {
 	// }
 	getSpendsByDate(id: number) {
 		return this.http.get('/api/spends/getSpendsByDate/'+ id, this.jwt())
-			map( (response: Response) =>{
+			.map( (response: Response) =>{
+				console.log('spends.service :: getSpendsByDate ', response['_body']);
 				return response['_body'];
 			})
 	}
@@ -36,19 +37,26 @@ export class SpendsService {
 		};
 		return Promise.resolve( filterSpend );
 	}
-	addSpend(spend:SpendModel): Promise<any> {
+	// addSpend_old(spend:SpendModel): Promise<any> {
 
-		return this.categoriesService.getCategoryById( spend.category ).then( categoryName => {
-			spend.id = SPENDS.length + 1;
-			spend.categoryName = categoryName;
-			SPENDS.push(spend);
+	// 	return this.categoriesService.getCategoryById( spend.category ).then( categoryName => {
+	// 		spend.id = SPENDS.length + 1;
+	// 		spend.categoryName = categoryName;
+	// 		SPENDS.push(spend);
 			
-			let response: Object = {}
-			response['type'] = 200;
-			response['data'] = "Spend created sucessfully";
+	// 		let response: Object = {}
+	// 		response['type'] = 200;
+	// 		response['data'] = "Spend created sucessfully";
 
-			return Promise.resolve( response );	
-		})
+	// 		return Promise.resolve( response );	
+	// 	})
+	// }
+	addSpend(spend:SpendModel){
+		return this.http.post('/api/spends', spend, this.jwt())
+			.map( (response: Response ) => {
+				console.log('spends.service :: addSpend ', response['_body']);
+				return response;
+			})
 	}
 	dropSpend(spendId: number): Promise<any> {
 		console.log("A", SPENDS);
@@ -69,22 +77,29 @@ export class SpendsService {
 
 	}
 
-	updateSpend(spend:SpendModel): Promise<any> {
-		return this.categoriesService.getCategoryById( spend.category ).then( categoryName => {
-			spend.categoryName = categoryName;
+	// updateSpend_old(spend:SpendModel): Promise<any> {
+	// 	return this.categoriesService.getCategoryById( spend.category ).then( categoryName => {
+	// 		spend.categoryName = categoryName;
 
-			for (let i = 0; i < SPENDS.length; i++) {
-				if( spend.id ==  SPENDS[i].id){
-					SPENDS[i] = spend
-				}
-			};
+	// 		for (let i = 0; i < SPENDS.length; i++) {
+	// 			if( spend.id ==  SPENDS[i].id){
+	// 				SPENDS[i] = spend
+	// 			}
+	// 		};
 			
-			let response: Object = {}
-			response['type'] = 200;
-			response['data'] = "Spend created sucessfully";
+	// 		let response: Object = {}
+	// 		response['type'] = 200;
+	// 		response['data'] = "Spend created sucessfully";
 
-			return Promise.resolve( response );	
-		})
+	// 		return Promise.resolve( response );	
+	// 	})
+	// }
+	updateSpend(spend:SpendModel): Promise<any> {
+		return this.http.post('/api/spends/update', spend, this.jwt())
+			.map( (response: Response ) => {
+				console.log('spends.service :: updateSpend ', response['_body']);
+				return response;
+			})
 	}
 
 	// private helper methods

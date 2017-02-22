@@ -116,27 +116,19 @@ var SpendComponent = (function () {
         };
         switch (this.action) {
             case 'new':
-                this.spendsService.addSpend(spend).then(function (response) {
-                    switch (response.type) {
-                        case 200:
-                            _this.location.back();
-                            break;
-                        case 500:
-                            console.log(response.data);
-                            break;
-                    }
+                this.spendsService.addSpend(spend)
+                    .subscribe(function (data) {
+                    _this.location.back();
+                }, function (error) {
+                    console.log(error);
                 });
                 break;
             case 'edit':
-                this.spendsService.updateSpend(spend).then(function (response) {
-                    switch (response.type) {
-                        case 200:
-                            _this.location.back();
-                            break;
-                        case 500:
-                            console.log(response.data);
-                            break;
-                    }
+                this.spendsService.updateSpend(spend)
+                    .subscribe(function (data) {
+                    _this.location.back();
+                }, function (error) {
+                    console.log(error);
                 });
                 break;
         }

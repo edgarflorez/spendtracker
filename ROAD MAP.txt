@@ -40,7 +40,9 @@
 - Implement the calendar lose functionality
 *********************************************************************************************************************
 	- Migrate Day 
+		- Return  data from edit mode and implement service updateSpend
 		- complete service getSpendsByDate, actually return an error with the mock data
+		- Migrate categories
 	- Migrate spend
 	- create  a session for query dates, spends and create  new dates and spends + edit
 		- https://auth0.com/docs/quickstart/spa/angular2/03-session-handling

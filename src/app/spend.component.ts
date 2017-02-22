@@ -124,28 +124,26 @@ export class SpendComponent implements OnInit {
 
 		switch(this.action){
 			case 'new':
-				this.spendsService.addSpend(spend).then( response => {
-					switch(response.type){
-						case 200:
+				this.spendsService.addSpend(spend)
+					.subscribe(
+						data => {
 							this.location.back();
-						break;
-						case 500:
-							console.log(response.data);
-						break;
-					}
-				})
+						},
+						error => {
+							console.log(error); 
+						}
+					)
 			break;
 			case  'edit':
-				this.spendsService.updateSpend(spend).then( response => {
-					switch(response.type){
-						case 200:
+				this.spendsService.updateSpend(spend)
+					.subscribe(
+						data => {
 							this.location.back();
-						break;
-						case 500:
-							console.log(response.data);
-						break;
-					}
-				})
+						},
+						error => {
+							console.log(error); 
+						}
+					)
 			break;
 		}
 	}

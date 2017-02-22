@@ -9,10 +9,14 @@ exports.fakeBackendProvider = {
         if (!localStorage.getItem('users')) {
             localStorage.setItem('users', '[{ "firstName": "edgarf",  "lastName": "florez",   "username": "edgarf",   "password": "12345",    "id": 1}, { "firstName": "cindy",   "lastName": "cordero",  "username": "cindyc",   "password": "12345",    "id": 2}, { "firstName": "John",   "lastName": "Doe",  "username": "a",   "password": "a",    "id": 3}]');
         }
+        if (!localStorage.getItem('categories')) {
+            localStorage.setItem('categories', '[{ "id": "1", "categoryName": "Alimentacion"},{ "id": "2", "categoryName": "Creditos"},{ "id": "3", "categoryName": "Otros Gastos"},{ "id": "4", "categoryName": "Seguro Vida"},{ "id": "5", "categoryName": "Servicios"},{ "id": "6", "categoryName": "Trasporte"},{ "id": "7", "categoryName": "Vivienda"}]');
+        }
         // array in local storage for registered users
         var users = JSON.parse(localStorage.getItem('users')) || [];
         var dates = JSON.parse(localStorage.getItem('dates')) || [];
         var spends = JSON.parse(localStorage.getItem('spends')) || [];
+        var categories = JSON.parse(localStorage.getItem('categories')) || [];
         // configure fake backend
         backend.connections.subscribe(function (connection) {
             // wrap in timeout to simulate server api call
@@ -99,11 +103,11 @@ exports.fakeBackendProvider = {
                         // find user by id in users array
                         var urlParts = connection.request.url.split('/');
                         var id = parseInt(urlParts[urlParts.length - 1]);
-                        for (var i = 0; i < users.length; i++) {
-                            var user = users[i];
+                        for (var i_1 = 0; i_1 < users.length; i_1++) {
+                            var user = users[i_1];
                             if (user.id === id) {
                                 // delete user
-                                users.splice(i, 1);
+                                users.splice(i_1, 1);
                                 localStorage.setItem('users', JSON.stringify(users));
                                 break;
                             }
@@ -172,6 +176,40 @@ exports.fakeBackendProvider = {
                         // return 401 not authorised if token is null or invalid
                         connection.mockRespond(new http_1.Response(new http_1.ResponseOptions({ status: 401 })));
                     }
+                    return;
+                }
+                // spends addSpend
+                if (connection.request.url.endsWith('/api/spends') && connection.request.method === http_1.RequestMethod.Post) {
+                    // get new user object from post body
+                    var newSpend_1 = JSON.parse(connection.request.getBody());
+                    // return category name within the service
+                    var categoryName = categories.filter(function (category) { return newSpend_1.category === category.id; });
+                    newSpend_1.categoryName = categoryName[0]['categoryName'];
+                    // save new spend
+                    newSpend_1.id = spends.length + 1;
+                    spends.push(newSpend_1);
+                    localStorage.setItem('spends', JSON.stringify(spends));
+                    // respond 200 OK
+                    connection.mockRespond(new http_1.Response(new http_1.ResponseOptions({ status: 200 })));
+                    return;
+                }
+                // spends updateSpend
+                if (connection.request.url.endsWith('/api/spends/update') && connection.request.method === http_1.RequestMethod.Post) {
+                    // get new user object from post body
+                    var newSpend_2 = JSON.parse(connection.request.getBody());
+                    // return category name within the service
+                    var categoryName = categories.filter(function (category) { return newSpend_2.category === category.id; });
+                    newSpend_2.categoryName = categoryName[0]['categoryName'];
+                    // update new spend
+                    for (var i = spends.length - 1; i >= 0; i--) {
+                        if (spends[i][id] == newSpend_2.id) {
+                            spends[i] = newSpend_2;
+                        }
+                    }
+                    ;
+                    localStorage.setItem('spends', JSON.stringify(spends));
+                    // respond 200 OK
+                    connection.mockRespond(new http_1.Response(new http_1.ResponseOptions({ status: 200 })));
                     return;
                 }
                 // spends getSpendsByDate
