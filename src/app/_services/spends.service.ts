@@ -28,7 +28,7 @@ export class SpendsService {
 				return response['_body'];
 			})
 	}
-	getSpendById(id: number): Promise<SpendModel> {
+	getSpendById_old(id: number): Promise<SpendModel> {
 		let filterSpend: SpendModel;
 		for (let i = 0; i < SPENDS.length; i++) {
 			if(SPENDS[i].id == id){
@@ -36,6 +36,13 @@ export class SpendsService {
 			}
 		};
 		return Promise.resolve( filterSpend );
+	}
+	getSpendById(id: number) {
+		return this.http.get('/api/spends/getSpendById/'+ id, this.jwt())
+			.map((response: Response) =>{
+				console.log('spends.service :: getSpendById ', response['_body']);
+				return response['_body'];
+			})
 	}
 	// addSpend_old(spend:SpendModel): Promise<any> {
 
@@ -58,7 +65,7 @@ export class SpendsService {
 				return response;
 			})
 	}
-	dropSpend(spendId: number): Promise<any> {
+	dropSpend_old(spendId: number): Promise<any> {
 		console.log("A", SPENDS);
 		for (let i = SPENDS.length - 1; i >= 0; i--) {
 			if(spendId == SPENDS[i].id){
@@ -75,6 +82,13 @@ export class SpendsService {
 
 		return Promise.resolve( response );	
 
+	}
+	deleteSpend(spendId: number){
+		return this.http.delete('/api/spends/'+ spendId, this.jwt())
+			.map( (response:Response) =>{
+				console.log('spends.service :: deleteSpend ', response['_body']);
+				return response;
+			})
 	}
 
 	// updateSpend_old(spend:SpendModel): Promise<any> {
@@ -94,7 +108,7 @@ export class SpendsService {
 	// 		return Promise.resolve( response );	
 	// 	})
 	// }
-	updateSpend(spend:SpendModel): Promise<any> {
+	updateSpend(spend:SpendModel) {
 		return this.http.post('/api/spends/update', spend, this.jwt())
 			.map( (response: Response ) => {
 				console.log('spends.service :: updateSpend ', response['_body']);

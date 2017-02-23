@@ -202,7 +202,7 @@ exports.fakeBackendProvider = {
                     newSpend_2.categoryName = categoryName[0]['categoryName'];
                     // update new spend
                     for (var i = spends.length - 1; i >= 0; i--) {
-                        if (spends[i][id] == newSpend_2.id) {
+                        if (spends[i]['id'] == newSpend_2.id) {
                             spends[i] = newSpend_2;
                         }
                     }
@@ -219,10 +219,55 @@ exports.fakeBackendProvider = {
                         // find spends by dateId in spends array
                         var urlParts = connection.request.url.split('/');
                         var dateId_1 = parseInt(urlParts[urlParts.length - 1]);
-                        var matchedSpends = spends.filter(function (spend) { return spend.date === dateId_1; });
+                        var matchedSpends = spends.filter(function (spend) { return +spend.date === +dateId_1; });
+                        console.log("matchedSpends :::: ", "id :" + dateId_1, matchedSpends);
                         console.log('fake-backend :: service api/getSpendsByDate/' + dateId_1);
                         // respond 200 OK with user
                         connection.mockRespond(new http_1.Response(new http_1.ResponseOptions({ status: 200, body: matchedSpends })));
+                    }
+                    else {
+                        // return 401 not authorised if token is null or invalid
+                        connection.mockRespond(new http_1.Response(new http_1.ResponseOptions({ status: 401 })));
+                    }
+                    return;
+                }
+                // spends getSpendById
+                if (connection.request.url.match(/\/api\/spends\/getSpendById\/\d+$/) && connection.request.method === http_1.RequestMethod.Get) {
+                    // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
+                    if (connection.request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                        // find spend by spendId in spends array
+                        var urlParts = connection.request.url.split('/');
+                        var spendId_1 = parseInt(urlParts[urlParts.length - 1]);
+                        var matchedSpends = spends.filter(function (spend) { return spend.id === spendId_1; });
+                        console.log('fake-backend :: service api/spends/getSpendById/' + spendId_1);
+                        // respond 200 OK with user
+                        connection.mockRespond(new http_1.Response(new http_1.ResponseOptions({ status: 200, body: matchedSpends[0] })));
+                    }
+                    else {
+                        // return 401 not authorised if token is null or invalid
+                        connection.mockRespond(new http_1.Response(new http_1.ResponseOptions({ status: 401 })));
+                    }
+                    return;
+                }
+                // spend 
+                if (connection.request.url.match(/\/api\/spends\/\d+$/) && connection.request.method === http_1.RequestMethod.Delete) {
+                    // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
+                    if (connection.request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                        // find user by id in users array
+                        var urlParts = connection.request.url.split('/');
+                        var id = parseInt(urlParts[urlParts.length - 1]);
+                        for (var i_2 = 0; i_2 < spends.length; i_2++) {
+                            var spend = spends[i_2];
+                            if (spend.id === id) {
+                                // delete spend
+                                spends.splice(i_2, 1);
+                                localStorage.setItem('spends', JSON.stringify(spends));
+                                break;
+                            }
+                        }
+                        console.log('fake-backend  :: delete : service api/spends/' + id);
+                        // respond 200 OK
+                        connection.mockRespond(new http_1.Response(new http_1.ResponseOptions({ status: 200 })));
                     }
                     else {
                         // return 401 not authorised if token is null or invalid

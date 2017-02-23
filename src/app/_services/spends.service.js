@@ -33,7 +33,7 @@ var SpendsService = (function () {
             return response['_body'];
         });
     };
-    SpendsService.prototype.getSpendById = function (id) {
+    SpendsService.prototype.getSpendById_old = function (id) {
         var filterSpend;
         for (var i = 0; i < mock_spends_1.SPENDS.length; i++) {
             if (mock_spends_1.SPENDS[i].id == id) {
@@ -42,6 +42,13 @@ var SpendsService = (function () {
         }
         ;
         return Promise.resolve(filterSpend);
+    };
+    SpendsService.prototype.getSpendById = function (id) {
+        return this.http.get('/api/spends/getSpendById/' + id, this.jwt())
+            .map(function (response) {
+            console.log('spends.service :: getSpendById ', response['_body']);
+            return response['_body'];
+        });
     };
     // addSpend_old(spend:SpendModel): Promise<any> {
     // 	return this.categoriesService.getCategoryById( spend.category ).then( categoryName => {
@@ -61,7 +68,7 @@ var SpendsService = (function () {
             return response;
         });
     };
-    SpendsService.prototype.dropSpend = function (spendId) {
+    SpendsService.prototype.dropSpend_old = function (spendId) {
         console.log("A", mock_spends_1.SPENDS);
         for (var i = mock_spends_1.SPENDS.length - 1; i >= 0; i--) {
             if (spendId == mock_spends_1.SPENDS[i].id) {
@@ -74,6 +81,13 @@ var SpendsService = (function () {
         response['type'] = 200;
         response['data'] = "Spend created sucessfully";
         return Promise.resolve(response);
+    };
+    SpendsService.prototype.deleteSpend = function (spendId) {
+        return this.http.delete('/api/spends/' + spendId, this.jwt())
+            .map(function (response) {
+            console.log('spends.service :: deleteSpend ', response['_body']);
+            return response;
+        });
     };
     // updateSpend_old(spend:SpendModel): Promise<any> {
     // 	return this.categoriesService.getCategoryById( spend.category ).then( categoryName => {

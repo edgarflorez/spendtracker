@@ -41,16 +41,17 @@ var SpendComponent = (function () {
             // console.log("A :", userId,this.action);
             switch (_this.action) {
                 case 'new':
-                    _this.route.params
-                        .switchMap(function (params) { return _this.datesService.getDateById(userId); })
-                        .subscribe(function (response) {
-                        _this.editModeOn = false;
-                        _this.editModeOnConfirm = false;
-                        _this.dateString = response.date;
-                        _this.model.id = 0;
-                        _this.model.categoryName = '';
-                        _this.model.date = response.id;
-                        _this.getCategories();
+                    _this.editModeOn = false;
+                    _this.editModeOnConfirm = false;
+                    _this.model.id = null;
+                    _this.model.categoryName = '';
+                    _this.model.date = params['id'];
+                    _this.getCategories();
+                    _this.datesService.getDateById(+params['id'])
+                        .subscribe(function (data) {
+                        _this.dateString = data.date;
+                    }, function (error) {
+                        console.log(error.message);
                     });
                     break;
                 case 'edit':
@@ -59,10 +60,14 @@ var SpendComponent = (function () {
                         .subscribe(function (response) {
                         _this.editModeOn = true;
                         _this.editModeOnConfirm = false;
-                        // console.log(response);
-                        _this.dateString = "SPEND DATE TODO";
                         _this.model = response;
                         _this.getCategories();
+                        _this.datesService.getDateById(_this.model.date)
+                            .subscribe(function (data) {
+                            _this.dateString = data.date;
+                        }, function (error) {
+                            console.log(error.message);
+                        });
                     });
                     break;
             }
@@ -82,16 +87,22 @@ var SpendComponent = (function () {
         this.editModeOnConfirm = false;
     };
     SpendComponent.prototype.onDeleteSpendConfirm = function () {
+        // this.spendsService.deleteSpend(this.model.id).then( response => {
+        // 	switch(response.type){
+        // 		case 200:
+        // 			this.location.back();
+        // 		break;
+        // 		case 500:
+        // 			console.log(response.data);
+        // 		break;
+        // 	}
         var _this = this;
-        this.spendsService.dropSpend(this.model.id).then(function (response) {
-            switch (response.type) {
-                case 200:
-                    _this.location.back();
-                    break;
-                case 500:
-                    console.log(response.data);
-                    break;
-            }
+        // })
+        this.spendsService.deleteSpend(this.model.id)
+            .subscribe(function (data) {
+            _this.location.back();
+        }, function (error) {
+            console.log(error.message);
         });
     };
     SpendComponent.prototype.reset = function () {

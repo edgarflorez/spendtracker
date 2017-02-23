@@ -49,17 +49,22 @@ export class SpendComponent implements OnInit {
 
 			switch(this.action){
 				case 'new':
-					this.route.params
-						.switchMap((params: Params) => this.datesService.getDateById( userId ))
-						.subscribe( response => {
-							this.editModeOn = false;
-							this.editModeOnConfirm = false;
-							this.dateString = response.date;
-							this.model.id 	= 0;
-							this.model.categoryName = '';
-							this.model.date = response.id;
-							this.getCategories();
-						});
+					this.editModeOn 		= false;
+					this.editModeOnConfirm 	= false;
+
+					this.model.id 			= null;
+					this.model.categoryName = '';
+					this.model.date 		= params['id'];
+					this.getCategories();
+					this.datesService.getDateById( +params['id'] )
+						.subscribe(
+							data => {
+								this.dateString = data.date;
+							},
+							error => {
+								console.log( error.message );
+							}
+						)
 				break;
 				case  'edit':
 					this.route.params
@@ -67,10 +72,17 @@ export class SpendComponent implements OnInit {
 						.subscribe( response => {
 							this.editModeOn = true;
 							this.editModeOnConfirm = false;
-							// console.log(response);
-							this.dateString = "SPEND DATE TODO";
 							this.model 		= response;
 							this.getCategories();
+							this.datesService.getDateById( this.model.date )
+								.subscribe(
+									data => {
+										this.dateString = data.date;
+									},
+									error => {
+										console.log( error.message );
+									}
+								)
 						});
 				break;
 			}
@@ -89,17 +101,26 @@ export class SpendComponent implements OnInit {
 		this.editModeOnConfirm = false;
 	}
 	onDeleteSpendConfirm(): void{
-		this.spendsService.dropSpend(this.model.id).then( response => {
-			switch(response.type){
-				case 200:
-					this.location.back();
-				break;
-				case 500:
-					console.log(response.data);
-				break;
-			}
+		// this.spendsService.deleteSpend(this.model.id).then( response => {
+		// 	switch(response.type){
+		// 		case 200:
+		// 			this.location.back();
+		// 		break;
+		// 		case 500:
+		// 			console.log(response.data);
+		// 		break;
+		// 	}
 
-		})
+		// })
+		this.spendsService.deleteSpend(this.model.id)
+			.subscribe(
+				data => {
+					this.location.back();
+				},
+				error => {
+					console.log( error.message );
+				}
+			)
 	}
 	reset(): void{
 		this.model = {
