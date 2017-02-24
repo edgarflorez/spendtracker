@@ -78,7 +78,13 @@ var SpendComponent = (function () {
     };
     SpendComponent.prototype.getCategories = function () {
         var _this = this;
-        this.categoriesService.getCategories().then(function (categories) { return _this.categories = categories; });
+        // this.categoriesService.getCategories().then( categories => this.categories = categories )
+        this.categoriesService.getCategories()
+            .subscribe(function (data) {
+            _this.categories = data;
+        }, function (error) {
+            console.log(error.message);
+        });
     };
     SpendComponent.prototype.onDeleteSpend = function () {
         this.editModeOnConfirm = true;

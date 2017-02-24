@@ -92,7 +92,16 @@ export class SpendComponent implements OnInit {
 		this.location.back();
 	}
 	getCategories():void {
-		this.categoriesService.getCategories().then( categories => this.categories = categories )
+		// this.categoriesService.getCategories().then( categories => this.categories = categories )
+		this.categoriesService.getCategories()
+			.subscribe(
+				data => {
+					this.categories = data
+				},
+				error => {
+					console.log( error.message );
+				}
+			)
 	}
 	onDeleteSpend(): void{
 		this.editModeOnConfirm = true;

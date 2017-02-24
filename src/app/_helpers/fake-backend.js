@@ -275,6 +275,19 @@ exports.fakeBackendProvider = {
                     }
                     return;
                 }
+                // getCategories
+                if (connection.request.url.endsWith('/api/categories') && connection.request.method === http_1.RequestMethod.Get) {
+                    // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
+                    if (connection.request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                        var body = JSON.parse(localStorage.getItem('categories'));
+                        connection.mockRespond(new http_1.Response(new http_1.ResponseOptions({ status: 200, body: body })));
+                    }
+                    else {
+                        // return 401 not authorised if token is null or invalid
+                        connection.mockRespond(new http_1.Response(new http_1.ResponseOptions({ status: 401 })));
+                    }
+                    return;
+                }
                 // pass through any requests not handled above
                 var realHttp = new http_1.Http(realBackend, options);
                 var requestOptions = new http_1.RequestOptions({
