@@ -17,6 +17,7 @@ var dates_service_1 = require("./_services/dates.service");
 var categories_service_1 = require("./_services/categories.service");
 var spends_service_1 = require("./_services/spends.service");
 var SpendComponent = (function () {
+    // Constructor
     function SpendComponent(route, location, datesService, categoriesService, spendsService) {
         this.route = route;
         this.location = location;
@@ -32,13 +33,13 @@ var SpendComponent = (function () {
             categoryName: null
         };
     }
+    // ngOnInit
     SpendComponent.prototype.ngOnInit = function () {
-        // Check if is a new spend or and edition
         var _this = this;
+        // Check if is a new spend or and edition
         this.route.params.subscribe(function (params) {
             var userId = (params['idSpend']) ? params['idSpend'] : params['id'];
             _this.action = (params['idSpend']) ? 'edit' : 'new';
-            // console.log("A :", userId,this.action);
             switch (_this.action) {
                 case 'new':
                     _this.editModeOn = false;
@@ -73,40 +74,12 @@ var SpendComponent = (function () {
             }
         });
     };
-    SpendComponent.prototype.goBack = function () {
-        this.location.back();
-    };
+    // Private Functions
     SpendComponent.prototype.getCategories = function () {
         var _this = this;
-        // this.categoriesService.getCategories().then( categories => this.categories = categories )
         this.categoriesService.getCategories()
             .subscribe(function (data) {
             _this.categories = data;
-        }, function (error) {
-            console.log(error.message);
-        });
-    };
-    SpendComponent.prototype.onDeleteSpend = function () {
-        this.editModeOnConfirm = true;
-    };
-    SpendComponent.prototype.onDeleteSpendCancel = function () {
-        this.editModeOnConfirm = false;
-    };
-    SpendComponent.prototype.onDeleteSpendConfirm = function () {
-        // this.spendsService.deleteSpend(this.model.id).then( response => {
-        // 	switch(response.type){
-        // 		case 200:
-        // 			this.location.back();
-        // 		break;
-        // 		case 500:
-        // 			console.log(response.data);
-        // 		break;
-        // 	}
-        var _this = this;
-        // })
-        this.spendsService.deleteSpend(this.model.id)
-            .subscribe(function (data) {
-            _this.location.back();
         }, function (error) {
             console.log(error.message);
         });
@@ -120,6 +93,25 @@ var SpendComponent = (function () {
             category: null,
             categoryName: null
         };
+    };
+    // Private Handlers
+    SpendComponent.prototype.goBack = function () {
+        this.location.back();
+    };
+    SpendComponent.prototype.onDeleteSpend = function () {
+        this.editModeOnConfirm = true;
+    };
+    SpendComponent.prototype.onDeleteSpendCancel = function () {
+        this.editModeOnConfirm = false;
+    };
+    SpendComponent.prototype.onDeleteSpendConfirm = function () {
+        var _this = this;
+        this.spendsService.deleteSpend(this.model.id)
+            .subscribe(function (data) {
+            _this.location.back();
+        }, function (error) {
+            console.log(error.message);
+        });
     };
     SpendComponent.prototype.onSubmit = function () {
         var _this = this;

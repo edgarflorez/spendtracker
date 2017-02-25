@@ -48,8 +48,10 @@
 		- http://jasonwatmore.com/post/2016/09/29/angular-2-user-registration-and-login-example-tutorial
 		- https://medium.com/@blacksonic86/authentication-in-angular-2-958052c64492#.knegfliu1
 		- http://stackoverflow.com/questions/36364365/angular2-central-session-service
-*********************************************************************************************************************
 - Migrate Categories to the service new flow
+- Delete promise and mock references +  services folder
+*********************************************************************************************************************
+- Format _models, _helpers and guards
 - Alert Close from any place of the page, next click. THE ALERT SHOULD BE IMPROVED, IT DUPLICATES THE ELEMENTS, further memory leaks
 - Create app log
 	- Log all events like create date, edit, delete ETC

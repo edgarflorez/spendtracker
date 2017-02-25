@@ -1,4 +1,9 @@
 "use strict";
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10,40 +15,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
-var mock_categories_1 = require("../mock/mock.categories");
-var CategoriesService = (function () {
+var jwt_service_1 = require("./jwt.service");
+var CategoriesService = (function (_super) {
+    __extends(CategoriesService, _super);
+    // Constructor
     function CategoriesService(http) {
-        this.http = http;
+        var _this = _super.call(this) || this;
+        _this.http = http;
+        return _this;
     }
-    CategoriesService.prototype.getCategoryById = function (id) {
-        var category;
-        for (var i = 0; i < mock_categories_1.CATEGORIES.length; i++) {
-            if (mock_categories_1.CATEGORIES[i].id == id) {
-                category = mock_categories_1.CATEGORIES[i];
-            }
-        }
-        ;
-        return Promise.resolve(category.categoryName);
-    };
+    // Public Methods
     CategoriesService.prototype.getCategories = function () {
-        // return Promise.resolve( CATEGORIES );
         return this.http.get('/api/categories', this.jwt())
             .map(function (response) {
             console.log('categories.service :: getCategories ', response['_body']);
             return response['_body'];
         });
     };
-    // private helper methods
-    CategoriesService.prototype.jwt = function () {
-        // create authorization header with jwt token
-        var currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        if (currentUser && currentUser.token) {
-            var headers = new http_1.Headers({ 'Authorization': 'Bearer ' + currentUser.token });
-            return new http_1.RequestOptions({ headers: headers });
-        }
-    };
     return CategoriesService;
-}());
+}(jwt_service_1.JwtService));
 CategoriesService = __decorate([
     core_1.Injectable(),
     __metadata("design:paramtypes", [http_1.Http])

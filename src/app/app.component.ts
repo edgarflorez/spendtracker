@@ -28,5 +28,5 @@ import { BaseRequestOptions } 	from '@angular/http';
     	BaseRequestOptions,
 	]
 })
-// export class AppComponent  { appName = 'Spend Tracker'; }
-export class AppComponent  { appName = 'ANGULAR LAB'; }
+export class AppComponent  { appName = 'Spend Tracker'; }
+// export class AppComponent  { appName = 'ANGULAR LAB'; }

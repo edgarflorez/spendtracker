@@ -16,12 +16,12 @@ import { SpendModel } 				from './_models/spend-model';
 	templateUrl: 	'spend.component.html'
 })
 export class SpendComponent implements OnInit {
+	// Vars
 	dateString: string;
 	categories: SpendCategory[];
 	action: string;
 	editModeOn: boolean;
 	editModeOnConfirm: boolean;
-
 	model = {
 		id:<number> null,
 		date:<number> null,
@@ -30,7 +30,7 @@ export class SpendComponent implements OnInit {
 		category:<number> null,
 		categoryName:<string> null 
 	}
-
+	// Constructor
 	constructor(
 		private route: ActivatedRoute,
 		private location: Location,
@@ -38,15 +38,12 @@ export class SpendComponent implements OnInit {
 		private categoriesService: CategoriesService,
 		private spendsService: SpendsService
 	) {}
-
+	// ngOnInit
 	ngOnInit() {
 		// Check if is a new spend or and edition
-
 		this.route.params.subscribe((params: Params) => {
 			let userId = (params['idSpend']) ? params['idSpend'] : params['id'];
 			this.action = (params['idSpend']) ? 'edit' : 'new';
-			// console.log("A :", userId,this.action);
-
 			switch(this.action){
 				case 'new':
 					this.editModeOn 		= false;
@@ -70,9 +67,9 @@ export class SpendComponent implements OnInit {
 					this.route.params
 						.switchMap((params: Params) => this.spendsService.getSpendById( userId ))
 						.subscribe( response => {
-							this.editModeOn = true;
-							this.editModeOnConfirm = false;
-							this.model 		= response;
+							this.editModeOn 		= true;
+							this.editModeOnConfirm 	= false;
+							this.model 				= response;
 							this.getCategories();
 							this.datesService.getDateById( this.model.date )
 								.subscribe(
@@ -88,43 +85,12 @@ export class SpendComponent implements OnInit {
 			}
 		});
 	}
-	goBack(): void {
-		this.location.back();
-	}
+	// Private Functions
 	getCategories():void {
-		// this.categoriesService.getCategories().then( categories => this.categories = categories )
 		this.categoriesService.getCategories()
 			.subscribe(
 				data => {
 					this.categories = data
-				},
-				error => {
-					console.log( error.message );
-				}
-			)
-	}
-	onDeleteSpend(): void{
-		this.editModeOnConfirm = true;
-	}
-	onDeleteSpendCancel(): void{
-		this.editModeOnConfirm = false;
-	}
-	onDeleteSpendConfirm(): void{
-		// this.spendsService.deleteSpend(this.model.id).then( response => {
-		// 	switch(response.type){
-		// 		case 200:
-		// 			this.location.back();
-		// 		break;
-		// 		case 500:
-		// 			console.log(response.data);
-		// 		break;
-		// 	}
-
-		// })
-		this.spendsService.deleteSpend(this.model.id)
-			.subscribe(
-				data => {
-					this.location.back();
 				},
 				error => {
 					console.log( error.message );
@@ -141,8 +107,28 @@ export class SpendComponent implements OnInit {
 			categoryName: null
 		};
 	}
-	onSubmit():void{
-
+	// Private Handlers
+	goBack(): void {
+		this.location.back();
+	}
+	onDeleteSpend(): void{
+		this.editModeOnConfirm = true;
+	}
+	onDeleteSpendCancel(): void{
+		this.editModeOnConfirm = false;
+	}
+	onDeleteSpendConfirm(): void{
+		this.spendsService.deleteSpend(this.model.id)
+			.subscribe(
+				data => {
+					this.location.back();
+				},
+				error => {
+					console.log( error.message );
+				}
+			)
+	}
+	onSubmit(): void{
 		let spend:SpendModel = {
 			id: 			this.model.id,
 			date: 			this.model.date,
@@ -151,7 +137,6 @@ export class SpendComponent implements OnInit {
 			category: 		this.model.category,
 			categoryName: 	""
 		}
-
 		switch(this.action){
 			case 'new':
 				this.spendsService.addSpend(spend)

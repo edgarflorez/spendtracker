@@ -1,7 +1,3 @@
-// import 'rxjs/add/operator/switchMap';
-// import 'rxjs/add/operator/map';
-// import { ActivatedRoute, Params } 	from '@angular/router';
-// import { Location }               	from '@angular/common';
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -17,29 +13,24 @@ var router_1 = require("@angular/router");
 var app_auth_service_1 = require("./_services/app-auth.service");
 var app_alert_1 = require("./utils/app.alert");
 var AuthComponent = (function () {
-    // model = {
-    // 	redirect:<string> '',
-    // 	user:<string> '',
-    // 	password:<string> ''
-    // }
+    // Constructor
     function AuthComponent(route, router, appAuthService, appAlert) {
         this.route = route;
         this.router = router;
         this.appAuthService = appAuthService;
         this.appAlert = appAlert;
+        // Vars
         this.model = {};
         this.loading = false;
     }
+    // ngOnInit
     AuthComponent.prototype.ngOnInit = function () {
         // reset login status
         this.appAuthService.logout();
         // get return URL from route parameters or default to '/'
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-        // this.route.params.subscribe((params: Params) => {
-        // 	this.model.redirect = (params['urlRedirect']) ? params['urlRedirect'] : 'URL NOT VALID';
-        // 	console.log(this.model.redirect);
-        // });
     };
+    // Public Method
     AuthComponent.prototype.login = function () {
         var _this = this;
         this.loading = true;

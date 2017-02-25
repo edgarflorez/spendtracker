@@ -10,23 +10,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var AppAlert = (function () {
+    // Constructor
     function AppAlert() {
         this.initUI();
     }
+    // Public Methods
     AppAlert.prototype.alert = function (message) {
         var _this = this;
         this.textNode.textContent = message;
-        this.node.appendChild(this.textNode); // Append the text to <li>
+        this.node.appendChild(this.textNode);
         document.getElementsByTagName('body')[0].appendChild(this.node);
-        // console.log(document.getElementsByTagName('body')[0]);
-        // document.getElementById("myList").appendChild(node);     // Append <li> to <ul> with id="myList"
-        console.log(message);
         this.closeTimeout = setTimeout(function () {
             document.getElementsByTagName('body')[0].removeChild(_this.node);
             _this.node.removeChild(_this.textNode);
         }, 10000);
         this.initListeners();
     };
+    // Private Functions
     AppAlert.prototype.initUI = function () {
         this.textNode = document.createTextNode(''); // Create a text node
         this.closeNode = document.createTextNode('X');

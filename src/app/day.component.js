@@ -16,20 +16,16 @@ var common_1 = require("@angular/common");
 var dates_service_1 = require("./_services/dates.service");
 var spends_service_1 = require("./_services/spends.service");
 var DayComponent = (function () {
+    // Constructor
     function DayComponent(datesService, spendsService, route, location) {
         this.datesService = datesService;
         this.spendsService = spendsService;
         this.route = route;
         this.location = location;
     }
+    // ngOnInit
     DayComponent.prototype.ngOnInit = function () {
-        // Online example 
-        // this.route.params
-        // 	.switchMap((params: Params) => this.heroService.getHero(+params['id']))
-        // 	.subscribe(hero => this.hero = hero);
         var _this = this;
-        // this.route.params
-        // 	.subscribe((params: Params) => this.id =  +params['id'] );
         this.editModeOn = false;
         this.route.params
             .switchMap(function (params) { return _this.datesService.getDateById(+params['id']); })
@@ -41,12 +37,9 @@ var DayComponent = (function () {
             console.log(error.message);
         });
     };
-    DayComponent.prototype.goBack = function () {
-        this.location.back();
-    };
+    // Private Functions
     DayComponent.prototype.getSpends = function (dateId) {
         var _this = this;
-        // this.spendsService.getSpendsByDate( dateId ).then( spends => this.spends = spends ); 
         this.spendsService.getSpendsByDate(dateId)
             .subscribe(function (data) {
             _this.spends = data;
@@ -54,21 +47,11 @@ var DayComponent = (function () {
             console.log(error.message);
         });
     };
-    // getCategoryName(categoryId: number): void{
-    // 	this.categoriesService.getCategoryById( categoryId ).then( category => { return category.categoryName } );
-    // }
-    DayComponent.prototype.getCategoryName = function (categoryId) {
-        // this.categoriesService.getCategoryById( categoryId ).then( category =>  {
-        // return category;
-        // });
-        // this.categoriesService.getCategoryById( categoryId ).then( category => cat =  returnData(category.categoryName) ); 
-        // function returnData (name): string {
-        // 	return name;
-        // }
-        // return "CAT";
+    // Private Handlers
+    DayComponent.prototype.goBack = function () {
+        this.location.back();
     };
     DayComponent.prototype.onChangeEditMode = function () {
-        console.log("MODE");
         this.editModeOn = !this.editModeOn;
     };
     return DayComponent;

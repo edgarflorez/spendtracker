@@ -10,35 +10,26 @@ import { SpendModel } 				from './_models/spend-model';
 import { SpendCategory } 			from './_models/spend-category';
 
 @Component({
-	moduleId: module.id,
+	moduleId: 		module.id,
 	selector: 		'day',
 	templateUrl: 	'day.component.html'
 })
 export class DayComponent implements OnInit {
-	id:number;
-	date:string;
+	// vars
+	id: number;
+	date: string;
 	spends: SpendModel[];
 	editModeOn: boolean;
-
+	// Constructor
 	constructor(
 		private datesService: DatesService,
 		private spendsService: SpendsService,
 		private route: ActivatedRoute,
 		private location: Location
 	) {}
-
+	// ngOnInit
 	ngOnInit() {
-		
-		// Online example 
-		// this.route.params
-		// 	.switchMap((params: Params) => this.heroService.getHero(+params['id']))
-		// 	.subscribe(hero => this.hero = hero);
-
-		// this.route.params
-		// 	.subscribe((params: Params) => this.id =  +params['id'] );
-
 		this.editModeOn = false;
-
 		this.route.params
 			.switchMap( (params: Params) => this.datesService.getDateById(+params['id']) )
 			.subscribe(
@@ -52,11 +43,8 @@ export class DayComponent implements OnInit {
 				}
 			);
 	}
-	goBack(): void {
-		this.location.back();
-	}
+	// Private Functions
 	getSpends(dateId: number): void{
-		// this.spendsService.getSpendsByDate( dateId ).then( spends => this.spends = spends ); 
 		this.spendsService.getSpendsByDate( dateId )
 			.subscribe( 
 				data => {
@@ -67,24 +55,11 @@ export class DayComponent implements OnInit {
 				}
 			); 
 	}
-	// getCategoryName(categoryId: number): void{
-	// 	this.categoriesService.getCategoryById( categoryId ).then( category => { return category.categoryName } );
-	// }
-	getCategoryName(categoryId: number): void  {
-		// this.categoriesService.getCategoryById( categoryId ).then( category =>  {
-			// return category;
-		// });
-
-
-
-		// this.categoriesService.getCategoryById( categoryId ).then( category => cat =  returnData(category.categoryName) ); 
-		// function returnData (name): string {
-		// 	return name;
-		// }
-		// return "CAT";
+	// Private Handlers
+	goBack(): void {
+		this.location.back();
 	}
 	onChangeEditMode():void {
-		console.log("MODE");
 		this.editModeOn = !this.editModeOn;
 	}
 }

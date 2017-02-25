@@ -13,12 +13,12 @@ var dates_service_1 = require("./_services/dates.service");
 var user_service_1 = require("./_services/user.service");
 var app_alert_1 = require("./utils/app.alert");
 var CalendarComponent = (function () {
-    // constructor
+    // Constructor
     function CalendarComponent(datesService, appAlert, userService) {
         this.datesService = datesService;
         this.appAlert = appAlert;
         this.userService = userService;
-        // vars
+        // Vars
         this.addDate = false;
         this.newDateFormatted = '';
         this.newDateJSDate = '';
@@ -34,10 +34,14 @@ var CalendarComponent = (function () {
             selectionTxtFontSize: '12px'
         };
     }
-    // methods
+    // ngOnInit
+    CalendarComponent.prototype.ngOnInit = function () {
+        this.getDates();
+        console.log("Calendar Init");
+    };
+    // Private Functions
     CalendarComponent.prototype.getDates = function () {
         var _this = this;
-        // this.datesService.getDates().then( dates => {this.dates = dates; console.log(this.dates);})
         this.datesService.getDates(this.userService.getCurrentUserId())
             .subscribe(function (data) {
             _this.dates = data;
@@ -45,13 +49,8 @@ var CalendarComponent = (function () {
             console.log(error.message);
         });
     };
-    CalendarComponent.prototype.ngOnInit = function () {
-        this.getDates();
-        console.log("Calendar Init");
-    };
+    // Private Handlers
     CalendarComponent.prototype.onDateChanged = function (event) {
-        // console.log('onDateChanged(): ', event.date, ' - jsdate: ', new Date(event.jsdate).toLocaleDateString(), ' - formatted: ', event.formatted, ' - epoc timestamp: ', event.epoc);
-        console.dir(event);
         this.newDateFormatted = event.formatted;
         this.newDateJSDate = event.jsdate;
     };
@@ -70,29 +69,13 @@ var CalendarComponent = (function () {
         event.stopPropagation();
         this.datesService.addDate({ 'id': 0, 'userId': this.userService.getCurrentUserId(), 'date': this.newDateJSDate })
             .subscribe(function (data) {
-            console.log("Calendar Component :: onSubmitAddNewDate ", data);
             _this.addDate = false;
             _this.getDates();
         }, function (error) {
             console.log(error);
             _this.addDate = false;
             _this.appAlert.alert(error);
-            // console.log("ERROR :: ", response.data);
         });
-        // this.datesService.addDate(this.newDateJSDate).then( response => {
-        // 	switch(response.type){
-        // 		case 200:
-        // 			this.addDate = false;
-        // 			this.dates = response.data;
-        // 			console.log(this.dates);
-        // 		break;
-        // 		case 500:
-        // 			this.addDate = false;
-        // 			this.appAlert.alert("ERROR:: "+ response.data);
-        // 			// console.log("ERROR :: ", response.data);
-        // 		break;
-        // 	}
-        // });
     };
     return CalendarComponent;
 }());

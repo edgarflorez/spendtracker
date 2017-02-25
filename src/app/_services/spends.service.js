@@ -1,4 +1,9 @@
 "use strict";
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10,38 +15,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
-var mock_spends_1 = require("../mock/mock.spends");
+var jwt_service_1 = require("./jwt.service");
 var categories_service_1 = require("./categories.service");
-var SpendsService = (function () {
+var SpendsService = (function (_super) {
+    __extends(SpendsService, _super);
+    // Constructor
     function SpendsService(categoriesService, http) {
-        this.categoriesService = categoriesService;
-        this.http = http;
+        var _this = _super.call(this) || this;
+        _this.categoriesService = categoriesService;
+        _this.http = http;
+        return _this;
     }
-    // getSpendsByDate_old(id: number): Promise<SpendModel[]>  {
-    // 	let filterSpends: SpendModel[] = [];
-    // 	for (let i = 0; i < SPENDS.length; i++) {
-    // 		if(SPENDS[i].date == id){
-    // 			filterSpends.push(SPENDS[i]);
-    // 		}
-    // 	};
-    // 	return Promise.resolve( filterSpends );
-    // }
+    // Public Methods
     SpendsService.prototype.getSpendsByDate = function (id) {
         return this.http.get('/api/spends/getSpendsByDate/' + id, this.jwt())
             .map(function (response) {
             console.log('spends.service :: getSpendsByDate ', response['_body']);
             return response['_body'];
         });
-    };
-    SpendsService.prototype.getSpendById_old = function (id) {
-        var filterSpend;
-        for (var i = 0; i < mock_spends_1.SPENDS.length; i++) {
-            if (mock_spends_1.SPENDS[i].id == id) {
-                filterSpend = JSON.parse(JSON.stringify(mock_spends_1.SPENDS[i]));
-            }
-        }
-        ;
-        return Promise.resolve(filterSpend);
     };
     SpendsService.prototype.getSpendById = function (id) {
         return this.http.get('/api/spends/getSpendById/' + id, this.jwt())
@@ -50,37 +41,12 @@ var SpendsService = (function () {
             return response['_body'];
         });
     };
-    // addSpend_old(spend:SpendModel): Promise<any> {
-    // 	return this.categoriesService.getCategoryById( spend.category ).then( categoryName => {
-    // 		spend.id = SPENDS.length + 1;
-    // 		spend.categoryName = categoryName;
-    // 		SPENDS.push(spend);
-    // 		let response: Object = {}
-    // 		response['type'] = 200;
-    // 		response['data'] = "Spend created sucessfully";
-    // 		return Promise.resolve( response );	
-    // 	})
-    // }
     SpendsService.prototype.addSpend = function (spend) {
         return this.http.post('/api/spends', spend, this.jwt())
             .map(function (response) {
             console.log('spends.service :: addSpend ', response['_body']);
             return response;
         });
-    };
-    SpendsService.prototype.dropSpend_old = function (spendId) {
-        console.log("A", mock_spends_1.SPENDS);
-        for (var i = mock_spends_1.SPENDS.length - 1; i >= 0; i--) {
-            if (spendId == mock_spends_1.SPENDS[i].id) {
-                mock_spends_1.SPENDS.splice(i, 1);
-            }
-        }
-        ;
-        console.log("B", mock_spends_1.SPENDS);
-        var response = {};
-        response['type'] = 200;
-        response['data'] = "Spend created sucessfully";
-        return Promise.resolve(response);
     };
     SpendsService.prototype.deleteSpend = function (spendId) {
         return this.http.delete('/api/spends/' + spendId, this.jwt())
@@ -89,20 +55,6 @@ var SpendsService = (function () {
             return response;
         });
     };
-    // updateSpend_old(spend:SpendModel): Promise<any> {
-    // 	return this.categoriesService.getCategoryById( spend.category ).then( categoryName => {
-    // 		spend.categoryName = categoryName;
-    // 		for (let i = 0; i < SPENDS.length; i++) {
-    // 			if( spend.id ==  SPENDS[i].id){
-    // 				SPENDS[i] = spend
-    // 			}
-    // 		};
-    // 		let response: Object = {}
-    // 		response['type'] = 200;
-    // 		response['data'] = "Spend created sucessfully";
-    // 		return Promise.resolve( response );	
-    // 	})
-    // }
     SpendsService.prototype.updateSpend = function (spend) {
         return this.http.post('/api/spends/update', spend, this.jwt())
             .map(function (response) {
@@ -110,17 +62,8 @@ var SpendsService = (function () {
             return response;
         });
     };
-    // private helper methods
-    SpendsService.prototype.jwt = function () {
-        // create authorization header with jwt token
-        var currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        if (currentUser && currentUser.token) {
-            var headers = new http_1.Headers({ 'Authorization': 'Bearer ' + currentUser.token });
-            return new http_1.RequestOptions({ headers: headers });
-        }
-    };
     return SpendsService;
-}());
+}(jwt_service_1.JwtService));
 SpendsService = __decorate([
     core_1.Injectable(),
     __metadata("design:paramtypes", [categories_service_1.CategoriesService,

@@ -1,5 +1,9 @@
-// User contains a standard set of CRUD methods for managing users, it contains a jwt() method that's used to add the JWT token from local storage to the Authorization header each http request
 "use strict";
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -9,12 +13,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+// User contains a standard set of CRUD methods for managing users, it contains a jwt() method that's used to add the JWT token from local storage to the Authorization header each http request
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
-var UserService = (function () {
+var jwt_service_1 = require("./jwt.service");
+var UserService = (function (_super) {
+    __extends(UserService, _super);
+    // Constructor
     function UserService(http) {
-        this.http = http;
+        var _this = _super.call(this) || this;
+        _this.http = http;
+        return _this;
     }
+    // Public Methods
     UserService.prototype.getAll = function () {
         return this.http.get('/api/users', this.jwt()).map(function (response) { return response.json(); });
     };
@@ -37,17 +48,8 @@ var UserService = (function () {
     UserService.prototype.delete = function (id) {
         return this.http.delete('/api/users/' + id, this.jwt()).map(function (response) { return response.json(); });
     };
-    // private helper methods
-    UserService.prototype.jwt = function () {
-        // create authorization header with jwt token
-        var currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        if (currentUser && currentUser.token) {
-            var headers = new http_1.Headers({ 'Authorization': 'Bearer ' + currentUser.token });
-            return new http_1.RequestOptions({ headers: headers });
-        }
-    };
     return UserService;
-}());
+}(jwt_service_1.JwtService));
 UserService = __decorate([
     core_1.Injectable(),
     __metadata("design:paramtypes", [http_1.Http])

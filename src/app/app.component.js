@@ -17,7 +17,7 @@ var testing_1 = require("@angular/http/testing");
 var http_1 = require("@angular/http");
 var AppComponent = (function () {
     function AppComponent() {
-        this.appName = 'ANGULAR LAB';
+        this.appName = 'Spend Tracker';
     }
     return AppComponent;
 }());
@@ -40,4 +40,5 @@ AppComponent = __decorate([
     })
 ], AppComponent);
 exports.AppComponent = AppComponent;
+// export class AppComponent  { appName = 'ANGULAR LAB'; }
 //# sourceMappingURL=app.component.js.map

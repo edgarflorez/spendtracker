@@ -12,9 +12,11 @@ var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 require("rxjs/add/operator/map");
 var AppAuthService = (function () {
+    // Constructor
     function AppAuthService(http) {
         this.http = http;
     }
+    // Public Methods
     AppAuthService.prototype.login = function (username, password) {
         return this.http.post('/api/authenticate', JSON.stringify({ username: username, password: password }))
             .map(function (response) {
