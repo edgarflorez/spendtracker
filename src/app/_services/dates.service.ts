@@ -9,7 +9,7 @@ import { LogService } 	from './log.service';
 export class DatesService extends JwtService {
 	// Constructor
 	constructor(
-		private http:Http
+		private http:Http,
 		private log:LogService
 	) {super();}
 	// Private Methods

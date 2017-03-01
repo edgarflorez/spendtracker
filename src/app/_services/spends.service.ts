@@ -11,7 +11,7 @@ export class SpendsService extends JwtService {
 	// Constructor
 	constructor(
 		private categoriesService: CategoriesService,
-		private http:Http
+		private http:Http,
 		private log:LogService
 	){super();}
 	// Public Methods
@@ -41,7 +41,7 @@ export class SpendsService extends JwtService {
 		return this.http.delete('/api/spends/'+ spendId, this.jwt())
 			.map( (response:Response) =>{
 				console.log('spends.service :: deleteSpend ', response['_body']);
-				this.log.record({'type': this.log.SPEND_DELETE, 'data':{'user':JSON.parse( localStorage.getItem('currentUser') ), 'spendId':spendId, 'spendData': response['_body'] 'date': new Date() }} );
+				this.log.record({'type': this.log.SPEND_DELETE, 'data':{'user':JSON.parse( localStorage.getItem('currentUser') ), 'spendId':spendId, 'spendData': response['_body'], 'date': new Date() }} );
 				return response;
 			})
 	}
