@@ -12,6 +12,9 @@ export let fakeBackendProvider = {
         if(!localStorage.getItem('categories')){
             localStorage.setItem('categories', '[{ "id": "1", "categoryName": "Alimentacion"},{ "id": "2", "categoryName": "Creditos"},{ "id": "3", "categoryName": "Otros Gastos"},{ "id": "4", "categoryName": "Seguro Vida"},{ "id": "5", "categoryName": "Servicios"},{ "id": "6", "categoryName": "Trasporte"},{ "id": "7", "categoryName": "Vivienda"}]')
         }
+        if(!localStorage.getItem('log')){
+            localStorage.setItem('log', '[]')
+        }
 
 
         // array in local storage for registered users
@@ -19,6 +22,7 @@ export let fakeBackendProvider = {
         let dates: any[] = JSON.parse(localStorage.getItem('dates')) || [];
         let spends: any[] = JSON.parse(localStorage.getItem('spends')) || [];
         let categories: any[] = JSON.parse(localStorage.getItem('categories')) || [];
+        let log: any[] = JSON.parse(localStorage.getItem('log')) || [];
 
         // configure fake backend
         backend.connections.subscribe((connection: MockConnection) => {
@@ -333,6 +337,22 @@ export let fakeBackendProvider = {
                         // return 401 not authorised if token is null or invalid
                         connection.mockRespond(new Response(new ResponseOptions({ status: 401 })));
                     }
+                    return;
+                }
+
+                // log
+                if (connection.request.url.endsWith('/api/log') && connection.request.method === RequestMethod.Post) {
+                    // get the log data object from post body
+                    let logData = JSON.parse(connection.request.getBody());
+
+                    // save log data
+
+                    log.push(logData);
+                    localStorage.setItem('log', JSON.stringify(log));
+
+                    // respond 200 OK
+                    connection.mockRespond(new Response(new ResponseOptions({ status: 200, body: logData })));
+
                     return;
                 }
 

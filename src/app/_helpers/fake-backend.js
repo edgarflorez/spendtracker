@@ -12,11 +12,15 @@ exports.fakeBackendProvider = {
         if (!localStorage.getItem('categories')) {
             localStorage.setItem('categories', '[{ "id": "1", "categoryName": "Alimentacion"},{ "id": "2", "categoryName": "Creditos"},{ "id": "3", "categoryName": "Otros Gastos"},{ "id": "4", "categoryName": "Seguro Vida"},{ "id": "5", "categoryName": "Servicios"},{ "id": "6", "categoryName": "Trasporte"},{ "id": "7", "categoryName": "Vivienda"}]');
         }
+        if (!localStorage.getItem('log')) {
+            localStorage.setItem('log', '[]');
+        }
         // array in local storage for registered users
         var users = JSON.parse(localStorage.getItem('users')) || [];
         var dates = JSON.parse(localStorage.getItem('dates')) || [];
         var spends = JSON.parse(localStorage.getItem('spends')) || [];
         var categories = JSON.parse(localStorage.getItem('categories')) || [];
+        var log = JSON.parse(localStorage.getItem('log')) || [];
         // configure fake backend
         backend.connections.subscribe(function (connection) {
             // wrap in timeout to simulate server api call
@@ -288,6 +292,17 @@ exports.fakeBackendProvider = {
                         // return 401 not authorised if token is null or invalid
                         connection.mockRespond(new http_1.Response(new http_1.ResponseOptions({ status: 401 })));
                     }
+                    return;
+                }
+                // log
+                if (connection.request.url.endsWith('/api/log') && connection.request.method === http_1.RequestMethod.Post) {
+                    // get the log data object from post body
+                    var logData = JSON.parse(connection.request.getBody());
+                    // save log data
+                    log.push(logData);
+                    localStorage.setItem('log', JSON.stringify(log));
+                    // respond 200 OK
+                    connection.mockRespond(new http_1.Response(new http_1.ResponseOptions({ status: 200, body: logData })));
                     return;
                 }
                 // pass through any requests not handled above
