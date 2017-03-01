@@ -249,16 +249,18 @@ exports.fakeBackendProvider = {
                     }
                     return;
                 }
-                // spend 
+                // spend delete
                 if (connection.request.url.match(/\/api\/spends\/\d+$/) && connection.request.method === http_1.RequestMethod.Delete) {
                     // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
                     if (connection.request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                         // find user by id in users array
                         var urlParts = connection.request.url.split('/');
                         var id = parseInt(urlParts[urlParts.length - 1]);
+                        var spendRemoved = void 0;
                         for (var i_2 = 0; i_2 < spends.length; i_2++) {
                             var spend = spends[i_2];
                             if (spend.id === id) {
+                                spendRemoved = spend;
                                 // delete spend
                                 spends.splice(i_2, 1);
                                 localStorage.setItem('spends', JSON.stringify(spends));
@@ -267,7 +269,7 @@ exports.fakeBackendProvider = {
                         }
                         console.log('fake-backend  :: delete : service api/spends/' + id);
                         // respond 200 OK
-                        connection.mockRespond(new http_1.Response(new http_1.ResponseOptions({ status: 200 })));
+                        connection.mockRespond(new http_1.Response(new http_1.ResponseOptions({ status: 200, body: spendRemoved })));
                     }
                     else {
                         // return 401 not authorised if token is null or invalid

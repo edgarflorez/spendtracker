@@ -3,12 +3,14 @@ import { Http, Headers, RequestOptions, Response } from '@angular/http';
 
 import { JwtService } 	from './jwt.service'
 import { SpendDate } 	from '../_models/spend-date'
+import { LogService } 	from './log.service';
 
 @Injectable()
 export class DatesService extends JwtService {
 	// Constructor
 	constructor(
 		private http:Http
+		private log:LogService
 	) {super();}
 	// Private Methods
 	getDates(userId: number){
@@ -21,6 +23,7 @@ export class DatesService extends JwtService {
 		return this.http.post('/api/dates', newDate, this.jwt())
 			.map( (response: Response) => {
 				console.log("dates.service :: addDate ", response);
+				this.log.record({'type': this.log.DATE_CREATE, 'data':{'user':JSON.parse( localStorage.getItem('currentUser') ), 'newDate':newDate, 'date': new Date() }} );
 				return response;
 			});
 	}

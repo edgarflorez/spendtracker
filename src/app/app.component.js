@@ -12,6 +12,7 @@ var dates_service_1 = require("./_services/dates.service");
 var spends_service_1 = require("./_services/spends.service");
 var categories_service_1 = require("./_services/categories.service");
 var app_auth_service_1 = require("./_services/app-auth.service");
+var log_service_1 = require("./_services/log.service");
 var index_1 = require("./_helpers/index");
 var testing_1 = require("@angular/http/testing");
 var http_1 = require("@angular/http");
@@ -33,6 +34,7 @@ AppComponent = __decorate([
             spends_service_1.SpendsService,
             categories_service_1.CategoriesService,
             app_auth_service_1.AppAuthService,
+            log_service_1.LogService,
             index_1.fakeBackendProvider,
             testing_1.MockBackend,
             http_1.BaseRequestOptions,

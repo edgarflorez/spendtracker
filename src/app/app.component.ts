@@ -6,6 +6,7 @@ import { DatesService } 		from './_services/dates.service';
 import { SpendsService }		from './_services/spends.service'
 import { CategoriesService }	from './_services/categories.service';
 import { AppAuthService }		from './_services/app-auth.service';
+import { LogService }		from './_services/log.service';
 
 import { fakeBackendProvider } 	from './_helpers/index';
 import { MockBackend, MockConnection } from '@angular/http/testing';
@@ -22,6 +23,7 @@ import { BaseRequestOptions } 	from '@angular/http';
 		SpendsService,
 		CategoriesService,
 		AppAuthService,
+		LogService,
 
 		fakeBackendProvider,
 		MockBackend,

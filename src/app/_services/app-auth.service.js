@@ -11,13 +11,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 require("rxjs/add/operator/map");
+var log_service_1 = require("./log.service");
 var AppAuthService = (function () {
     // Constructor
-    function AppAuthService(http) {
+    function AppAuthService(http, log) {
         this.http = http;
+        this.log = log;
     }
     // Public Methods
     AppAuthService.prototype.login = function (username, password) {
+        var _this = this;
         return this.http.post('/api/authenticate', JSON.stringify({ username: username, password: password }))
             .map(function (response) {
             // login sussessful if there's a jwt token in response
@@ -26,9 +29,13 @@ var AppAuthService = (function () {
                 // store user details and jwt token in local storage to keep the user logged in between page refreshes
                 localStorage.setItem('currentUser', JSON.stringify(user));
             }
+            _this.log.record({ 'type': _this.log.LOGIN, 'data': { 'user': JSON.parse(localStorage.getItem('currentUser')), 'date': new Date() } });
         });
     };
     AppAuthService.prototype.logout = function () {
+        if (JSON.parse(localStorage.getItem('currentUser'))) {
+            this.log.record({ 'type': this.log.LOGOUT, 'data': { 'user': JSON.parse(localStorage.getItem('currentUser')), 'date': new Date() } });
+        }
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
     };
@@ -36,7 +43,8 @@ var AppAuthService = (function () {
 }());
 AppAuthService = __decorate([
     core_1.Injectable(),
-    __metadata("design:paramtypes", [http_1.Http])
+    __metadata("design:paramtypes", [http_1.Http,
+        log_service_1.LogService])
 ], AppAuthService);
 exports.AppAuthService = AppAuthService;
 //# sourceMappingURL=app-auth.service.js.map

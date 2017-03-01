@@ -17,13 +17,15 @@ var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 var jwt_service_1 = require("./jwt.service");
 var categories_service_1 = require("./categories.service");
+var log_service_1 = require("./log.service");
 var SpendsService = (function (_super) {
     __extends(SpendsService, _super);
     // Constructor
-    function SpendsService(categoriesService, http) {
+    function SpendsService(categoriesService, http, log) {
         var _this = _super.call(this) || this;
         _this.categoriesService = categoriesService;
         _this.http = http;
+        _this.log = log;
         return _this;
     }
     // Public Methods
@@ -42,23 +44,29 @@ var SpendsService = (function (_super) {
         });
     };
     SpendsService.prototype.addSpend = function (spend) {
+        var _this = this;
         return this.http.post('/api/spends', spend, this.jwt())
             .map(function (response) {
             console.log('spends.service :: addSpend ', response['_body']);
+            _this.log.record({ 'type': _this.log.SPEND_CREATE, 'data': { 'user': JSON.parse(localStorage.getItem('currentUser')), 'spend': spend, 'date': new Date() } });
             return response;
         });
     };
     SpendsService.prototype.deleteSpend = function (spendId) {
+        var _this = this;
         return this.http.delete('/api/spends/' + spendId, this.jwt())
             .map(function (response) {
             console.log('spends.service :: deleteSpend ', response['_body']);
+            _this.log.record({ 'type': _this.log.SPEND_DELETE, 'data': { 'user': JSON.parse(localStorage.getItem('currentUser')), 'spendId': spendId, 'spendData': response['_body'], 'date': new Date() } });
             return response;
         });
     };
     SpendsService.prototype.updateSpend = function (spend) {
+        var _this = this;
         return this.http.post('/api/spends/update', spend, this.jwt())
             .map(function (response) {
             console.log('spends.service :: updateSpend ', response['_body']);
+            _this.log.record({ 'type': _this.log.SPEND_UPDATE, 'data': { 'user': JSON.parse(localStorage.getItem('currentUser')), 'spend': spend, 'date': new Date() } });
             return response;
         });
     };
@@ -67,7 +75,8 @@ var SpendsService = (function (_super) {
 SpendsService = __decorate([
     core_1.Injectable(),
     __metadata("design:paramtypes", [categories_service_1.CategoriesService,
-        http_1.Http])
+        http_1.Http,
+        log_service_1.LogService])
 ], SpendsService);
 exports.SpendsService = SpendsService;
 //# sourceMappingURL=spends.service.js.map

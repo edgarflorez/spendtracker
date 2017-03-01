@@ -16,12 +16,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 var jwt_service_1 = require("./jwt.service");
+var log_service_1 = require("./log.service");
 var DatesService = (function (_super) {
     __extends(DatesService, _super);
     // Constructor
-    function DatesService(http) {
+    function DatesService(http, log) {
         var _this = _super.call(this) || this;
         _this.http = http;
+        _this.log = log;
         return _this;
     }
     // Private Methods
@@ -32,9 +34,11 @@ var DatesService = (function (_super) {
         });
     };
     DatesService.prototype.addDate = function (newDate) {
+        var _this = this;
         return this.http.post('/api/dates', newDate, this.jwt())
             .map(function (response) {
             console.log("dates.service :: addDate ", response);
+            _this.log.record({ 'type': _this.log.DATE_CREATE, 'data': { 'user': JSON.parse(localStorage.getItem('currentUser')), 'newDate': newDate, 'date': new Date() } });
             return response;
         });
     };
@@ -51,7 +55,8 @@ var DatesService = (function (_super) {
 }(jwt_service_1.JwtService));
 DatesService = __decorate([
     core_1.Injectable(),
-    __metadata("design:paramtypes", [http_1.Http])
+    __metadata("design:paramtypes", [http_1.Http,
+        log_service_1.LogService])
 ], DatesService);
 exports.DatesService = DatesService;
 //# sourceMappingURL=dates.service.js.map
