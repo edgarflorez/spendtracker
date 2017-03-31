@@ -21,7 +21,11 @@ var AppAuthService = (function () {
     // Public Methods
     AppAuthService.prototype.login = function (username, password) {
         var _this = this;
-        return this.http.post('/api/authenticate', JSON.stringify({ username: username, password: password }))
+        // return this.http.post('/api/authenticate', JSON.stringify({ username: username, password: password}))
+        var headers = new http_1.Headers({ 'dataType': 'jsonp' });
+        var options = new http_1.RequestOptions({ headers: headers });
+        // return this.http.post('http://www.edgarflorez.com/spendTracker/service/test.php?password=' + password + '&username=' + username , JSON.stringify({ username: username, password: password}), options  ) 
+        return this.http.post('http://localhost:8888/spendTrackerService/api/authenticate/?password=' + password + '&username=' + username, JSON.stringify({ username: username, password: password }), options)
             .map(function (response) {
             // login sussessful if there's a jwt token in response
             var user = response.json();

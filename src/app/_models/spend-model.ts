@@ -1,8 +1,8 @@
 export class SpendModel{
 	id: 			number;
-	date: 			number;
 	ammount: 		number;
-	description: 	string;
 	category: 		number;
 	categoryName: 	string;
+	date: 			number;
+	description: 	string;
 }

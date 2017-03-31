@@ -54,10 +54,23 @@
 ****** [DONE]problemas al integrar los modulos app component :: fakeBackendService
 ***** Angular 2 Login Component
 http://jasonwatmore.com/post/2016/09/29/angular-2-user-registration-and-login-example-tutorial
-*********************************************************************************************************************
 - Create app log
 	- Log all events like create date, edit, delete ETC
+*********************************************************************************************************************
+- Data Base and connect application
+	- https://sourceforge.net/projects/phprestsql/?source=typ_redirect
+	- https://www.infoq.com/news/2014/09/MySQL-REST
+	- https://www.leaseweb.com/labs/2015/10/creating-a-simple-rest-api-in-php/
+	- http://coreymaynard.com/blog/creating-a-restful-api-with-php/
+	- https://www.sitepoint.com/best-practices-rest-api-scratch-introduction/
+	- https://docs.phalconphp.com/en/3.0.0/reference/tutorial-rest.html
+	- https://github.com/mevdschee/php-crud-api
+	- http://phprestsql.sourceforge.net/
+	- CORS https://www.html5rocks.com/en/tutorials/cors/
 - Alert Close from any place of the page, next click. THE ALERT SHOULD BE IMPROVED, IT DUPLICATES THE ELEMENTS, further memory leaks
+
+
+* Updating Data¶
 
 
 
