@@ -67,6 +67,7 @@ http://jasonwatmore.com/post/2016/09/29/angular-2-user-registration-and-login-ex
 	- https://github.com/mevdschee/php-crud-api
 	- http://phprestsql.sourceforge.net/
 	- CORS https://www.html5rocks.com/en/tutorials/cors/
+		- Funciona parcialmente desde authenticate.php hay que   seguir haciendo pruebas para que se pueda loguear desde alla.
 - Alert Close from any place of the page, next click. THE ALERT SHOULD BE IMPROVED, IT DUPLICATES THE ELEMENTS, further memory leaks
 
 
