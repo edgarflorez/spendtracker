@@ -18,9 +18,13 @@ export class AppAuthService {
 		let headers = new Headers({ 'dataType': 'jsonp'});
 
     	let options = new RequestOptions({ headers: headers }); 
+    	console.log("LOGIN START");
 		// return this.http.post('http://localhost:8888/spendTrackerService/api/authenticate/?password=' + password + '&username=' + username , JSON.stringify({ username: username, password: password}), options  ) 
-		return this.http.post('http://localhost:8888/spendTrackerService/service/authenticate.php?username='+ username +'&password='+password, JSON.stringify({ username: username, password: password}), options  );
-			.map((response: Response) => { 
+		return this.http.post('http://localhost:8888/spendTrackerService/api/authenticate?username='+ username +'&password='+password, JSON.stringify({ username: username, password: password}), options  )
+		// return this.http.post('http://edgarflorez.com/spendTracker/api/authenticate?username='+ username +'&password='+password, JSON.stringify({ username: username, password: password}), options  )
+			.map((response: Response) => {
+
+				console.log("HEY ",response);
 				// login sussessful if there's a jwt token in response
 				let user = response.json();
 				if(user && user.token){

@@ -24,9 +24,11 @@ var AppAuthService = (function () {
         // return this.http.post('/api/authenticate', JSON.stringify({ username: username, password: password}))
         var headers = new http_1.Headers({ 'dataType': 'jsonp' });
         var options = new http_1.RequestOptions({ headers: headers });
+        console.log("LOGIN START");
         // return this.http.post('http://localhost:8888/spendTrackerService/api/authenticate/?password=' + password + '&username=' + username , JSON.stringify({ username: username, password: password}), options  ) 
-        return this.http.post('http://localhost:8888/spendTrackerService/service/authenticate.php?username=' + username + '&password=' + password, JSON.stringify({ username: username, password: password }), options);
-        map(function (response) {
+        return this.http.post('http://localhost:8888/spendTrackerService/api/authenticate?username=' + username + '&password=' + password, JSON.stringify({ username: username, password: password }), options)
+            .map(function (response) {
+            console.log("HEY ", response);
             // login sussessful if there's a jwt token in response
             var user = response.json();
             if (user && user.token) {

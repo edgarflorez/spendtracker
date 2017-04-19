@@ -57,6 +57,9 @@ http://jasonwatmore.com/post/2016/09/29/angular-2-user-registration-and-login-ex
 - Create app log
 	- Log all events like create date, edit, delete ETC
 *********************************************************************************************************************
+- Deploy the DB on my server and make remote calls. Check if the XR error still appearing
+- CORS DISABLE http://stackoverflow.com/questions/3102819/disable-same-origin-policy-in-chrome
+	- $ open -a Google\ Chrome --args --disable-web-security --user-data-dir
 - Data Base and connect application
 	- https://sourceforge.net/projects/phprestsql/?source=typ_redirect
 	- https://www.infoq.com/news/2014/09/MySQL-REST
