@@ -24,14 +24,20 @@ var AppAuthService = (function () {
         // return this.http.post('/api/authenticate', JSON.stringify({ username: username, password: password}))
         var headers = new http_1.Headers({ 'dataType': 'jsonp' });
         var options = new http_1.RequestOptions({ headers: headers });
-        console.log("LOGIN START");
         // return this.http.post('http://localhost:8888/spendTrackerService/api/authenticate/?password=' + password + '&username=' + username , JSON.stringify({ username: username, password: password}), options  ) 
         return this.http.post('http://localhost:8888/spendTrackerService/api/authenticate?username=' + username + '&password=' + password, JSON.stringify({ username: username, password: password }), options)
             .map(function (response) {
-            console.log("HEY ", response);
             // login sussessful if there's a jwt token in response
-            var user = response.json();
-            if (user && user.token) {
+            // Translate the server side response into the app model structure
+            var user = {};
+            user['id'] = response.json().Id;
+            user['username'] = response.json().Username;
+            user['firstName'] = response.json().FirstName;
+            user['lastName'] = response.json().Lastname;
+            user['username'] = response.json().Username;
+            user['token'] = response.json().token;
+            // let user = response.json();
+            if (user && user['token']) {
                 // store user details and jwt token in local storage to keep the user logged in between page refreshes
                 localStorage.setItem('currentUser', JSON.stringify(user));
             }

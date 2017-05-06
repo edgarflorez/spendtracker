@@ -17,17 +17,23 @@ export class AppAuthService {
 		// return this.http.post('/api/authenticate', JSON.stringify({ username: username, password: password}))
 		let headers = new Headers({ 'dataType': 'jsonp'});
 
-    	let options = new RequestOptions({ headers: headers }); 
-    	console.log("LOGIN START");
+    	let options = new RequestOptions({ headers: headers });
 		// return this.http.post('http://localhost:8888/spendTrackerService/api/authenticate/?password=' + password + '&username=' + username , JSON.stringify({ username: username, password: password}), options  ) 
 		return this.http.post('http://localhost:8888/spendTrackerService/api/authenticate?username='+ username +'&password='+password, JSON.stringify({ username: username, password: password}), options  )
 		// return this.http.post('http://edgarflorez.com/spendTracker/api/authenticate?username='+ username +'&password='+password, JSON.stringify({ username: username, password: password}), options  )
 			.map((response: Response) => {
-
-				console.log("HEY ",response);
 				// login sussessful if there's a jwt token in response
-				let user = response.json();
-				if(user && user.token){
+				// Translate the server side response into the app model structure
+				let user 			= {};
+				user['id']			= response.json().Id;
+				user['username'] 	= response.json().Username;
+				user['firstName'] 	= response.json().FirstName;
+				user['lastName'] 	= response.json().Lastname;
+				user['username'] 	= response.json().Username;
+				user['token'] 		= response.json().token;
+
+				// let user = response.json();
+				if(user && user['token']){
 					// store user details and jwt token in local storage to keep the user logged in between page refreshes
 					localStorage.setItem('currentUser', JSON.stringify(user));
 				}

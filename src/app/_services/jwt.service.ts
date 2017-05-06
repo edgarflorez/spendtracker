@@ -9,4 +9,11 @@ export class JwtService {
 			return new RequestOptions({ headers: headers});
 		}
 	}
+	jwtString(){
+		// create authorization header with jwt token
+		let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+		if(currentUser && currentUser.token){
+			return 'Bearer '+ currentUser.token; 
+		}
+	}
 }

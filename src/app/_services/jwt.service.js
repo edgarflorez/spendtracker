@@ -11,6 +11,13 @@ var JwtService = (function () {
             return new http_1.RequestOptions({ headers: headers });
         }
     };
+    JwtService.prototype.jwtString = function () {
+        // create authorization header with jwt token
+        var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        if (currentUser && currentUser.token) {
+            return 'Bearer ' + currentUser.token;
+        }
+    };
     return JwtService;
 }());
 exports.JwtService = JwtService;

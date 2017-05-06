@@ -28,14 +28,18 @@ var DatesService = (function (_super) {
     }
     // Private Methods
     DatesService.prototype.getDates = function (userId) {
-        return this.http.get('/api/dates/getDates/' + userId, this.jwt())
+        // return this.http.get('/api/dates/getDates/' + userId, this.jwt())
+        return this.http.get('http://localhost:8888/spendTrackerService/api/getDates?id=' + userId + '&Authorization=' + this.jwtString())
             .map(function (response) {
             return response['_body'];
         });
     };
+    // addDate(newDate:SpendDate){
     DatesService.prototype.addDate = function (newDate) {
         var _this = this;
-        return this.http.post('/api/dates', newDate, this.jwt())
+        // return this.http.post('/api/dates', newDate, this.jwt())
+        // return this.http.post('http://localhost:8888/spendTrackerService/api/addDate?date=myDateString&userId=' + newDate["userId"] + '&Authorization=' + this.jwtString(), newDate, this.jwt() )
+        return this.http.post('http://localhost:8888/spendTrackerService/api/addDate?date=' + newDate["date"] + '&userId=' + newDate["userId"] + '&Authorization=' + this.jwtString(), newDate, this.jwt())
             .map(function (response) {
             console.log("dates.service :: addDate ", response);
             _this.log.record({ 'type': _this.log.DATE_CREATE, 'data': { 'user': JSON.parse(localStorage.getItem('currentUser')), 'newDate': newDate, 'date': new Date() } });

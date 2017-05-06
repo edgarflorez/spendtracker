@@ -56,7 +56,13 @@
 http://jasonwatmore.com/post/2016/09/29/angular-2-user-registration-and-login-example-tutorial
 - Create app log
 	- Log all events like create date, edit, delete ETC
+- http://angularcode.com/demo-of-a-simple-crud-restful-php-service-used-with-angularjs-and-mysql/
+- SAVE DATES via PHP in the DB
+- AddDate via API  service
 *********************************************************************************************************************
+- Check the flow of create and return a date
+- Move API logic to mysqli and test the Login
+- The services are called but most of the data is exposed and could raise a security issue
 - Deploy the DB on my server and make remote calls. Check if the XR error still appearing
 - CORS DISABLE http://stackoverflow.com/questions/3102819/disable-same-origin-policy-in-chrome
 	- $ open -a Google\ Chrome --args --disable-web-security --user-data-dir
