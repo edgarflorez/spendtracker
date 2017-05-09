@@ -31,7 +31,17 @@ var DatesService = (function (_super) {
         // return this.http.get('/api/dates/getDates/' + userId, this.jwt())
         return this.http.get('http://localhost:8888/spendTrackerService/api/getDates?id=' + userId + '&Authorization=' + this.jwtString())
             .map(function (response) {
-            return response['_body'];
+            // Translate the server side response into app model structure
+            var responseParsed = [];
+            for (var _i = 0, _a = response.json(); _i < _a.length; _i++) {
+                var entry = _a[_i];
+                var tempArray = {};
+                tempArray['id'] = entry.Id;
+                tempArray['userId'] = entry.UserId;
+                tempArray['date'] = entry.Date;
+                responseParsed.push(tempArray);
+            }
+            return responseParsed;
         });
     };
     // addDate(newDate:SpendDate){

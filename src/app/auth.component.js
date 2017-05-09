@@ -38,8 +38,9 @@ var AuthComponent = (function () {
             .subscribe(function (data) {
             _this.router.navigate([_this.returnUrl]);
         }, function (error) {
-            _this.appAlert.alert(error.message);
+            console.dir(error);
             _this.loading = false;
+            _this.appAlert.alert(error);
         });
     };
     return AuthComponent;

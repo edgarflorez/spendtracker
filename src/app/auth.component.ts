@@ -39,8 +39,9 @@ export class AuthComponent implements OnInit {
 					this.router.navigate([this.returnUrl]);
 				},
 				error => {
-					this.appAlert.alert( error.message );
+					console.dir(error);
 					this.loading = false;
+					this.appAlert.alert( error );
 				}
 			)
 	}

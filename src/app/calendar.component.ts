@@ -74,9 +74,8 @@ export class CalendarComponent implements OnInit {
 					this.getDates();
 				},
 				error => {
-					console.log( error );
 					this.addDate = false;
-					this.appAlert.alert(error);
+					this.appAlert.alert(error.json().msg);
 				}
 			)
 	}
