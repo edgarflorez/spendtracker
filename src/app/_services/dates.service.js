@@ -16,6 +16,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 var jwt_service_1 = require("./jwt.service");
+var spend_date_1 = require("../_models/spend-date");
 var log_service_1 = require("./log.service");
 var DatesService = (function (_super) {
     __extends(DatesService, _super);
@@ -35,7 +36,7 @@ var DatesService = (function (_super) {
             var responseParsed = [];
             for (var _i = 0, _a = response.json(); _i < _a.length; _i++) {
                 var entry = _a[_i];
-                var tempArray = {};
+                var tempArray = new spend_date_1.SpendDate();
                 tempArray['id'] = entry.Id;
                 tempArray['userId'] = entry.UserId;
                 tempArray['date'] = entry.Date;

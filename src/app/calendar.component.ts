@@ -43,6 +43,7 @@ export class CalendarComponent implements OnInit {
 		this.datesService.getDates(this.userService.getCurrentUserId())
 			.subscribe(
 				data => {
+					console.log("DATA :: ", data);
 					this.dates = data;
 				},
 				error => {

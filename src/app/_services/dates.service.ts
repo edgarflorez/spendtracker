@@ -20,7 +20,7 @@ export class DatesService extends JwtService {
 				// Translate the server side response into app model structure
 				let responseParsed		 = [];
 				for(let entry of response.json()){
-					let tempArray 		= {};
+					let tempArray 		= new SpendDate();
 					tempArray['id'] 	= entry.Id;
 					tempArray['userId']	= entry.UserId;
 					tempArray['date'] 	= entry.Date;

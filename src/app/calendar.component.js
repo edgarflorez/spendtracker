@@ -44,6 +44,7 @@ var CalendarComponent = (function () {
         var _this = this;
         this.datesService.getDates(this.userService.getCurrentUserId())
             .subscribe(function (data) {
+            console.log("DATA :: ", data);
             _this.dates = data;
         }, function (error) {
             console.log(error.message);
