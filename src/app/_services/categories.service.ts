@@ -12,10 +12,19 @@ export class CategoriesService extends JwtService {
 	){super();}
 	// Public Methods
 	getCategories() {
-		return this.http.get('/api/categories', this.jwt())
+		// return this.http.get('/api/categories', this.jwt())
+		return this.http.get('http://localhost:8888/spendTrackerService/api/getCategories?Authorization=' + this.jwtString(), this.jwt())
 			.map( (response: Response ) => {
-				console.log('categories.service :: getCategories ', response['_body']);
-				return response['_body'];
+				let responseParsed		 = [];
+				for(let entry of response.json()){
+					let tempArray 		= new SpendCategory();
+					tempArray['id'] 	= entry.Id;
+					tempArray['categoryName'] = entry.CategoryName;
+					responseParsed.push(tempArray);
+				}
+				console.log('categories.service :: getCategories ', responseParsed);
+				return responseParsed;
+				// return response['_body'];
 			})
 	}
 }

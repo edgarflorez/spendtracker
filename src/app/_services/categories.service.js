@@ -16,6 +16,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 var jwt_service_1 = require("./jwt.service");
+var spend_category_1 = require("../_models/spend-category");
 var CategoriesService = (function (_super) {
     __extends(CategoriesService, _super);
     // Constructor
@@ -26,10 +27,20 @@ var CategoriesService = (function (_super) {
     }
     // Public Methods
     CategoriesService.prototype.getCategories = function () {
-        return this.http.get('/api/categories', this.jwt())
+        // return this.http.get('/api/categories', this.jwt())
+        return this.http.get('http://localhost:8888/spendTrackerService/api/getCategories?Authorization=' + this.jwtString(), this.jwt())
             .map(function (response) {
-            console.log('categories.service :: getCategories ', response['_body']);
-            return response['_body'];
+            var responseParsed = [];
+            for (var _i = 0, _a = response.json(); _i < _a.length; _i++) {
+                var entry = _a[_i];
+                var tempArray = new spend_category_1.SpendCategory();
+                tempArray['id'] = entry.Id;
+                tempArray['categoryName'] = entry.CategoryName;
+                responseParsed.push(tempArray);
+            }
+            console.log('categories.service :: getCategories ', responseParsed);
+            return responseParsed;
+            // return response['_body'];
         });
     };
     return CategoriesService;

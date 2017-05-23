@@ -62,11 +62,13 @@ http://jasonwatmore.com/post/2016/09/29/angular-2-user-registration-and-login-ex
 - Check the flow of create and return a date
 	- Return the user dates
 - Move API logic to mysqli and test the Login
-*********************************************************************************************************************
 - spend data 
 	- return data
 	- add spends
 	- delete spends
+*********************************************************************************************************************
+	- return categories to the spend list
+	- include the log as DB table
 - The services are called but most of the data is exposed and could raise a security issue
 - Deploy the DB on my server and make remote calls. Check if the XR error still appearing
 - CORS DISABLE http://stackoverflow.com/questions/3102819/disable-same-origin-policy-in-chrome
