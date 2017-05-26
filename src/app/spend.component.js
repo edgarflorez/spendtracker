@@ -48,12 +48,15 @@ var SpendComponent = (function () {
                     _this.model.categoryName = '';
                     _this.model.date = params['id'];
                     _this.getCategories();
-                    _this.datesService.getDateById(+params['id'])
-                        .subscribe(function (data) {
-                        _this.dateString = data.date;
-                    }, function (error) {
-                        console.log(error.message);
-                    });
+                    // this.datesService.getDateById( +params['id'] )
+                    // 	.subscribe(
+                    // 		data => {
+                    // 			this.dateString = data.date;
+                    // 		},
+                    // 		error => {
+                    // 			console.log( error.message );
+                    // 		}
+                    // 	)
                     break;
                 case 'edit':
                     _this.route.params

@@ -45,7 +45,8 @@ export class DatesService extends JwtService {
 	}
 	getDateById(id:number){
 		// return this.http.get('/api/dates/getDateById/'+ id, this.jwt())
-		return this.http.get('http://localhost:8888/spendTrackerService/api/getDateById?id=' + id + '&Authorization=' + this.jwtString(), id, this.jwt())
+		// return this.http.get('http://localhost:8888/spendTrackerService/api/getDateById?id=' + id + '&Authorization=' + this.jwtString(), id, this.jwt())
+		return this.http.get('http://localhost:8888/spendTrackerService/api/getDateById?id=' + id + '&Authorization=' + this.jwtString())
 			.map( (response: Response) =>{
 				// Translate the server side response into app model structure
 				let responseParsed 		= new SpendDate();

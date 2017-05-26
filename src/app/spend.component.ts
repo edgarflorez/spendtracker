@@ -53,15 +53,15 @@ export class SpendComponent implements OnInit {
 					this.model.categoryName = '';
 					this.model.date 		= params['id'];
 					this.getCategories();
-					this.datesService.getDateById( +params['id'] )
-						.subscribe(
-							data => {
-								this.dateString = data.date;
-							},
-							error => {
-								console.log( error.message );
-							}
-						)
+					// this.datesService.getDateById( +params['id'] )
+					// 	.subscribe(
+					// 		data => {
+					// 			this.dateString = data.date;
+					// 		},
+					// 		error => {
+					// 			console.log( error.message );
+					// 		}
+					// 	)
 				break;
 				case  'edit':
 					this.route.params
