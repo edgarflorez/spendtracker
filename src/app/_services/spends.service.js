@@ -41,7 +41,7 @@ var SpendsService = (function (_super) {
                 var tempArray = new spend_model_1.SpendModel();
                 tempArray['id'] = entry.Id;
                 tempArray['ammount'] = entry.Ammount;
-                tempArray['category'] = entry.Category;
+                tempArray['categoryName'] = entry.CategoryName;
                 tempArray['date'] = entry.Date;
                 tempArray['description'] = entry.Description;
                 responseParsed.push(tempArray);

@@ -25,7 +25,7 @@ export class SpendsService extends JwtService {
 					let tempArray 			= new SpendModel();
 					tempArray['id'] 		= entry.Id;
 					tempArray['ammount']	= entry.Ammount;
-					tempArray['category']	= entry.Category;
+					tempArray['categoryName']= entry.CategoryName;
 					tempArray['date']		= entry.Date;
 					tempArray['description']= entry.Description;
 					responseParsed.push(tempArray);
