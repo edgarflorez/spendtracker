@@ -66,8 +66,9 @@ http://jasonwatmore.com/post/2016/09/29/angular-2-user-registration-and-login-ex
 	- return data
 	- add spends
 	- delete spends
-*********************************************************************************************************************
 	- return categories to the spend list
+*********************************************************************************************************************
+	- Update GET protocol
 	- include the log as DB table
 - The services are called but most of the data is exposed and could raise a security issue
 - Deploy the DB on my server and make remote calls. Check if the XR error still appearing
