@@ -78,7 +78,6 @@ var SpendsService = (function (_super) {
     };
     SpendsService.prototype.deleteSpend = function (spendId) {
         var _this = this;
-        console.log("HEY GET deleteSpend service");
         // return this.http.delete('/api/spends/'+ spendId, this.jwt())
         return this.http.post('http://localhost:8888/spendTrackerService/api/deleteSpend?id=' + spendId + '&Authorization=' + this.jwtString(), spendId, this.jwt())
             .map(function (response) {
@@ -88,13 +87,26 @@ var SpendsService = (function (_super) {
         });
     };
     SpendsService.prototype.updateSpend = function (spend) {
-        var _this = this;
         // return this.http.post('/api/spends/update', spend, this.jwt())
+        // this.log.record({'type': this.log.SPEND_UPDATE, 'data':{'user':JSON.parse( localStorage.getItem('currentUser') ), 'spend':spend, 'date': new Date() }} );
         return this.http.post('http://localhost:8888/spendTrackerService/api/updateSpend?id=' + spend.id + '&ammount=' + spend.ammount + '&category=' + spend.category + '&date=' + spend.date + '&description=' + spend.description + '&Authorization=' + this.jwtString(), spend, this.jwt())
             .map(function (response) {
             console.log('spends.service :: updateSpend ', response['_body']);
-            _this.log.record({ 'type': _this.log.SPEND_UPDATE, 'data': { 'user': JSON.parse(localStorage.getItem('currentUser')), 'spend': spend, 'date': new Date() } });
             return response;
+        });
+    };
+    SpendsService.prototype.logSpend = function (spend) {
+        console.log("LOG V4");
+        // return this.http.post('/api/spends', spend, this.jwt())
+        // return this.http.post('http://localhost:8888/spendTrackerService/api/logApp?type='+ this.log.SPEND_UPDATE + '&data="{spend:' +  spend.ammount + '}"' + '&Authorization=' + this.jwtString() , spend, this.jwt())
+        // 	.map( (response: Response ) => {
+        // 		console.log('spends.service :: logSpend ', response['_body']);
+        // 		return response;
+        // 	})
+        this.http.post('http://localhost:8888/spendTrackerService/api/logApp?type=' + this.log.SPEND_UPDATE + '&data="{spend:' + spend.ammount + '}"' + '&Authorization=' + this.jwtString(), spend, this.jwt())
+            .map(function (response) {
+            console.log('spends.service :: logSpend ', response['_body']);
+            response;
         });
     };
     return SpendsService;

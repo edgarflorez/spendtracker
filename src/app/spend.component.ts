@@ -150,6 +150,15 @@ export class SpendComponent implements OnInit {
 					)
 			break;
 			case  'edit':
+				// this.spendsService.logSpend(spend)
+				// 	.subscribe(
+				// 		data => {
+				// 			console.log("Log response OK");
+				// 		},
+				// 		error => {
+				// 			console.log(error); 
+				// 		}
+				// 	)
 				this.spendsService.updateSpend(spend)
 					.subscribe(
 						data => {
