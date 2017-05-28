@@ -22,6 +22,12 @@ export class LogService  extends JwtService{
 
 
 	record(data:any){
+		let log: any[] 	= JSON.parse(localStorage.getItem('log')) || [];
+		let logData 	= JSON.stringify(data);
+	    log.push(logData);
+	    localStorage.setItem('log' + JSON.parse( localStorage.getItem("currentUser") ).username , JSON.stringify(log));
+	}
+	recordBK(data:any){
 		console.log("************** ");
 		console.log("-------- ",data);
 		// console.log("LOG ", data);

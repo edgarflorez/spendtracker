@@ -87,10 +87,17 @@ var SpendsService = (function (_super) {
         });
     };
     SpendsService.prototype.updateSpend = function (spend) {
+        var _this = this;
         // return this.http.post('/api/spends/update', spend, this.jwt())
-        // this.log.record({'type': this.log.SPEND_UPDATE, 'data':{'user':JSON.parse( localStorage.getItem('currentUser') ), 'spend':spend, 'date': new Date() }} );
         return this.http.post('http://localhost:8888/spendTrackerService/api/updateSpend?id=' + spend.id + '&ammount=' + spend.ammount + '&category=' + spend.category + '&date=' + spend.date + '&description=' + spend.description + '&Authorization=' + this.jwtString(), spend, this.jwt())
             .map(function (response) {
+            var log = {};
+            log['type'] = _this.log.SPEND_UPDATE;
+            log['data'] = {};
+            log['data']['user'] = JSON.parse(localStorage.getItem("currentUser"));
+            log['data']['spend'] = spend;
+            log['data']['date'] = new Date();
+            _this.log.record(log);
             console.log('spends.service :: updateSpend ', response['_body']);
             return response;
         });
