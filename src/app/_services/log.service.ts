@@ -22,10 +22,10 @@ export class LogService  extends JwtService{
 
 
 	record(data:any){
-		let log: any[] 	= JSON.parse(localStorage.getItem('log')) || [];
+		let log: any[] 	= JSON.parse(localStorage.getItem('logUser' + JSON.parse( localStorage.getItem("currentUser") ).id ) )  || [];
 		let logData 	= JSON.stringify(data);
 	    log.push(logData);
-	    localStorage.setItem('log' + JSON.parse( localStorage.getItem("currentUser") ).username , JSON.stringify(log));
+	    localStorage.setItem('logUser' + JSON.parse( localStorage.getItem("currentUser") ).id , JSON.stringify(log));
 	}
 	recordBK(data:any){
 		console.log("************** ");

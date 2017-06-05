@@ -32,10 +32,10 @@ var LogService = (function (_super) {
         return _this;
     }
     LogService.prototype.record = function (data) {
-        var log = JSON.parse(localStorage.getItem('log')) || [];
+        var log = JSON.parse(localStorage.getItem('logUser' + JSON.parse(localStorage.getItem("currentUser")).id)) || [];
         var logData = JSON.stringify(data);
         log.push(logData);
-        localStorage.setItem('log' + JSON.parse(localStorage.getItem("currentUser")).username, JSON.stringify(log));
+        localStorage.setItem('logUser' + JSON.parse(localStorage.getItem("currentUser")).id, JSON.stringify(log));
     };
     LogService.prototype.recordBK = function (data) {
         console.log("************** ");
