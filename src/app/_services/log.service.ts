@@ -6,7 +6,7 @@ import { JwtService } 			from './jwt.service'
 @Injectable()
 export class LogService  extends JwtService{
 	// Service constants to track different services
-	readonly LOGIN:string 			= "Login"
+	readonly LOGIN:string 			= "Log in"
 	readonly LOGOUT:string 			= "Log out"
 	readonly DATE_CREATE:string 	= "Date Create"
 	readonly SPEND_CREATE:string 	= "Spend Create"

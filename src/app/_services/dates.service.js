@@ -53,7 +53,13 @@ var DatesService = (function (_super) {
         return this.http.post('http://localhost:8888/spendTrackerService/api/addDate?date=' + newDate["date"] + '&userId=' + newDate["userId"] + '&Authorization=' + this.jwtString(), newDate, this.jwt())
             .map(function (response) {
             console.log("dates.service :: addDate ", response);
-            _this.log.record({ 'type': _this.log.DATE_CREATE, 'data': { 'user': JSON.parse(localStorage.getItem('currentUser')), 'newDate': newDate, 'date': new Date() } });
+            var log = {};
+            log['type'] = _this.log.DATE_CREATE;
+            log['data'] = {};
+            log['data']['user'] = JSON.parse(localStorage.getItem("currentUser"));
+            log['data']['newDate'] = newDate;
+            log['data']['date'] = new Date();
+            _this.log.record(log);
             return response;
         });
     };

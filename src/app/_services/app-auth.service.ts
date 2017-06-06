@@ -38,13 +38,27 @@ export class AppAuthService {
 					localStorage.setItem('currentUser', JSON.stringify(user));
 				}
 
-				this.log.record({'type': this.log.LOGIN, 'data':{'user': JSON.parse( localStorage.getItem('currentUser') ), 'date': new Date() }} );
+				let log = {};
+				log['type'] 		= this.log.LOGIN;
+				log['data'] 		= {};
+				log['data']['user'] = JSON.parse( localStorage.getItem("currentUser") );
+				log['data']['date'] = new Date();
+				this.log.record(log);
 			});
 	}
 	logout(){
+
+		var userId = JSON.parse( localStorage.getItem("currentUser") )['id'];
+
 		if(JSON.parse( localStorage.getItem('currentUser') )){
-			this.log.record({'type': this.log.LOGOUT, 'data':{'user': JSON.parse( localStorage.getItem('currentUser') ), 'date': new Date() }} );
+			let log = {};
+			log['type'] 		= this.log.LOGOUT;
+			log['data'] 		= {};
+			log['data']['user'] = JSON.parse( localStorage.getItem("currentUser") );
+			log['data']['date'] = new Date();
+			this.log.record(log);
 		}
+		
 		// remove user from local storage to log user out
 		localStorage.removeItem('currentUser');
 	}

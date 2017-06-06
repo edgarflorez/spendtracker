@@ -36,7 +36,15 @@ export class DatesService extends JwtService {
 		return this.http.post('http://localhost:8888/spendTrackerService/api/addDate?date='+ newDate["date"] + '&userId=' + newDate["userId"] + '&Authorization=' + this.jwtString(), newDate, this.jwt() )
 			.map( (response: Response) => {
 				console.log("dates.service :: addDate ", response);
-				this.log.record({'type': this.log.DATE_CREATE, 'data':{'user':JSON.parse( localStorage.getItem('currentUser') ), 'newDate':newDate, 'date': new Date() }} );
+
+				let log = {};
+				log['type'] 		= this.log.DATE_CREATE;
+				log['data'] 		= {};
+				log['data']['user'] = JSON.parse( localStorage.getItem("currentUser") );
+				log['data']['newDate']= newDate;
+				log['data']['date'] = new Date();
+				this.log.record(log);
+
 				return response;
 			});
 	}

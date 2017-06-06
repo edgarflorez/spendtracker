@@ -23,7 +23,7 @@ var LogService = (function (_super) {
         var _this = _super.call(this) || this;
         _this.http = http;
         // Service constants to track different services
-        _this.LOGIN = "Login";
+        _this.LOGIN = "Log in";
         _this.LOGOUT = "Log out";
         _this.DATE_CREATE = "Date Create";
         _this.SPEND_CREATE = "Spend Create";

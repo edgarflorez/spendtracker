@@ -41,12 +41,23 @@ var AppAuthService = (function () {
                 // store user details and jwt token in local storage to keep the user logged in between page refreshes
                 localStorage.setItem('currentUser', JSON.stringify(user));
             }
-            _this.log.record({ 'type': _this.log.LOGIN, 'data': { 'user': JSON.parse(localStorage.getItem('currentUser')), 'date': new Date() } });
+            var log = {};
+            log['type'] = _this.log.LOGIN;
+            log['data'] = {};
+            log['data']['user'] = JSON.parse(localStorage.getItem("currentUser"));
+            log['data']['date'] = new Date();
+            _this.log.record(log);
         });
     };
     AppAuthService.prototype.logout = function () {
+        var userId = JSON.parse(localStorage.getItem("currentUser"))['id'];
         if (JSON.parse(localStorage.getItem('currentUser'))) {
-            this.log.record({ 'type': this.log.LOGOUT, 'data': { 'user': JSON.parse(localStorage.getItem('currentUser')), 'date': new Date() } });
+            var log = {};
+            log['type'] = this.log.LOGOUT;
+            log['data'] = {};
+            log['data']['user'] = JSON.parse(localStorage.getItem("currentUser"));
+            log['data']['date'] = new Date();
+            this.log.record(log);
         }
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
