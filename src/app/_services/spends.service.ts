@@ -52,25 +52,40 @@ export class SpendsService extends JwtService {
 	}
 	addSpend(spend:SpendModel){
 		// return this.http.post('/api/spends', spend, this.jwt())
-		return this.http.post('http://localhost:8888/spendTrackerService/api/addSpend?ammount='+ spend.ammount + '&category=' + spend.category + '&date=' + spend.date + '&description=' + spend.description + '&Authorization=' + this.jwtString() , spend, this.jwt())
+		return this.http.post('http://localhost:8888/spendTrackerService/api/addSpend?userId='+ JSON.parse( localStorage.getItem("currentUser") ).id +'&ammount='+ spend.ammount + '&category=' + spend.category + '&date=' + spend.date + '&description=' + spend.description + '&Authorization=' + this.jwtString() , spend, this.jwt())
 			.map( (response: Response ) => {
 				console.log('spends.service :: addSpend ', response['_body']);
-				this.log.record({'type': this.log.SPEND_CREATE, 'data':{'user':JSON.parse( localStorage.getItem('currentUser') ), 'spend':spend, 'date': new Date() }} );
+
+				let log = {};
+				log['type'] 		= this.log.SPEND_CREATE;
+				log['data'] 		= {};
+				log['data']['user'] = JSON.parse( localStorage.getItem("currentUser") );
+				log['data']['spend']= spend;
+				log['data']['date'] = new Date();
+				this.log.record(log);
 				return response;
 			})
 	}
 	deleteSpend(spendId: number){
 		// return this.http.delete('/api/spends/'+ spendId, this.jwt())
-		return this.http.post('http://localhost:8888/spendTrackerService/api/deleteSpend?id='+ spendId +'&Authorization=' + this.jwtString() , spendId, this.jwt())
+		return this.http.post('http://localhost:8888/spendTrackerService/api/deleteSpend?userId='+ JSON.parse( localStorage.getItem("currentUser") ).id +'&id='+ spendId +'&Authorization=' + this.jwtString() , spendId, this.jwt())
 			.map( (response:Response) =>{
 				console.log('spends.service :: deleteSpend ', response['_body']);
-				this.log.record({'type': this.log.SPEND_DELETE, 'data':{'user':JSON.parse( localStorage.getItem('currentUser') ), 'spendId':spendId, 'spendData': response['_body'], 'date': new Date() }} );
+
+				let log = {};
+				log['type'] 		= this.log.SPEND_DELETE;
+				log['data'] 		= {};
+				log['data']['user'] = JSON.parse( localStorage.getItem("currentUser") );
+				log['data']['spendId']= spendId;
+				log['data']['spendData']= response['_body'];
+				log['data']['date'] = new Date();
+				this.log.record(log);
 				return response;
 			})
 	}
 	updateSpend(spend:SpendModel) {
 		// return this.http.post('/api/spends/update', spend, this.jwt())
-		return this.http.post('http://localhost:8888/spendTrackerService/api/updateSpend?id='+ spend.id +'&ammount='+ spend.ammount + '&category=' + spend.category + '&date=' + spend.date + '&description=' + spend.description + '&Authorization=' + this.jwtString() , spend, this.jwt())
+		return this.http.post('http://localhost:8888/spendTrackerService/api/updateSpend?userId='+ JSON.parse( localStorage.getItem("currentUser") ).id +'&id='+ spend.id +'&ammount='+ spend.ammount + '&category=' + spend.category + '&date=' + spend.date + '&description=' + spend.description + '&Authorization=' + this.jwtString() , spend, this.jwt())
 			.map( (response: Response ) => {
 				let log = {};
 				log['type'] 		= this.log.SPEND_UPDATE;
