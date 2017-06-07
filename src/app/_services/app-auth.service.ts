@@ -48,8 +48,6 @@ export class AppAuthService {
 	}
 	logout(){
 
-		var userId = JSON.parse( localStorage.getItem("currentUser") )['id'];
-
 		if(JSON.parse( localStorage.getItem('currentUser') )){
 			let log = {};
 			log['type'] 		= this.log.LOGOUT;

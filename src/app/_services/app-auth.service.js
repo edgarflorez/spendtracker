@@ -50,7 +50,6 @@ var AppAuthService = (function () {
         });
     };
     AppAuthService.prototype.logout = function () {
-        var userId = JSON.parse(localStorage.getItem("currentUser"))['id'];
         if (JSON.parse(localStorage.getItem('currentUser'))) {
             var log = {};
             log['type'] = this.log.LOGOUT;
