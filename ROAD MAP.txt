@@ -74,6 +74,7 @@ http://jasonwatmore.com/post/2016/09/29/angular-2-user-registration-and-login-ex
 	- Update GET protocol, use only one object start with Login
 - If the password change the App should quick the user to log-in
 - On login MD5 or encript the password
+- Check security with the Autorization code
 - fix the logout on mobile
 - The services are called but most of the data is exposed and could raise a security issue
 - Deploy the DB on my server and make remote calls. Check if the XR error still appearing

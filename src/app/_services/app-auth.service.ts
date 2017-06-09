@@ -14,24 +14,15 @@ export class AppAuthService {
 	){}
 	// Public Methods
 	login(username: string, password:string){
-		// return this.http.post('/api/authenticate', JSON.stringify({ username: username, password: password}))
+
 		let headers = new Headers({ 'dataType': 'jsonp'});
-
     	let options = new RequestOptions({ headers: headers });
-
     	let data = {
     		'username': username,
     		'password': password
     	}
-
-		// return this.http.post('http://localhost:8888/spendTrackerService/api/authenticate?username='+ username +'&password='+password, JSON.stringify({ username: username, password: password}), options  )
-		return this.http.post('http://localhost:8888/spendTrackerService/api/authenticate', JSON.stringify(data), options  )
-		// return this.http(
-		// 		method: 'POST',
-		// 		url: 'http://localhost:8888/spendTrackerService/api/authenticate',
-		// 		data: JSON.stringify(data),
-		// 		headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-		// 	)
+    	
+		return this.http.post('http://localhost:8888/spendTrackerService/api/authenticate', data, options  )
 			.map((response: Response) => {
 				// login sussessful if there's a jwt token in response
 				// Translate the server side response into the app model structure

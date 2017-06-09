@@ -21,15 +21,13 @@ var AppAuthService = (function () {
     // Public Methods
     AppAuthService.prototype.login = function (username, password) {
         var _this = this;
-        // return this.http.post('/api/authenticate', JSON.stringify({ username: username, password: password}))
         var headers = new http_1.Headers({ 'dataType': 'jsonp' });
         var options = new http_1.RequestOptions({ headers: headers });
         var data = {
             'username': username,
             'password': password
         };
-        // return this.http.post('http://localhost:8888/spendTrackerService/api/authenticate?username='+ username +'&password='+password, JSON.stringify({ username: username, password: password}), options  )
-        return this.http.post('http://localhost:8888/spendTrackerService/api/authenticate', JSON.stringify(data), options)
+        return this.http.post('http://localhost:8888/spendTrackerService/api/authenticate', data, options)
             .map(function (response) {
             // login sussessful if there's a jwt token in response
             // Translate the server side response into the app model structure

@@ -14,8 +14,15 @@ export class DatesService extends JwtService {
 	) {super();}
 	// Private Methods
 	getDates(userId: number){
-		// return this.http.get('/api/dates/getDates/' + userId, this.jwt())
-		return this.http.get('http://localhost:8888/spendTrackerService/api/getDates?id=' + userId + '&Authorization=' + this.jwtString())
+
+		let data = {
+    		'id': userId,
+    		'Authorization': this.jwtString()
+    	}
+		let headers = new Headers({ 'params': JSON.stringify( data )});
+    	let options = new RequestOptions({ headers: headers });
+
+		return this.http.get('http://localhost:8888/spendTrackerService/api/getDates', options)
 			.map( (response: Response) => {
 				// Translate the server side response into app model structure
 				let responseParsed		 = [];
@@ -31,9 +38,14 @@ export class DatesService extends JwtService {
 	}
 	// addDate(newDate:SpendDate){
 	addDate(newDate:any){
-		// return this.http.post('/api/dates', newDate, this.jwt())
-		// return this.http.post('http://localhost:8888/spendTrackerService/api/addDate?date=myDateString&userId=' + newDate["userId"] + '&Authorization=' + this.jwtString(), newDate, this.jwt() )
-		return this.http.post('http://localhost:8888/spendTrackerService/api/addDate?date='+ newDate["date"] + '&userId=' + newDate["userId"] + '&Authorization=' + this.jwtString(), newDate, this.jwt() )
+
+		let data = {
+    		'date': newDate["date"],
+    		'userId': newDate["userId"],
+    		'Authorization': this.jwtString()
+    	}
+
+		return this.http.post('http://localhost:8888/spendTrackerService/api/addDate', data )
 			.map( (response: Response) => {
 				console.log("dates.service :: addDate ", response);
 
