@@ -28,14 +28,19 @@ export class LogService  extends JwtService{
 	    localStorage.setItem('logUser' + JSON.parse( localStorage.getItem("currentUser") ).id , JSON.stringify(log));
 	}
 	recordBK(data:any){
-		console.log("************** ");
-		console.log("-------- ",data);
-		// console.log("LOG ", data);
-		// this.http.post('/api/log', data)
-		return this.http.post('http://localhost:8888/spendTrackerService/api/logApp?type='+ data.type + '&data' + data.data + '&Authorization=' + this.jwtString() , data, this.jwt())
+
+		let headers = new Headers({ 'dataType': 'jsonp'});
+    	let options = new RequestOptions({ headers: headers });
+    	let data = {
+    		'type': data.type,
+    		'data': data.data,
+    		'Authorization': this.jwtString()
+    	}
+
+		// console.log("-------- ",data);
+		return this.http.post('http://localhost:8888/spendTrackerService/api/logApp', data, options )
 			.map( (response: Response) =>{
-				console.log("****************** "); 
-				console.log("RESPONSE");
+				// console.log("****************** "); 
 				let log: any[] = JSON.parse(localStorage.getItem('log')) || [];
 
 				// let logData = JSON.parse(response);
@@ -46,7 +51,7 @@ export class LogService  extends JwtService{
                 log.push(logData);
                 localStorage.setItem('log', JSON.stringify(log));
 
-				console.log('log.service :: Log ', response['_body']);
+				// console.log('log.service :: Log ', response['_body']);
 				return response;
 			})
 	}

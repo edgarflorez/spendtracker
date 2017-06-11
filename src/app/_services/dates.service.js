@@ -75,9 +75,13 @@ var DatesService = (function (_super) {
         dates.sort(function (a, b) { return a.date - b.date; });
     };
     DatesService.prototype.getDateById = function (id) {
-        // return this.http.get('/api/dates/getDateById/'+ id, this.jwt())
-        // return this.http.get('http://localhost:8888/spendTrackerService/api/getDateById?id=' + id + '&Authorization=' + this.jwtString(), id, this.jwt())
-        return this.http.get('http://localhost:8888/spendTrackerService/api/getDateById?id=' + id + '&Authorization=' + this.jwtString())
+        var data = {
+            'id': id,
+            'Authorization': this.jwtString()
+        };
+        var headers = new http_1.Headers({ 'params': JSON.stringify(data) });
+        var options = new http_1.RequestOptions({ headers: headers });
+        return this.http.get('http://localhost:8888/spendTrackerService/api/getDateById', options)
             .map(function (response) {
             // Translate the server side response into app model structure
             var responseParsed = new spend_date_1.SpendDate();

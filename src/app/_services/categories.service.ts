@@ -12,8 +12,14 @@ export class CategoriesService extends JwtService {
 	){super();}
 	// Public Methods
 	getCategories() {
-		// return this.http.get('/api/categories', this.jwt())
-		return this.http.get('http://localhost:8888/spendTrackerService/api/getCategories?Authorization=' + this.jwtString(), this.jwt())
+
+		let data = {
+    		'Authorization': this.jwtString()
+    	}
+		let headers = new Headers({ 'params': JSON.stringify( data )});
+    	let options = new RequestOptions({ headers: headers });
+
+		return this.http.get('http://localhost:8888/spendTrackerService/api/getCategories', options)
 			.map( (response: Response ) => {
 				let responseParsed		 = [];
 				for(let entry of response.json()){

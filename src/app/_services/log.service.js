@@ -38,21 +38,24 @@ var LogService = (function (_super) {
         localStorage.setItem('logUser' + JSON.parse(localStorage.getItem("currentUser")).id, JSON.stringify(log));
     };
     LogService.prototype.recordBK = function (data) {
-        console.log("************** ");
-        console.log("-------- ", data);
-        // console.log("LOG ", data);
-        // this.http.post('/api/log', data)
-        return this.http.post('http://localhost:8888/spendTrackerService/api/logApp?type=' + data.type + '&data' + data.data + '&Authorization=' + this.jwtString(), data, this.jwt())
+        var headers = new http_1.Headers({ 'dataType': 'jsonp' });
+        var options = new http_1.RequestOptions({ headers: headers });
+        var data = {
+            'type': data.type,
+            'data': data.data,
+            'Authorization': this.jwtString()
+        };
+        // console.log("-------- ",data);
+        return this.http.post('http://localhost:8888/spendTrackerService/api/logApp', data, options)
             .map(function (response) {
-            console.log("****************** ");
-            console.log("RESPONSE");
+            // console.log("****************** "); 
             var log = JSON.parse(localStorage.getItem('log')) || [];
             // let logData = JSON.parse(response);
             var logData = "{'type':" + data.type + ",'data':" + data.data + "}";
             // save log data
             log.push(logData);
             localStorage.setItem('log', JSON.stringify(log));
-            console.log('log.service :: Log ', response['_body']);
+            // console.log('log.service :: Log ', response['_body']);
             return response;
         });
     };

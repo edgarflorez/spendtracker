@@ -27,8 +27,12 @@ var CategoriesService = (function (_super) {
     }
     // Public Methods
     CategoriesService.prototype.getCategories = function () {
-        // return this.http.get('/api/categories', this.jwt())
-        return this.http.get('http://localhost:8888/spendTrackerService/api/getCategories?Authorization=' + this.jwtString(), this.jwt())
+        var data = {
+            'Authorization': this.jwtString()
+        };
+        var headers = new http_1.Headers({ 'params': JSON.stringify(data) });
+        var options = new http_1.RequestOptions({ headers: headers });
+        return this.http.get('http://localhost:8888/spendTrackerService/api/getCategories', options)
             .map(function (response) {
             var responseParsed = [];
             for (var _i = 0, _a = response.json(); _i < _a.length; _i++) {
