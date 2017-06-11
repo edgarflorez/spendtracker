@@ -11,6 +11,7 @@ var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/http");
 // If you are using systemjs package loader import the MyDateRangePickerModule from here:
 var mydatepicker_1 = require("mydatepicker");
+var ngx_bootstrap_1 = require("ngx-bootstrap");
 var app_component_1 = require("./app.component");
 var calendar_component_1 = require("./calendar.component");
 var day_component_1 = require("./day.component");
@@ -30,7 +31,8 @@ AppModule = __decorate([
             forms_1.FormsModule,
             http_1.HttpModule,
             mydatepicker_1.MyDatePickerModule,
-            app_routing_module_1.AppRoutingModule
+            app_routing_module_1.AppRoutingModule,
+            ngx_bootstrap_1.CollapseModule.forRoot()
         ],
         declarations: [
             app_component_1.AppComponent,

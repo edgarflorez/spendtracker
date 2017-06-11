@@ -31,14 +31,14 @@ export class LogService  extends JwtService{
 
 		let headers = new Headers({ 'dataType': 'jsonp'});
     	let options = new RequestOptions({ headers: headers });
-    	let data = {
+    	let dataLog = {
     		'type': data.type,
     		'data': data.data,
     		'Authorization': this.jwtString()
     	}
 
 		// console.log("-------- ",data);
-		return this.http.post('http://localhost:8888/spendTrackerService/api/logApp', data, options )
+		return this.http.post('http://localhost:8888/spendTrackerService/api/logApp', dataLog, options )
 			.map( (response: Response) =>{
 				// console.log("****************** "); 
 				let log: any[] = JSON.parse(localStorage.getItem('log')) || [];

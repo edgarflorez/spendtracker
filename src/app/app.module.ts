@@ -6,6 +6,7 @@ import { HttpModule }       from '@angular/http';
 
 // If you are using systemjs package loader import the MyDateRangePickerModule from here:
 import { MyDatePickerModule } from 'mydatepicker';
+import { CollapseModule }   from 'ngx-bootstrap'; 
 
 import { AppComponent }     from './app.component';
 import { CalendarComponent }from './calendar.component';
@@ -16,13 +17,15 @@ import { AuthComponent }    from './auth.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthGuard }        from './_guards/index'; 
 
+
 @NgModule({
   imports:      [ 
   	BrowserModule, 
   	FormsModule,
     HttpModule,
   	MyDatePickerModule,
-  	AppRoutingModule
+  	AppRoutingModule,
+    CollapseModule.forRoot()
   ],
   declarations: [ 
   	AppComponent,

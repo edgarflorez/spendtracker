@@ -30,5 +30,18 @@ import { BaseRequestOptions } 	from '@angular/http';
     	BaseRequestOptions,
 	]
 })
-export class AppComponent  { appName = 'Spend Tracker'; }
+export class AppComponent  { 
+	
+	appName = 'Spend Tracker'; 
+
+	public isCollapsed:boolean = true;
+
+	public collapsed(event:any):void {
+		console.log(event);
+	}
+
+	public expanded(event:any):void {
+		console.log(event);
+	}
+}
 // export class AppComponent  { appName = 'ANGULAR LAB'; }

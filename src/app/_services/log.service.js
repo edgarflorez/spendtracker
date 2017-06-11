@@ -40,13 +40,13 @@ var LogService = (function (_super) {
     LogService.prototype.recordBK = function (data) {
         var headers = new http_1.Headers({ 'dataType': 'jsonp' });
         var options = new http_1.RequestOptions({ headers: headers });
-        var data = {
+        var dataLog = {
             'type': data.type,
             'data': data.data,
             'Authorization': this.jwtString()
         };
         // console.log("-------- ",data);
-        return this.http.post('http://localhost:8888/spendTrackerService/api/logApp', data, options)
+        return this.http.post('http://localhost:8888/spendTrackerService/api/logApp', dataLog, options)
             .map(function (response) {
             // console.log("****************** "); 
             var log = JSON.parse(localStorage.getItem('log')) || [];

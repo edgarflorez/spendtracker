@@ -17,7 +17,14 @@ var http_1 = require("@angular/http");
 var AppComponent = (function () {
     function AppComponent() {
         this.appName = 'Spend Tracker';
+        this.isCollapsed = true;
     }
+    AppComponent.prototype.collapsed = function (event) {
+        console.log(event);
+    };
+    AppComponent.prototype.expanded = function (event) {
+        console.log(event);
+    };
     return AppComponent;
 }());
 AppComponent = __decorate([
