@@ -70,12 +70,13 @@ http://jasonwatmore.com/post/2016/09/29/angular-2-user-registration-and-login-ex
 	- Implement all logs login, spends
 	- On DB save the user id in a additional column  
 	- include the log as DB table
-*********************************************************************************************************************
 	- Update GET protocol, use only one object start with Login
+*********************************************************************************************************************
+- fix the logout on mobile
+
 - If the password change the App should quick the user to log-in
 - On login MD5 or encript the password
 - Check security with the Autorization code
-- fix the logout on mobile
 - The services are called but most of the data is exposed and could raise a security issue
 - Deploy the DB on my server and make remote calls. Check if the XR error still appearing
 - CORS DISABLE http://stackoverflow.com/questions/3102819/disable-same-origin-policy-in-chrome
