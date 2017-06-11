@@ -125,7 +125,7 @@ var SpendsService = (function (_super) {
         var data = {
             'userId': JSON.parse(localStorage.getItem("currentUser")).id,
             'id': spend.id,
-            'ammount': spend.id,
+            'ammount': spend.ammount,
             'category': spend.category,
             'date': spend.date,
             'description': spend.description,
