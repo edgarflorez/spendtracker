@@ -1,0 +1,40 @@
+<main class="login">
+		<header>
+			<h1 class="hidden">Welcome to spend tracker</h1>
+		</header>
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-md-6 col-md-offset-3" >
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<form action="" class="form-horizontal" (ngSubmit)="login()" #loginForm="ngForm">
+								<div class="form-group">
+									<label for="user" class="col-xs-3">User</label>
+									<div class="col-xs-9">
+										<input type="text" placeholder="User" class="form-control" id="user" name="user" [(ngModel)]="model.user" #user="ngModel" required>
+										<div  [hidden]="user.valid || user.pristine" class="alert alert-danger">Please write your user name</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="password" class="col-xs-3">Password</label>
+									<div class="col-xs-9">
+										<input type="password" placeholder="Password" class="form-control " id="password" name="password" [(ngModel)]="model.password" #password="ngModel" required>
+										<div  [hidden]="password.valid || password.pristine" class="alert alert-danger">Please write your password</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-xs-9 col-xs-offset-3">
+										<div class="btn-group btn-group-justified" role="group" aria-label="...">
+											<div class="btn-group btn-group-lg" role="group">
+												<button type="submit" class="btn btn-primary" [disabled]="!loginForm.form.valid">Log-in</button> 
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div><!-- panel-body -->
+					</div><!-- panel -->
+				</div><!-- col-xs-12 -->
+			</div><!-- row -->
+		</div><!-- container -->
+	</main>

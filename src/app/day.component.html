@@ -1,0 +1,45 @@
+<main class="day-detail">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+				<header class="current-day">
+					<a class="btn  pull-right" (click)="onChangeEditMode()" [ngClass]="{'btn-default': !editModeOn, 'btn-info': editModeOn }" ><span *ngIf="!editModeOn">Edit Spends</span> <span *ngIf="editModeOn">Cancel</span> <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+					<h2><span class="label label-primary">{{ date | date:'EEEE' }},</span> {{date | date:'d MMMM y'}}</h2>
+				</header><!-- current-day -->
+				<div class="day-table">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>Ammount</th>
+								<th>Description</th>
+								<th>Category</th>
+								<th *ngIf="editModeOn" class="text-right">Edit</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let spend of spends">
+								<td>{{ spend.ammount | currency:'USD':true:'1.0' }}</td>
+								<td>{{ spend.description }}</td>
+								<td>{{ spend.categoryName }}</td>
+								<td *ngIf="editModeOn"  class="text-right">
+									<a class="btn btn-default btn-large" [routerLink]="['/spend/edit', spend.id]"><span class="glyphicon glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div><!-- day-table -->
+			</div><!-- col-xs-12 -->
+		</div><!-- row -->
+	</div><!-- container-fluid day -->	
+</main><!-- day-detail -->
+<footer class="nav-footer">
+	<nav class="action-nav navbar navbar-default navbar-fixed-bottom">
+		<h2 class="hidden">Day Tools</h2>
+		<div class="container-fluid">
+			<div class="btn-group btn-group-lg btn-group-justified">
+				<a class="btn btn-info" role="button" (click)="goBack()"><span class="glyphicon glyphicon glyphicon-calendar pull-left"></span>Calendar</a>
+				<a class="btn btn-primary" [routerLink]="['/spend', id]">Spend <span class="glyphicon glyphicon-plus pull-right" aria-hidden="true"></span> </a>
+			</div>
+		</div><!-- container-fluid -->
+	</nav><!-- action-nav -->
+	</footer><!-- nav-footer -->

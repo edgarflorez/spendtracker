@@ -1,0 +1,76 @@
+body{
+	background: $bg-color;
+}
+html,body{
+	height: 100%;
+}
+
+.day-detail,.calendar,.spend{
+	padding-top: 70px;
+	padding-bottom: 70px;
+}
+
+.action-nav{
+	padding: 10px 0;
+}
+.login{
+	position:relative;
+	z-index: 9999;
+	background: $bg-color;
+}
+.login,.spend{
+	display:flex;
+	align-items:center;
+	height:100%;
+}
+
+.app-alert{
+	position: absolute;
+	top: 55px;
+	width: 80%;
+	margin-left: 10%;
+	z-index: 99999;
+}
+.app-alert-close{
+	font-weight: bold;
+	padding: 5px;
+	position: absolute;
+	right: 0;
+	right: 10px;
+	top: 10px;
+	cursor: pointer;
+}
+/*Add spend Component*/
+.spend{
+	.btn-group-justified{
+		a{
+			width: 50%
+		}
+		button{
+			width: 100%
+		}
+	}
+}
+
+/*Form Validation */
+.ng-valid[required], .ng-valid.required  {
+  border-left: 5px solid #42A948; /* green */
+}
+
+.ng-invalid:not(form)  {
+  border-left: 5px solid #a94442; /* red */
+}
+.ng-invalid:not(form).ng-pristine:not(select)   {
+  border-left: 1px solid #ccc;
+}
+
+
+/*Day componet table*/
+.column-edit{
+	width: 5%;
+	text-align: center;
+}
+
+.component-group{
+	height: 100%;
+}
