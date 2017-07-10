@@ -21,8 +21,9 @@ export class AppAuthService {
     		'username': username,
     		'password': password
     	}
-    	
-		return this.http.post('http://localhost:8888/spendTrackerService/api/authenticate', data, options  )
+
+    // return this.http.post('http://localhost:8888/spendTrackerService/api/authenticate', data, options  )
+		return this.http.post('../spendTrackerService/api/authenticate', data, options  )
 			.map((response: Response) => {
 				// login sussessful if there's a jwt token in response
 				// Translate the server side response into the app model structure
@@ -58,7 +59,7 @@ export class AppAuthService {
 			log['data']['date'] = new Date();
 			this.log.record(log);
 		}
-		
+
 		// remove user from local storage to log user out
 		localStorage.removeItem('currentUser');
 	}
