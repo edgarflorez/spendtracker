@@ -117,4 +117,13 @@ c1ndyPass
 
 
 
+*************************
+
+MEJORAS
+
+* Update spend
+* Poner las fechas de la mas reciente a antigua
+* Paginar las fechas
+
+
 
