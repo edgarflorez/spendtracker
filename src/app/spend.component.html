@@ -15,19 +15,12 @@
                 <label for="spendInputAmmount" class="col-xs-3">Ammount</label>
                 <div class="col-xs-9">
                   <input type="tel" pattern="\d*" placeholder="Ammount" class="form-control" id="spendInputAmmount" name="ammount" [(ngModel)]="model.ammount" #ammount="ngModel"  required >
-                  <div  [hidden]="ammount.valid || ammount.pristine" class="alert alert-danger">Ammount is required</div>
                 </div>
               </div>
               <div class="form-group">
                 <label for="spendInputDescription" class="col-xs-3">Description</label>
                 <div class="col-xs-9">
-                  <input type="text" placeholder="Description" class="form-control" id="spendInputDescription"  name="description" [(ngModel)]="model.description" #description="ngModel" minlength="3" pattern="[A-Za-z0-9'\- ]+$" maxlength="100" required>
-                  <div  [hidden]="description.valid || description.pristine" class="alert alert-danger btn-xs">
-                    Please check the next caveats<br>
-                    * The description should not be empty<br>
-                    * The description should have 5+ letters<br>
-                    * The description should not have symbols<br>
-                  </div>
+                  <input type="text" placeholder="Description" class="form-control" id="spendInputDescription"  name="description" [(ngModel)]="model.description" #description="ngModel" minlength="3" pattern="[A-Za-z0-9'\-áéíóúñÁÉÍÓÚÑ ]+$" maxlength="100" required>
                 </div>
               </div>
               <div class="form-group">
@@ -47,6 +40,14 @@
                   <button type="submit" class="btn btn-primary" [disabled]="!spendForm.form.valid">Submit</button>
                 </div>
               </form>
+              <br>
+              <div  [hidden]="ammount.valid || ammount.pristine" class="alert alert-danger">Ammount is required</div>
+              <div  [hidden]="description.valid || description.pristine" class="alert alert-danger btn-xs">
+                Please check the next caveats<br>
+                * The description should not be empty<br>
+                * The description should have 5+ letters<br>
+                * The description should not have symbols<br>
+              </div>
               <!-- {{ diagnostic }} -->
             </div>
           </div>

@@ -129,15 +129,15 @@ MEJORAS
 * Cuando creo un spend hacer foco en el costo
 * En Mobile spend mejorar la fecha se ve montada, pasarla a dos lineas
 * La descripcion de un gasto pude tener caracteres mom´s share
-***********************************************************************************
 * Las validaciones dentro del gasto son muy grandes y cambian mucho el layout interrumpiendo, mejorarlo
-* Send to mail progress
-*  Evaluar poner salud
 *  Verificar importe del fondo como un gasto de Otros gastos
 * No puedo ingresar caña en la description
+***********************************************************************************
 * incluir dentro de la fecha 2016
 * Debe haber una manera para incluir los servicios que se pagan por pagos online y creditos
 * Query para poder mirar que transacciones son mayoures a X precio
 * Paginar las fechas
+* Send to mail progress
+*  Evaluar poner salud
 
 
