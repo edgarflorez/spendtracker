@@ -126,9 +126,9 @@ MEJORAS
 * Spend, numeros
 * type tel in ammount
 * Algunas veces se hace zoom
-***********************************************************************************
 * Cuando creo un spend hacer foco en el costo
 * En Mobile spend mejorar la fecha se ve montada, pasarla a dos lineas
+***********************************************************************************
 * La descripcion de un gasto pude tener caracteres mom´s share
 * Las validaciones dentro del gasto son muy grandes y cambian mucho el layout interrumpiendo, mejorarlo
 * Send to mail progress
