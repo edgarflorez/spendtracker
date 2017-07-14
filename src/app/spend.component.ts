@@ -43,6 +43,7 @@ export class SpendComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       let userId = (params['idSpend']) ? params['idSpend'] : params['id'];
       this.action = (params['idSpend']) ? 'edit' : 'new';
+      document.getElementById('spendInputAmmount').focus();
       switch(this.action){
         case 'new':
           this.editModeOn     = false;
