@@ -19,8 +19,8 @@ export class CategoriesService extends JwtService {
 		let headers = new Headers({ 'params': JSON.stringify( data )});
     	let options = new RequestOptions({ headers: headers });
 
-    // return this.http.get('http://localhost:8888/spendTrackerService/api/getCategories', options)
-		return this.http.get('../spendTrackerService/api/getCategories', options)
+    return this.http.get('http://localhost:8888/spendTrackerService/api/getCategories', options)
+		// return this.http.get('../spendTrackerService/api/getCategories', options)
 			.map( (response: Response ) => {
 				let responseParsed		 = [];
 				for(let entry of response.json()){
