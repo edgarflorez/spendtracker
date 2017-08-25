@@ -13,7 +13,7 @@ export class LogService  extends JwtService{
 	readonly SPEND_DELETE:string 	= "Spend Delete"
 	readonly SPEND_UPDATE:string 	= "Spend Update"
 
-	
+
 
 	// Construnctor
 	constructor(
@@ -38,9 +38,10 @@ export class LogService  extends JwtService{
     	}
 
 		// console.log("-------- ",data);
-		return this.http.post('http://localhost:8888/spendTrackerService/api/logApp', dataLog, options )
+    return this.http.post('http://localhost:8888/spendTrackerService/api/logApp', dataLog, options )
+		// return this.http.post('../spendTrackerService/api/logApp', dataLog, options )
 			.map( (response: Response) =>{
-				// console.log("****************** "); 
+				// console.log("****************** ");
 				let log: any[] = JSON.parse(localStorage.getItem('log')) || [];
 
 				// let logData = JSON.parse(response);

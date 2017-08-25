@@ -2,52 +2,52 @@
 
 
 - [DONE] Create a spend
-	- [DONE] Validate form
-	- [DONE] ammount required 
-	- [DONE] description required > 5 characters 
-	- [DONE] description max length 100 characters
-	- [DONE] Category valid
-	- [DONE] Create the spend with the given data
+  - [DONE] Validate form
+  - [DONE] ammount required
+  - [DONE] description required > 5 characters
+  - [DONE] description max length 100 characters
+  - [DONE] Category valid
+  - [DONE] Create the spend with the given data
 - [DONE] Create a model for the form
-- [DONE] in the app module import the FormsModule 
-- Edit Spend 
-	- [DONE] Create btn edit Show/hide
-	- [DONE] View Edit 
-	- [DONE] When you edit a spend then go back the element is edited It should let the same values
-		- [DONE] try to copy the element avoid reference.
+- [DONE] in the app module import the FormsModule
+- Edit Spend
+  - [DONE] Create btn edit Show/hide
+  - [DONE] View Edit
+  - [DONE] When you edit a spend then go back the element is edited It should let the same values
+    - [DONE] try to copy the element avoid reference.
 - [DONE] Delete a spend.
-	- [DONE] confirm with buttons
+  - [DONE] confirm with buttons
 
 - [DONE] Remove main nav, just let the app navigation.
 
 - LOGIN
-	- [DONE] Implement on all pages de login entry point
-	- [DONE] Fix the View to take all the screen
-	
+  - [DONE] Implement on all pages de login entry point
+  - [DONE] Fix the View to take all the screen
+
 - Create a login point entry
-	- Users mock
-	- login or reject login.
-	- [DONE] 1 DB and two users
-	- Security session
-	- ask for auth at any step
-	- Logout
-	- Create a date with the userId
-	- Create days for each user independently
-	- Use the userService to return user data
-	- Check if the date exists
-	- Error select a date
-	- create same date for two user
+  - Users mock
+  - login or reject login.
+  - [DONE] 1 DB and two users
+  - Security session
+  - ask for auth at any step
+  - Logout
+  - Create a date with the userId
+  - Create days for each user independently
+  - Use the userService to return user data
+  - Check if the date exists
+  - Error select a date
+  - create same date for two user
 - Implement the calendar lose functionality
-	- Migrate Day 
-		- Return  data from edit mode and implement service updateSpend
-		- complete service getSpendsByDate, actually return an error with the mock data
-	- Migrate spend
-	- create  a session for query dates, spends and create  new dates and spends + edit
-		- https://auth0.com/docs/quickstart/spa/angular2/03-session-handling
-		- https://auth0.com/blog/creating-your-first-real-world-angular-2-app-from-authentication-to-calling-an-api-and-everything-in-between/
-		- http://jasonwatmore.com/post/2016/09/29/angular-2-user-registration-and-login-example-tutorial
-		- https://medium.com/@blacksonic86/authentication-in-angular-2-958052c64492#.knegfliu1
-		- http://stackoverflow.com/questions/36364365/angular2-central-session-service
+  - Migrate Day
+    - Return  data from edit mode and implement service updateSpend
+    - complete service getSpendsByDate, actually return an error with the mock data
+  - Migrate spend
+  - create  a session for query dates, spends and create  new dates and spends + edit
+    - https://auth0.com/docs/quickstart/spa/angular2/03-session-handling
+    - https://auth0.com/blog/creating-your-first-real-world-angular-2-app-from-authentication-to-calling-an-api-and-everything-in-between/
+    - http://jasonwatmore.com/post/2016/09/29/angular-2-user-registration-and-login-example-tutorial
+    - https://medium.com/@blacksonic86/authentication-in-angular-2-958052c64492#.knegfliu1
+    - http://stackoverflow.com/questions/36364365/angular2-central-session-service
 - Migrate Categories to the service new flow
 - Delete promise and mock references +  services folder
 - Format _models, _helpers and guards
@@ -55,22 +55,22 @@
 ***** Angular 2 Login Component
 http://jasonwatmore.com/post/2016/09/29/angular-2-user-registration-and-login-example-tutorial
 - Create app log
-	- Log all events like create date, edit, delete ETC
+  - Log all events like create date, edit, delete ETC
 - http://angularcode.com/demo-of-a-simple-crud-restful-php-service-used-with-angularjs-and-mysql/
 - SAVE DATES via PHP in the DB
 - AddDate via API  service
 - Check the flow of create and return a date
-	- Return the user dates
+  - Return the user dates
 - Move API logic to mysqli and test the Login
-- spend data 
-	- return data
-	- add spends
-	- delete spends
-	- return categories to the spend list
-	- Implement all logs login, spends
-	- On DB save the user id in a additional column  
-	- include the log as DB table
-	- Update GET protocol, use only one object start with Login
+- spend data
+  - return data
+  - add spends
+  - delete spends
+  - return categories to the spend list
+  - Implement all logs login, spends
+  - On DB save the user id in a additional column
+  - include the log as DB table
+  - Update GET protocol, use only one object start with Login
 *********************************************************************************************************************
 - fix the logout on mobile
 
@@ -80,22 +80,64 @@ http://jasonwatmore.com/post/2016/09/29/angular-2-user-registration-and-login-ex
 - The services are called but most of the data is exposed and could raise a security issue
 - Deploy the DB on my server and make remote calls. Check if the XR error still appearing
 - CORS DISABLE http://stackoverflow.com/questions/3102819/disable-same-origin-policy-in-chrome
-	- $ open -a Google\ Chrome --args --disable-web-security --user-data-dir
+  - $ open -a Google\ Chrome --args --disable-web-security --user-data-dir
 - Data Base and connect application
-	- https://sourceforge.net/projects/phprestsql/?source=typ_redirect
-	- https://www.infoq.com/news/2014/09/MySQL-REST
-	- https://www.leaseweb.com/labs/2015/10/creating-a-simple-rest-api-in-php/
-	- http://coreymaynard.com/blog/creating-a-restful-api-with-php/
-	- https://www.sitepoint.com/best-practices-rest-api-scratch-introduction/
-	- https://docs.phalconphp.com/en/3.0.0/reference/tutorial-rest.html
-	- https://github.com/mevdschee/php-crud-api
-	- http://phprestsql.sourceforge.net/
-	- CORS https://www.html5rocks.com/en/tutorials/cors/
-		- Funciona parcialmente desde authenticate.php hay que   seguir haciendo pruebas para que se pueda loguear desde alla.
+  - https://sourceforge.net/projects/phprestsql/?source=typ_redirect
+  - https://www.infoq.com/news/2014/09/MySQL-REST
+  - https://www.leaseweb.com/labs/2015/10/creating-a-simple-rest-api-in-php/
+  - http://coreymaynard.com/blog/creating-a-restful-api-with-php/
+  - https://www.sitepoint.com/best-practices-rest-api-scratch-introduction/
+  - https://docs.phalconphp.com/en/3.0.0/reference/tutorial-rest.html
+  - https://github.com/mevdschee/php-crud-api
+  - http://phprestsql.sourceforge.net/
+  - CORS https://www.html5rocks.com/en/tutorials/cors/
+    - Funciona parcialmente desde authenticate.php hay que   seguir haciendo pruebas para que se pueda loguear desde alla.
 - Alert Close from any place of the page, next click. THE ALERT SHOULD BE IMPROVED, IT DUPLICATES THE ELEMENTS, further memory leaks
 
 
 * Updating Data¶
 
+
+*************************
+
+DB haumaru_spend_tracker
+
+User :: haumaru_spend
+Pass :: sp3ndPass
+
+
+USER
+edgarf
+edgarfmail@gmail.com
+3dg4rPass
+
+cindyc
+cindyginethcordero@gmail.com
+c1ndyPass
+
+
+
+*************************
+
+MEJORAS
+
+* Update spend
+* Poner las fechas de la mas reciente a antigua
+* Spend, numeros
+* type tel in ammount
+* Algunas veces se hace zoom
+* Cuando creo un spend hacer foco en el costo
+* En Mobile spend mejorar la fecha se ve montada, pasarla a dos lineas
+* La descripcion de un gasto pude tener caracteres mom´s share
+* Las validaciones dentro del gasto son muy grandes y cambian mucho el layout interrumpiendo, mejorarlo
+*  Verificar importe del fondo como un gasto de Otros gastos
+* No puedo ingresar caña en la description
+***********************************************************************************
+* incluir dentro de la fecha 2016
+* Debe haber una manera para incluir los servicios que se pagan por pagos online y creditos
+* Query para poder mirar que transacciones son mayoures a X precio
+* Paginar las fechas
+* Send to mail progress
+*  Evaluar poner salud
 
 
