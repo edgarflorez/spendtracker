@@ -23,7 +23,7 @@ export class CalendarComponent implements OnInit {
     height: '34px',
     width: '260px',
     inline: true,
-    disableUntil: {year: 2016, month: 8, day: 10},
+    disableUntil: {year: 2015, month: 8, day: 10},
     selectionTxtFontSize: '12px'
     };
     // Constructor

@@ -71,12 +71,7 @@ http://jasonwatmore.com/post/2016/09/29/angular-2-user-registration-and-login-ex
   - On DB save the user id in a additional column
   - include the log as DB table
   - Update GET protocol, use only one object start with Login
-*********************************************************************************************************************
 - fix the logout on mobile
-
-- If the password change the App should quick the user to log-in
-- On login MD5 or encript the password
-- Check security with the Autorization code
 - The services are called but most of the data is exposed and could raise a security issue
 - Deploy the DB on my server and make remote calls. Check if the XR error still appearing
 - CORS DISABLE http://stackoverflow.com/questions/3102819/disable-same-origin-policy-in-chrome
@@ -92,10 +87,35 @@ http://jasonwatmore.com/post/2016/09/29/angular-2-user-registration-and-login-ex
   - http://phprestsql.sourceforge.net/
   - CORS https://www.html5rocks.com/en/tutorials/cors/
     - Funciona parcialmente desde authenticate.php hay que   seguir haciendo pruebas para que se pueda loguear desde alla.
+MEJORAS
+
+* Update spend
+* Poner las fechas de la mas reciente a antigua
+* Spend, numeros
+* type tel in ammount
+* Algunas veces se hace zoom
+* Cuando creo un spend hacer foco en el costo
+* En Mobile spend mejorar la fecha se ve montada, pasarla a dos lineas
+* La descripcion de un gasto pude tener caracteres mom´s share
+* Las validaciones dentro del gasto son muy grandes y cambian mucho el layout interrumpiendo, mejorarlo
+*  Verificar importe del fondo como un gasto de Otros gastos
+* No puedo ingresar caña en la description
+* incluir dentro de la fecha 2016
+* arreglar path para poner en favoritos
+*********************************************************************************************************************
+
+- If the password change the App should quick the user to log-in
+- On login MD5 or encript the password
+- Check security with the Autorization code
 - Alert Close from any place of the page, next click. THE ALERT SHOULD BE IMPROVED, IT DUPLICATES THE ELEMENTS, further memory leaks
+* Debe haber una manera para incluir los servicios que se pagan por pagos online y creditos
+* Query para poder mirar que transacciones son mayoures a X precio
+* Paginar las fechas
+* Send to mail progress
+*  Evaluar poner salud
 
 
-* Updating Data¶
+* Updating Data
 
 
 *************************
@@ -119,25 +139,5 @@ c1ndyPass
 
 *************************
 
-MEJORAS
-
-* Update spend
-* Poner las fechas de la mas reciente a antigua
-* Spend, numeros
-* type tel in ammount
-* Algunas veces se hace zoom
-* Cuando creo un spend hacer foco en el costo
-* En Mobile spend mejorar la fecha se ve montada, pasarla a dos lineas
-* La descripcion de un gasto pude tener caracteres mom´s share
-* Las validaciones dentro del gasto son muy grandes y cambian mucho el layout interrumpiendo, mejorarlo
-*  Verificar importe del fondo como un gasto de Otros gastos
-* No puedo ingresar caña en la description
-***********************************************************************************
-* incluir dentro de la fecha 2016
-* Debe haber una manera para incluir los servicios que se pagan por pagos online y creditos
-* Query para poder mirar que transacciones son mayoures a X precio
-* Paginar las fechas
-* Send to mail progress
-*  Evaluar poner salud
 
 

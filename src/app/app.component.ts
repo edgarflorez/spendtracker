@@ -34,6 +34,7 @@ export class AppComponent  {
   appName = 'Spend Tracker';
 
   public isCollapsed:boolean = true;
+  public modeOutcome:boolean = true;
 
   public collapsed(event:any):void {
     console.log(event);

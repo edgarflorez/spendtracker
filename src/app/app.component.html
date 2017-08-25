@@ -10,7 +10,10 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">{{appName}}</a>
+				<a class="navbar-brand" href="#">{{appName}}
+					<span *ngIf="modeOutcome" class="label label-primary label-outcome">Outcome <span class="glyphicon glyphicon-chevron-up"></span> </span>
+					<span *ngIf="!modeOutcome" class="label label-primary label-income">Income <span class="glyphicon glyphicon-chevron-down"></span> </span>
+				</a> 
 			</div>
 			<div 	class="collapse navbar-collapse" 
 					id="menu-collapse-id"
@@ -18,6 +21,10 @@
 					(expanded)="expanded($event)"
 					[collapse]="isCollapsed">
 				<ul class="nav navbar-nav navbar-right">
+					<li class=""><a  routerLink="/" (click)="modeOutcome = false; isCollapsed = true">Income</a></li>
+					<li class="hidden-sm-down">|</li>
+					<li class=""><a  routerLink="/" (click)="modeOutcome = true; isCollapsed = true">Outcome</a></li>
+					<li class="hidden-sm-down">|</li>
 					<li class=""><a  routerLink="/login" (click)="isCollapsed = true">Log out</a></li>
 					<!-- <li class=""><a  routerLink="/calendar">Calendar</a></li> -->
 					<!-- <li class=""><a  routerLink="/day">Day</a></li> -->
