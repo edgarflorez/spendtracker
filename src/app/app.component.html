@@ -21,9 +21,9 @@
 					(expanded)="expanded($event)"
 					[collapse]="isCollapsed">
 				<ul class="nav navbar-nav navbar-right">
-					<li class=""><a  routerLink="/" (click)="modeOutcome = false; isCollapsed = true">Income</a></li>
+					<li class=""><a  routerLink="/calendar-income" (click)="setIncomedMode()">Income</a></li>
 					<li class="hidden-sm-down">|</li>
-					<li class=""><a  routerLink="/" (click)="modeOutcome = true; isCollapsed = true">Outcome</a></li>
+					<li class=""><a  routerLink="/" (click)="setSpendMode()">Outcome</a></li>
 					<li class="hidden-sm-down">|</li>
 					<li class=""><a  routerLink="/login" (click)="isCollapsed = true">Log out</a></li>
 					<!-- <li class=""><a  routerLink="/calendar">Calendar</a></li> -->

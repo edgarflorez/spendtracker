@@ -1,0 +1,63 @@
+<main class="income">
+  <header>
+    <h2 class="hidden">Create Income form</h2>
+  </header>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-md-6 col-md-offset-3" >
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <form action="" class="form-horizontal" (ngSubmit)="onSubmit()" #spendForm="ngForm">
+              <h2 class="text-center">{{dateString | date:'d MMMM y'}}</h2>
+              <br>
+              {{formAmmount}}
+              <div class="form-group">
+                <label for="spendInputAmmount" class="col-xs-3">Ammount</label>
+                <div class="col-xs-9">
+                  <input type="tel" pattern="\d*" placeholder="Ammount" class="form-control" id="spendInputAmmount" name="ammount" [(ngModel)]="model.ammount" #ammount="ngModel"  required >
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="spendInputDescription" class="col-xs-3">Description</label>
+                <div class="col-xs-9">
+                  <input type="text" placeholder="Description" class="form-control" id="spendInputDescription"  name="description" [(ngModel)]="model.description" #description="ngModel" minlength="3" pattern="[A-Za-z0-9'\-áéíóúñÁÉÍÓÚÑ ]+$" maxlength="100" required>
+                </div>
+              </div>
+              <div class="btn-group btn-group-lg btn-group-justified">
+                <a class="btn btn-default" role="button" (click)="goBack()">
+                  CANCEL</a>
+                  <!-- <a class="btn btn-primary" href="#">SUBMIT </a> -->
+                  <button type="submit" class="btn btn-primary" [disabled]="!spendForm.form.valid">Submit</button>
+                </div>
+              </form>
+              <br>
+              <div  [hidden]="ammount.valid || ammount.pristine" class="alert alert-danger">Ammount is required</div>
+              <div  [hidden]="description.valid || description.pristine" class="alert alert-danger btn-xs">
+                Please check the next caveats<br>
+                * The description should not be empty<br>
+                * The description should have 5+ letters<br>
+                * The description should not have symbols<br>
+              </div>
+              <!-- {{ diagnostic }} -->
+            </div>
+          </div>
+          <div class="panel panel-default" *ngIf="editModeOn">
+            <div class="panel-body">
+              <div *ngIf="editModeOnConfirm">
+                <p class="text-center"><br>Are you sure to delete this spend?<br><br></p>
+                <div class="btn-group btn-group-lg btn-group-justified">
+                  <a class="btn btn-default" role="button" (click)="onDeleteSpendCancel()">
+                    NO</a>
+                    <a class="btn btn-danger" role="button" (click)="onDeleteSpendConfirm()">YES</a>
+                  </div>
+                </div>
+                <div class="btn-group btn-group-lg btn-group-justified" *ngIf="!editModeOnConfirm">
+                  <a class="btn btn-danger" role="button" (click)="onDeleteSpend()">DELETE</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- row -->
+      </div><!-- container -->
+  </main><!-- spend -->

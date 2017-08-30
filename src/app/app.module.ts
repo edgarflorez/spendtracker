@@ -12,6 +12,9 @@ import { AppComponent }     from './app.component';
 import { CalendarComponent }from './calendar.component';
 import { DayComponent }     from './day.component'; 
 import { SpendComponent }   from './spend.component';
+import { CalendarIncomeComponent }from './calendarIncome.component';
+import { DayIncomeComponent }     from './dayIncome.component'; 
+import { IncomeComponent }     from './income.component';
 import { AuthComponent }    from './auth.component';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -31,7 +34,10 @@ import { AuthGuard }        from './_guards/index';
   	AppComponent,
   	CalendarComponent,
   	DayComponent,
-  	SpendComponent,
+    SpendComponent,
+    CalendarIncomeComponent,
+    DayIncomeComponent,
+    IncomeComponent,
     AuthComponent 
   ],
   providers: 	[

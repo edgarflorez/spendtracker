@@ -5,7 +5,7 @@ html,body{
 	height: 100%;
 }
 
-.day-detail,.calendar,.spend{
+.day-detail,.calendar,.spend,.income{
 	padding-top: 70px;
 	padding-bottom: 70px;
 }
@@ -18,7 +18,7 @@ html,body{
 	z-index: 9999;
 	background: $bg-color;
 }
-.login,.spend{
+.login,.spend,.income{
 	display:flex;
 	align-items:center;
 	height:100%;
@@ -41,7 +41,7 @@ html,body{
 	cursor: pointer;
 }
 /*Add spend Component*/
-.spend{
+.spend, .income{
 	.btn-group-justified{
 		a{
 			width: 50%

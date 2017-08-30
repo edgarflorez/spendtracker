@@ -4,6 +4,7 @@ import { AppAlert }       from './utils/app.alert'
 import { UserService }      from './_services/user.service';
 import { DatesService }     from './_services/dates.service';
 import { SpendsService }    from './_services/spends.service'
+import { IncomesService }      from './_services/incomes.service';
 import { CategoriesService }  from './_services/categories.service';
 import { AppAuthService }   from './_services/app-auth.service';
 import { LogService }   from './_services/log.service';
@@ -20,6 +21,7 @@ import { BaseRequestOptions }   from '@angular/http';
     UserService,
     DatesService,
     SpendsService,
+    IncomesService,
     CategoriesService,
     AppAuthService,
     LogService,
@@ -42,6 +44,16 @@ export class AppComponent  {
 
   public expanded(event:any):void {
     console.log(event);
+  }
+
+  public setSpendMode(event:any):void {
+    this.modeOutcome = true;
+    this.isCollapsed = true
+  }
+  public setIncomedMode(event:any):void {
+    this.modeOutcome = false;
+    this.isCollapsed = true
+
   }
 }
 // export class AppComponent  { appName = 'ANGULAR LAB'; }
