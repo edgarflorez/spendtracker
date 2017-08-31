@@ -12,7 +12,6 @@
 							<tr>
 								<th>Ammount</th>
 								<th>Description</th>
-								<th>Category</th>
 								<th *ngIf="editModeOn" class="text-right">Edit</th>
 							</tr>
 						</thead>
@@ -20,7 +19,6 @@
 							<tr *ngFor="let income of incomes">
 								<td>{{ income.ammount | currency:'USD':true:'1.0' }}</td>
 								<td>{{ income.description }}</td>
-								<td>{{ income.categoryName }}</td>
 								<td *ngIf="editModeOn"  class="text-right">
 									<a class="btn btn-default btn-large" [routerLink]="['/income/edit', income.id]"><span class="glyphicon glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
 								</td>

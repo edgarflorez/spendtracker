@@ -67,6 +67,7 @@ export class CalendarIncomeComponent implements OnInit {
   }
   onSubmitAddNewDate(event:any){
     event.stopPropagation();
+    console.log("DATE :::::: ",this.newDateJSDate);
     this.datesService.addDateIncome({'id':0, 'userId':this.userService.getCurrentUserId(), 'date': this.newDateJSDate } )
       .subscribe(
         data => {

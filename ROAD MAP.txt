@@ -104,6 +104,7 @@ MEJORAS
 * arreglar path para poner en favoritos
 *********************************************************************************************************************
 
+- Check Log for Income
 - If the password change the App should quick the user to log-in
 - On login MD5 or encript the password
 - Check security with the Autorization code
