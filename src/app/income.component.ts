@@ -49,7 +49,7 @@ export class IncomeComponent implements OnInit {
 
           this.model.id       = null;
           this.model.date     = params['id'];
-          this.datesService.getDateById( +params['id'] )
+          this.datesService.getDateIncomeById( +params['id'] )
             .subscribe(
               data => {
                 this.dateString = data.date;
@@ -66,7 +66,7 @@ export class IncomeComponent implements OnInit {
               this.editModeOn     = true;
               this.editModeOnConfirm  = false;
               this.model        = response;
-              this.datesService.getDateById( this.model.date )
+              this.datesService.getDateIncomeById( this.model.date )
                 .subscribe(
                   data => {
                     this.dateString = data.date;

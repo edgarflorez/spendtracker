@@ -22,8 +22,8 @@ export class IncomesService extends JwtService {
 		let headers = new Headers({ 'params': JSON.stringify( data )});
     	let options = new RequestOptions({ headers: headers });
 
-    	return this.http.get('http://localhost:8888/spendTrackerService/api/getIncomesByDate', options)
-		// return this.http.get('../spendTrackerService/api/getIncomesByDate', options)
+    	//return this.http.get('http://localhost:8888/spendTrackerService/api/getIncomesByDate', options)
+		return this.http.get('../spendTrackerService/api/getIncomesByDate', options)
 			.map( (response: Response) =>{
 				// Translate the server side response into app model structure
 				let responseParsed		 = [];
@@ -49,8 +49,8 @@ export class IncomesService extends JwtService {
 		let headers = new Headers({ 'params': JSON.stringify( data )});
     	let options = new RequestOptions({ headers: headers });
 
-    	return this.http.get('http://localhost:8888/spendTrackerService/api/getIncomeById', options)
-		// return this.http.get('../spendTrackerService/api/getIncomeById', options)
+    	//return this.http.get('http://localhost:8888/spendTrackerService/api/getIncomeById', options)
+		return this.http.get('../spendTrackerService/api/getIncomeById', options)
 			.map((response: Response) =>{
 				let tempResponse 			= new IncomeModel();
 				tempResponse['id'] 			= response.json().Id;
@@ -72,13 +72,13 @@ export class IncomesService extends JwtService {
     		'Authorization':this.jwtString()
     	}
 
-    	return this.http.post('http://localhost:8888/spendTrackerService/api/addIncome', data)
-		// return this.http.post('../spendTrackerService/api/addIncome', data)
+    	//return this.http.post('http://localhost:8888/spendTrackerService/api/addIncome', data)
+		return this.http.post('../spendTrackerService/api/addIncome', data)
 			.map( (response: Response ) => {
 				console.log('spends.service :: addIncome ', response['_body']);
 
 				let log = {};
-				log['type'] 		= this.log.SPEND_CREATE;
+				log['type'] 		= this.log.INCOME_CREATE;
 				log['data'] 		= {};
 				log['data']['user'] = JSON.parse( localStorage.getItem("currentUser") );
 				log['data']['spend']= spend;
@@ -95,13 +95,13 @@ export class IncomesService extends JwtService {
     		'Authorization': this.jwtString()
     	}
 
-    	return this.http.post('http://localhost:8888/spendTrackerService/api/deleteIncome', data)
-		// return this.http.post('../spendTrackerService/api/deleteIncome', data)
+    	//return this.http.post('http://localhost:8888/spendTrackerService/api/deleteIncome', data)
+		return this.http.post('../spendTrackerService/api/deleteIncome', data)
 			.map( (response:Response) =>{
 				console.log('spends.service :: deleteIncome ', response['_body']);
 
 				let log = {};
-				log['type'] 		= this.log.SPEND_DELETE;
+				log['type'] 		= this.log.INCOME_DELETE;
 				log['data'] 		= {};
 				log['data']['user'] = JSON.parse( localStorage.getItem("currentUser") );
 				log['data']['spendId']= spendId;
@@ -122,11 +122,11 @@ export class IncomesService extends JwtService {
     		'Authorization': this.jwtString()
     	}
 
-    	return this.http.post('http://localhost:8888/spendTrackerService/api/updateIncome', data)
-		// return this.http.post('../spendTrackerService/api/updateIncome', data)
+    	//return this.http.post('http://localhost:8888/spendTrackerService/api/updateIncome', data)
+		return this.http.post('../spendTrackerService/api/updateIncome', data)
 			.map( (response: Response ) => {
 				let log = {};
-				log['type'] 		= this.log.SPEND_UPDATE;
+				log['type'] 		= this.log.INCOME_UPDATE;
 				log['data'] 		= {};
 				log['data']['user'] = JSON.parse( localStorage.getItem("currentUser") );
 				log['data']['spend']= spend;

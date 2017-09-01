@@ -12,6 +12,10 @@ export class LogService  extends JwtService{
 	readonly SPEND_CREATE:string 	= "Spend Create"
 	readonly SPEND_DELETE:string 	= "Spend Delete"
 	readonly SPEND_UPDATE:string 	= "Spend Update"
+	readonly DATE_INCOME_CREATE:string 	= "Date Income Create"
+	readonly INCOME_CREATE:string 	= "Income Create"
+	readonly INCOME_DELETE:string 	= "Income Delete"
+	readonly INCOME_UPDATE:string 	= "Income Update"
 
 
 
@@ -38,8 +42,8 @@ export class LogService  extends JwtService{
     	}
 
 		// console.log("-------- ",data);
-    return this.http.post('http://localhost:8888/spendTrackerService/api/logApp', dataLog, options )
-		// return this.http.post('../spendTrackerService/api/logApp', dataLog, options )
+    //return this.http.post('http://localhost:8888/spendTrackerService/api/logApp', dataLog, options )
+	return this.http.post('../spendTrackerService/api/logApp', dataLog, options )
 			.map( (response: Response) =>{
 				// console.log("****************** ");
 				let log: any[] = JSON.parse(localStorage.getItem('log')) || [];

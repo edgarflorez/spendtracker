@@ -22,8 +22,8 @@ export class AppAuthService {
     		'password': password
     	}
 
-    return this.http.post('http://localhost:8888/spendTrackerService/api/authenticate', data, options  )
-		// return this.http.post('../spendTrackerService/api/authenticate', data, options  )
+    //return this.http.post('http://localhost:8888/spendTrackerService/api/authenticate', data, options  )
+	return this.http.post('../spendTrackerService/api/authenticate', data, options  )
 			.map((response: Response) => {
 				// login sussessful if there's a jwt token in response
 				// Translate the server side response into the app model structure
