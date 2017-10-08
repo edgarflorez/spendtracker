@@ -24,8 +24,8 @@ export class SpendsService extends JwtService {
 		let headers = new Headers({ 'params': JSON.stringify( data )});
     	let options = new RequestOptions({ headers: headers });
 
-    //return this.http.get('http://localhost:8888/spendTrackerService/api/getSpendsByDate', options)
-	return this.http.get('../spendTrackerService/api/getSpendsByDate', options)
+    return this.http.get('http://localhost:8888/spendTrackerService/api/getSpendsByDate', options)
+	//return this.http.get('../spendTrackerService/api/getSpendsByDate', options)
 			.map( (response: Response) =>{
 				// Translate the server side response into app model structure
 				let responseParsed		 = [];
@@ -52,8 +52,8 @@ export class SpendsService extends JwtService {
 		let headers = new Headers({ 'params': JSON.stringify( data )});
     	let options = new RequestOptions({ headers: headers });
 
-    //return this.http.get('http://localhost:8888/spendTrackerService/api/getSpendById', options)
-	return this.http.get('../spendTrackerService/api/getSpendById', options)
+    return this.http.get('http://localhost:8888/spendTrackerService/api/getSpendById', options)
+	//return this.http.get('../spendTrackerService/api/getSpendById', options)
 			.map((response: Response) =>{
 				let tempResponse 			= new SpendModel();
 				tempResponse['id'] 			= response.json().Id;
@@ -77,8 +77,8 @@ export class SpendsService extends JwtService {
     		'Authorization':this.jwtString()
     	}
 
-    //return this.http.post('http://localhost:8888/spendTrackerService/api/addSpend', data)
-	return this.http.post('../spendTrackerService/api/addSpend', data)
+    return this.http.post('http://localhost:8888/spendTrackerService/api/addSpend', data)
+	//return this.http.post('../spendTrackerService/api/addSpend', data)
 			.map( (response: Response ) => {
 				console.log('spends.service :: addSpend ', response['_body']);
 
@@ -100,8 +100,8 @@ export class SpendsService extends JwtService {
     		'Authorization': this.jwtString()
     	}
 
-    //return this.http.post('http://localhost:8888/spendTrackerService/api/deleteSpend', data)
-	return this.http.post('../spendTrackerService/api/deleteSpend', data)
+    return this.http.post('http://localhost:8888/spendTrackerService/api/deleteSpend', data)
+	//return this.http.post('../spendTrackerService/api/deleteSpend', data)
 			.map( (response:Response) =>{
 				console.log('spends.service :: deleteSpend ', response['_body']);
 
@@ -128,8 +128,8 @@ export class SpendsService extends JwtService {
     		'Authorization': this.jwtString()
     	}
 
-    //return this.http.post('http://localhost:8888/spendTrackerService/api/updateSpend', data)
-	return this.http.post('../spendTrackerService/api/updateSpend', data)
+    return this.http.post('http://localhost:8888/spendTrackerService/api/updateSpend', data)
+	//return this.http.post('../spendTrackerService/api/updateSpend', data)
 			.map( (response: Response ) => {
 				let log = {};
 				log['type'] 		= this.log.SPEND_UPDATE;

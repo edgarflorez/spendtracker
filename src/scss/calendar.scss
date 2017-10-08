@@ -7,8 +7,11 @@
 	z-index: 9999;
 }
 .date-picker-container{
-	padding-top: 200px;
-    text-align: center;
+  left: 50%;
+  position: relative;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  text-align: center;
 }
 .input-date-picker{
 	width: 50%;
